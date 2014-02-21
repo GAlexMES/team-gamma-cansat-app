@@ -7,7 +7,11 @@ import java.io.IOException;
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.options.Options;
 
-public class save {
+
+
+public class Save {
+	private static Save instance = null;
+
 	Options option = Options.getInstance();
 	private String filepathtime = option.getValueStoragePath()
 			+ R.string.value_time;
@@ -16,12 +20,14 @@ public class save {
 	private String filepathco2 = option.getValueStoragePath()
 			+ R.string.value_co2;
 	private String writableString = null;
-	private final String[] names = new String[3];
 
-	public void save() {
-		names[0] = "time";
-		names[1] = "temp";
-		names[2] = "cos";
+	
+	//Singletion
+	public static Save getInstance() {
+		if (instance == null) {
+			instance = new Save();
+		}
+		return instance;
 
 	}
 
@@ -36,19 +42,19 @@ public class save {
 			outtime = new FileOutputStream(new File(filepathtime), true);
 			writableString = Long.toString(time);
 			outtime.write(writableString.getBytes());
+			outtime.write(":".getBytes());
 			outtime.close();
 
 			if (temp != null) {
 				outtemp = new FileOutputStream(new File(filepathtemp), true);
-				writableString = Double.toString(temp);
-				outtemp.write(writableString.getBytes());
+				writableString = time + ":" +Double.toString(temp) + "\n";
 				outtemp.close();
 
 			}
 
 			if (co2 != null) {
 				outco2 = new FileOutputStream(new File(filepathco2), true);
-				writableString = Double.toString(co2);
+				writableString =time + ":" + Double.toString(co2) + "\n";
 				outco2.write(writableString.getBytes());
 				outco2.close();
 			}
