@@ -6,10 +6,12 @@ import java.util.Locale;
 import de.teamgamma.cansat.app.fragments.HomeFragment;
 import de.teamgamma.cansat.app.fragments.OptionsFragment;
 import de.teamgamma.cansat.app.fragments.ValueFragment;
+import de.teamgamma.cansat.app.fragments.androidplot.OrientationSensorExampleActivity;
 import de.teamgamma.cansat.app.fragments.androidplot.realtime_xy_example;
 import de.teamgamma.cansat.app.fragments.androidplot.simple_xy_example;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.options.OptionsExport;
+import de.teamgamma.cansat.app.sensors.Sensor;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -40,9 +42,13 @@ public class MainActivity extends Activity {
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mSlidemanueTitels;
+    private Sensor sensor= new Sensor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+    	for(int i = 0; i<10;i++){
+    		sensor.setValues(0, i);
+    	}
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         options_data.getValuesFromFile();
@@ -137,6 +143,8 @@ public class MainActivity extends Activity {
             selectItem(position);
         }
     }
+    
+    
 
     private void selectItem(int position) {
     	Fragment fragment;
@@ -144,7 +152,7 @@ public class MainActivity extends Activity {
     	switch (position){
     	case 0: fragment = new HomeFragment(); break;
     	case 1: fragment = new simple_xy_example(); break;
-    	case 2: fragment = new realtime_xy_example(); break;
+    	//case 2: fragment = new  OrientationSensorExampleActivity(); break;
     	case 5: fragment = new OptionsFragment(); break;
     	default:  fragment = new ValueFragment(); break;
     	}    	
