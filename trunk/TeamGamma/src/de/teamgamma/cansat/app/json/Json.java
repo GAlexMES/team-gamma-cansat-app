@@ -1,12 +1,13 @@
 package de.teamgamma.cansat.app.json;
 
+import java.util.jar.Attributes.Name;
+
 import org.json.JSONObject;
 
 import de.teamgamma.cansat.app.savedata.Save;
 
 public class Json {
 
-	private final String[] names = new String[3];
 	private static Json instance = null;
 
 	public static Json getInstance() {
@@ -16,11 +17,7 @@ public class Json {
 		return instance;
 
 	}
-	public Json(){
-		this.names[0] = "time";
-		this.names[1] = "temp";
-		this.names[2] = "co2";
-	}
+
 
 	public void unpack(String json) {
 
@@ -29,13 +26,19 @@ public class Json {
 		/*
 		 * Daten an Save und Values uebergeben.
 		 */
+		for (String s : Names.names){
+			if (s == "time"){
+				data.getLong(s);
+				
+			}else{
+				data.getDouble(s);
+			}
+			
+		}
+		Save.getInstance().writeAll(data.getLong(Names.names[0]),
+				data.getDouble(Names.names[1]), data.getDouble(Names.names[2]));
 
-		Save.getInstance().writeAll(data.getLong(names[0]),
-				data.getDouble(names[1]), data.getDouble(names[2]));
 
-		data.getLong(this.names[0]);
-		data.getDouble(names[2]);
-		data.getDouble(names[2]);
 
 	}
 
