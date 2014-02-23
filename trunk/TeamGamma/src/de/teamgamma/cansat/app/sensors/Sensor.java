@@ -13,11 +13,12 @@ public class Sensor {
 		values[9][0] = time;
 		values[9][1] = value;
 	}
+
 	
 	private void newValue(){
 		for(int i = 0; i<9;i++){
-			values[i]=values[i+1];
+			values[i][1]=values[i+1][1];
 		}
 	}
-
+	
 }

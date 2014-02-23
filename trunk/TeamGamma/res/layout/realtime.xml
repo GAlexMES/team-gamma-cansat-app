@@ -14,7 +14,16 @@
     android:layout_marginRight="10px"
     title="A/P/R Levels"
     />
-
+    <com.androidplot.xy.XYPlot
+    android:id="@+id/aprHistoryPlot"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1"
+    android:layout_marginTop="10px"
+    android:layout_marginLeft="10px"
+    android:layout_marginRight="10px"
+    title="A/P/R History"
+    />
  
     <LinearLayout android:orientation="horizontal"
                   android:gravity="center"
@@ -23,6 +32,11 @@
         <CheckBox android:id="@+id/hwAccelerationCb"
                   android:visibility="gone"
                   android:text="HW Acceleration"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
+ 
+        <CheckBox android:id="@+id/showFpsCb"
+                  android:text="Show FPS"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"/>
      </LinearLayout>
