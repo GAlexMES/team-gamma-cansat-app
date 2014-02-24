@@ -1,4 +1,4 @@
-package de.teamgamma.cansat.app.json;
+package de.teamgamma.cansat.app.data;
 
 public class Names {
 	

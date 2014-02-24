@@ -4,11 +4,27 @@ import java.util.jar.Attributes.Name;
 
 import org.json.JSONObject;
 
+import de.teamgamma.cansat.app.data.Names;
 import de.teamgamma.cansat.app.savedata.Save;
 
 public class Json {
 
 	private static Json instance = null;
+	private long time;
+	private Double temp;
+	private Double co2;
+
+	public long getTime() {
+		return time;
+	}
+
+	public Double getTemp() {
+		return temp;
+	}
+
+	public Double getCo2() {
+		return co2;
+	}
 
 	public static Json getInstance() {
 		if (instance == null) {
@@ -18,28 +34,16 @@ public class Json {
 
 	}
 
-
 	public void unpack(String json) {
 
 		JSONObject data = new JSONObject(json);
 
-		/*
-		 * Daten an Save und Values uebergeben.
-		 */
-		for (String s : Names.names){
-			if (s == "time"){
-				data.getLong(s);
-				
-			}else{
-				data.getDouble(s);
-			}
-			
-		}
-		Save.getInstance().writeAll(data.getLong(Names.names[0]),
-				data.getDouble(Names.names[1]), data.getDouble(Names.names[2]));
-
-
+		this.time = data.getLong(Names.names[0]);
+		this.temp = data.getDouble(Names.names[1]);
+		this.temp = data.getDouble(Names.names[2]);
 
 	}
+	// Save.getInstance().writeAll(data.getLong(Names.names[0]),
+	// data.getDouble(Names.names[1]), data.getDouble(Names.names[2]));
 
 }
