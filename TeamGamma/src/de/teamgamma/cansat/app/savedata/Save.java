@@ -31,7 +31,7 @@ public class Save {
 
 	}
 
-	public void writeAll(long time, Double temp, Double co2) {
+	public void saveAll(long time, Double temp, Double co2) {
 
 		FileOutputStream outtime = null;
 		FileOutputStream outtemp = null;
