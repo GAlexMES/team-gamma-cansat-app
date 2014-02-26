@@ -8,7 +8,7 @@ public class AndroidSocketConnect {
 			
 			@Override
 			public void run(){
-				new AndroidClient(options.getJava_socket_ipAdress(), Integer.parseInt(options.getJava_socket_port()), new MessageAdapter() {
+				new AndroidClient(options.getJavaSocketIpAdress(), Integer.parseInt(options.getJavaSocketPort()), new MessageAdapter() {
 					
 					@Override
 					public void messageArrived(String message) {

@@ -4,8 +4,8 @@ package de.teamgamma.cansat.app.options;
 
 
 public class Options {
-	private String java_socket_ipAdress = null;;
-	private String java_socket_port = null;;
+	private String javaSocketIpAdress = null;;
+	private String javaSocketPort = null;;
 	private OptionsExport optionsExport = new OptionsExport();
 	private int methodToConnect = 0;
 	private String valueExportPath = null;
@@ -57,36 +57,36 @@ public class Options {
 
 
 	public void getValuesFromFile(){
-		java_socket_ipAdress=optionsExport.getValue(0);
-		java_socket_port=optionsExport.getValue(1);
+		javaSocketIpAdress=optionsExport.getValue(0);
+		javaSocketPort=optionsExport.getValue(1);
 		methodToConnect=Integer.parseInt(optionsExport.getValue(2));
 		valueExportPath = optionsExport.getValue(3);
 		valueStoragePath = optionsExport.getValue(4);
 		}
 	
-	public String getJava_socket_ipAdress() {
-		return java_socket_ipAdress;
+	public String getJavaSocketIpAdress() {
+		return javaSocketIpAdress;
 	}
-	public String getJava_socket_port() {
-		return java_socket_port;
+	public String getJavaSocketPort() {
+		return javaSocketPort;
 	}
-	public void setJava_socket_ipAdress(String java_socket_ipAdress) {
-		this.java_socket_ipAdress = java_socket_ipAdress;
+	public void setJavaSocketIpAdress(String javaSocketIpAdress) {
+		this.javaSocketIpAdress = javaSocketIpAdress;
 		writeAllToFile();
 	}
-	public void setJava_socket_port(String java_socket_port) {
-		this.java_socket_port = java_socket_port;
+	public void setJavaSocketPort(String javaSocketPort) {
+		this.javaSocketPort = javaSocketPort;
 		writeAllToFile();
 	}
 	
 	public void setAllConnectionOptions(String ipAdress, String port, int checkedRadioButton){
-		java_socket_ipAdress = 	ipAdress;
-		java_socket_port	= 	port;
+		javaSocketIpAdress = 	ipAdress;
+		javaSocketPort	= 	port;
 		methodToConnect		=	checkedRadioButton;
 		writeAllToFile();
 	}
 	
 	private void writeAllToFile(){
-		optionsExport.writeAll(java_socket_ipAdress, java_socket_port, methodToConnect, valueExportPath, valueStoragePath );
+		optionsExport.writeAll(javaSocketIpAdress, javaSocketPort, methodToConnect, valueExportPath, valueStoragePath );
 	}
 }

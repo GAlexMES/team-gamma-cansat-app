@@ -1,29 +1,18 @@
-package de.teamgamma.cansat.app.fragments.androidplot;
+package de.teamgamma.cansat.app.fragments_androidplot;
 
-/*
-* Copyright 2012 AndroidPlot.com
-*
-*    Licensed under the Apache License, Version 2.0 (the "License");
-*    you may not use this file except in compliance with the License.
-*    You may obtain a copy of the License at
-*
-*        http://www.apache.org/licenses/LICENSE-2.0
-*
-*    Unless required by applicable law or agreed to in writing, software
-*    distributed under the License is distributed on an "AS IS" BASIS,
-*    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*    See the License for the specific language governing permissions and
-*    limitations under the License.
-*/
-import android.app.Activity;
+import java.text.FieldPosition;
+import java.text.Format;
+import java.text.ParsePosition;
+import java.util.Arrays;
+
 import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Color;
-import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,20 +21,30 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
 import com.androidplot.util.PlotStatistics;
-import com.androidplot.xy.*;
+import com.androidplot.xy.BarFormatter;
+import com.androidplot.xy.BarRenderer;
+import com.androidplot.xy.BoundaryMode;
+import com.androidplot.xy.LineAndPointFormatter;
+import com.androidplot.xy.SimpleXYSeries;
+import com.androidplot.xy.XYPlot;
 
 import de.teamgamma.cansat.app.R;
+import de.teamgamma.cansat.app.sensors.Sensor;
 
-import java.text.FieldPosition;
-import java.text.Format;
-import java.text.ParsePosition;
-import java.util.Arrays;
-import java.util.zip.Inflater;
  
 // Monitor the phone's orientation sensor and plot the resulting azimuth pitch and roll values.
 // See: http://developer.android.com/reference/android/hardware/SensorEvent.html
-public class OrientationSensorExampleActivity extends Fragment implements SensorEventListener
-{
+public class realtime_xy_example extends Fragment implements SensorEventListener {
+	private static Sensor sensor;
+	
+	public static final realtime_xy_example newInstance(Sensor newSensor)
+	{
+		Log.d("re", "create1");
+		sensor=newSensor;
+		realtime_xy_example f = new realtime_xy_example();
+			    
+	    return f;
+	}
  
     /**
      * A simple formatter to convert bar indexes into sensor names.
@@ -53,8 +52,7 @@ public class OrientationSensorExampleActivity extends Fragment implements Sensor
     private class APRIndexFormat extends Format {
         @Override
         public StringBuffer format(Object obj, StringBuffer toAppendTo, FieldPosition pos) {
-            Number num = (Number) obj;
- 
+            Number num = (Number) obj; 
             // using num.intValue() will floor the value, so we add 0.5 to round instead:
             int roundNum = (int) (num.floatValue() + 0.5f);
             switch(roundNum) {
@@ -84,7 +82,7 @@ public class OrientationSensorExampleActivity extends Fragment implements Sensor
     private Sensor orSensor = null;
  
     private XYPlot aprLevelsPlot = null;
-    private XYPlot aprHistoryPlot = null;
+
  
     private CheckBox hwAcceleratedCb;
     private CheckBox showFpsCb;
@@ -92,19 +90,15 @@ public class OrientationSensorExampleActivity extends Fragment implements Sensor
     private SimpleXYSeries azimuthHistorySeries = null;
     private SimpleXYSeries pitchHistorySeries = null;
     private SimpleXYSeries rollHistorySeries = null;
-
+ 
     /** Called when the activity is first created. */
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(R.layout.androidplot_realtime_dynamic_plot,
+    	Log.d("re", "created");
+    	final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(R.layout.androidplot_realtime_dynamic_plot,
                 container, false);
- 
         // setup the APR Levels plot:
-        aprLevelsPlot = (XYPlot)mLinearLayout.findViewById(R.id.aprLevelsPlot);
- 
+        aprLevelsPlot = (XYPlot) mLinearLayout.findViewById(R.id.aprLevelsPlot); 
         aprLevelsSeries = new SimpleXYSeries("APR Levels");
         aprLevelsSeries.useImplicitXVals();
         aprLevelsPlot.addSeries(aprLevelsSeries,
@@ -128,54 +122,21 @@ public class OrientationSensorExampleActivity extends Fragment implements Sensor
         aprLevelsPlot.getRangeLabelWidget().pack();
         aprLevelsPlot.setGridPadding(15, 0, 15, 0);
  
-        // setup the APR History plot:
-        aprHistoryPlot = (XYPlot) mLinearLayout.findViewById(R.id.aprHistoryPlot);
- 
-        azimuthHistorySeries = new SimpleXYSeries("Azimuth");
-        azimuthHistorySeries.useImplicitXVals();
-        pitchHistorySeries = new SimpleXYSeries("Pitch");
-        pitchHistorySeries.useImplicitXVals();
-        rollHistorySeries = new SimpleXYSeries("Roll");
-        rollHistorySeries.useImplicitXVals();
- 
-        aprHistoryPlot.setRangeBoundaries(-180, 359, BoundaryMode.FIXED);
-        aprHistoryPlot.setDomainBoundaries(0, 30, BoundaryMode.FIXED);
-        aprHistoryPlot.addSeries(azimuthHistorySeries, new LineAndPointFormatter());
-        aprHistoryPlot.addSeries(pitchHistorySeries, new LineAndPointFormatter());
-        aprHistoryPlot.addSeries(rollHistorySeries, new LineAndPointFormatter());
-        aprHistoryPlot.setDomainStepValue(5);
-        aprHistoryPlot.setTicksPerRangeLabel(3);
-        aprHistoryPlot.setDomainLabel("Sample Index");
-        aprHistoryPlot.getDomainLabelWidget().pack();
-        aprHistoryPlot.setRangeLabel("Angle (Degs)");
-        aprHistoryPlot.getRangeLabelWidget().pack();
- 
         // setup checkboxes:
-        hwAcceleratedCb = (CheckBox)mLinearLayout.findViewById(R.id.hwAccelerationCb);
+        hwAcceleratedCb = (CheckBox) mLinearLayout.findViewById(R.id.hwAccelerationCb);
         final PlotStatistics levelStats = new PlotStatistics(1000, false);
         final PlotStatistics histStats = new PlotStatistics(1000, false);
  
         aprLevelsPlot.addListener(levelStats);
-        aprHistoryPlot.addListener(histStats);
         hwAcceleratedCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b) {
                     aprLevelsPlot.setLayerType(View.LAYER_TYPE_NONE, null);
-                    aprHistoryPlot.setLayerType(View.LAYER_TYPE_NONE, null);
+                    
                 } else {
                     aprLevelsPlot.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-                    aprHistoryPlot.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
                 }
-            }
-        });
- 
-        showFpsCb = (CheckBox) mLinearLayout.findViewById(R.id.showFpsCb);
-        showFpsCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                levelStats.setAnnotatePlotEnabled(b);
-                histStats.setAnnotatePlotEnabled(b);
             }
         });
  
@@ -185,59 +146,46 @@ public class OrientationSensorExampleActivity extends Fragment implements Sensor
             // make our bars a little thicker than the default so they can be seen better:
             barRenderer.setBarWidth(25);
         }
- 
+        
+        
         // register for orientation sensor events:
-        sensorMgr = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
-        for (Sensor sensor : sensorMgr.getSensorList(Sensor.TYPE_ORIENTATION)) {
-            if (sensor.getType() == Sensor.TYPE_ORIENTATION) {
-                orSensor = sensor;
-            }
-        }
+        
  
         // if we can't access the orientation sensor then exit:
-        if (orSensor == null) {
-            System.out.println("Failed to attach to orSensor.");
-            cleanup();
-        }
- 
-        sensorMgr.registerListener(this, orSensor, SensorManager.SENSOR_DELAY_UI);
-		return mLinearLayout;
- 
+
+        return mLinearLayout;
     }
  
     private void cleanup() {
         // aunregister with the orientation sensor before exiting:
-        sensorMgr.unregisterListener(this);
-        //finish();
     }
  
     // Called whenever a new orSensor reading is taken.
-    @Override
     public synchronized void onSensorChanged(SensorEvent sensorEvent) {
  
         // update instantaneous data:
-        Number[] series1Numbers = {sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]};
-        aprLevelsSeries.setModel(Arrays.asList(series1Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY);
- 
+        Number[] series1Numbers = {realtime_xy_example.sensor.getValues()[0][0], realtime_xy_example.sensor.getValues()[1][0],realtime_xy_example.sensor.getValues()[2][0]};
+        aprLevelsSeries.setModel(Arrays.asList(series1Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY); 
         // get rid the oldest sample in history:
         if (rollHistorySeries.size() > HISTORY_SIZE) {
             rollHistorySeries.removeFirst();
             pitchHistorySeries.removeFirst();
             azimuthHistorySeries.removeFirst();
-        }
- 
+        } 
         // add the latest history sample:
-        azimuthHistorySeries.addLast(null, sensorEvent.values[0]);
-        pitchHistorySeries.addLast(null, sensorEvent.values[1]);
-        rollHistorySeries.addLast(null, sensorEvent.values[2]);
+        azimuthHistorySeries.addLast(null, realtime_xy_example.sensor.getValues()[0][0]);
+        pitchHistorySeries.addLast(null, realtime_xy_example.sensor.getValues()[1][0]);
+        rollHistorySeries.addLast(null, realtime_xy_example.sensor.getValues()[2][0]);
  
         // redraw the Plots:
         aprLevelsPlot.redraw();
-        aprHistoryPlot.redraw();
+        Log.d("re", "re");
+
     }
  
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int i) {
-        // Not interested in this event
-    }
+	@Override
+	public void onAccuracyChanged(android.hardware.Sensor sensor, int accuracy) {
+		// TODO Auto-generated method stub
+		
+	}
 }
