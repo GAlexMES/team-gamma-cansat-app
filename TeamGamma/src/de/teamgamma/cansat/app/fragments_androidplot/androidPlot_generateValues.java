@@ -1,4 +1,4 @@
-package de.teamgamma.cansat.app.fragments.androidplot;
+package de.teamgamma.cansat.app.fragments_androidplot;
 
 import java.util.Random;
 

@@ -40,8 +40,8 @@ public class OptionsConnectionFragment extends Fragment {
      	final RadioGroup itemTypeGroup = (RadioGroup)mLinearLayout.findViewById(R.id.Group);
      	Button connectAndSave = (Button) mLinearLayout.findViewById(R.id.button_connect);
      	Button options_save = (Button)mLinearLayout.findViewById(R.id.button_save);
-     	java_socket_ipAdress.setText(option_data.getJava_socket_ipAdress());
-     	java_socket_port.setText(option_data.getJava_socket_port());
+     	java_socket_ipAdress.setText(option_data.getJavaSocketIpAdress());
+     	java_socket_port.setText(option_data.getJavaSocketPort());
      	itemTypeGroup.clearCheck();
     	final RadioButton radio_database = (RadioButton)mLinearLayout.findViewById(R.id.radioButtonDatabase);
     	final RadioButton radio_java_socket = (RadioButton)mLinearLayout.findViewById(R.id.radioButtonJavaSocket);

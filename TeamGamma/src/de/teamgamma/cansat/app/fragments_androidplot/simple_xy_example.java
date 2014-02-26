@@ -1,4 +1,4 @@
-package de.teamgamma.cansat.app.fragments.androidplot;
+package de.teamgamma.cansat.app.fragments_androidplot;
 import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Color;
