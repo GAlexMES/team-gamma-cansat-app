@@ -15,12 +15,8 @@ public class Datenverarbeitung {
 		j.unpack(message);
 		
 		save.saveAll(j.getTime(), j.getTemp(), j.getCo2());
-		
-		
-		
-		// Alex seine klasse Sensor muss ein Doublearray sein
-		//temp.setValues(j.getTime(), j.getTemp());
-		//co2.setValues(j.getTime(), j.getCo2());
+		temp.setValues(j.getTime(), j.getTemp());
+		co2.setValues(j.getTime(), j.getCo2());
 		
 		
 		

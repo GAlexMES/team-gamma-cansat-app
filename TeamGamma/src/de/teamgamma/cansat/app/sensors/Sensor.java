@@ -1,17 +1,21 @@
 package de.teamgamma.cansat.app.sensors;
 
 public class Sensor {
-	private int[][] values = new int[10][2];
+	private double[][] values = new double[10][2];
 	
-	public int[][] getValues() {
+	public double[][] getValues() {
 		// TODO Auto-generated method stub
 		return values;
 	}
 
-	public void setValues(int time, int value) {
+	public void setValues(long time, Double value) {
+		if (value != null){
+			
+		
 		newValue();
 		values[9][0] = time;
 		values[9][1] = value;
+		}
 	}
 
 	
