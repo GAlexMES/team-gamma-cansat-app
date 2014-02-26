@@ -7,8 +7,6 @@ import java.io.IOException;
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.options.Options;
 
-
-
 public class Save {
 	private static Save instance = null;
 
@@ -21,14 +19,12 @@ public class Save {
 			+ R.string.value_co2;
 	private String writableString = null;
 
-	
-	//Singletion
+	// Singleton
 	public static Save getInstance() {
 		if (instance == null) {
 			instance = new Save();
 		}
 		return instance;
-
 	}
 
 	public void saveAll(long time, Double temp, Double co2) {
@@ -47,20 +43,18 @@ public class Save {
 
 			if (temp != null) {
 				outtemp = new FileOutputStream(new File(filepathtemp), true);
-				writableString = time + ":" +Double.toString(temp) + "\n";
+				writableString = time + ":" + Double.toString(temp) + "\n";
 				outtemp.close();
-
 			}
 
 			if (co2 != null) {
 				outco2 = new FileOutputStream(new File(filepathco2), true);
-				writableString =time + ":" + Double.toString(co2) + "\n";
+				writableString = time + ":" + Double.toString(co2) + "\n";
 				outco2.write(writableString.getBytes());
 				outco2.close();
 			}
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

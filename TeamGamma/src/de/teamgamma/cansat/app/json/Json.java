@@ -17,33 +17,26 @@ public class Json {
 	public long getTime() {
 		return time;
 	}
-
 	public Double getTemp() {
 		return temp;
 	}
-
 	public Double getCo2() {
 		return co2;
 	}
-
 	public static Json getInstance() {
 		if (instance == null) {
 			instance = new Json();
 		}
 		return instance;
-
 	}
 
 	public void unpack(String json) {
 
 		JSONObject data = new JSONObject(json);
-
 		this.time = data.getLong(Names.names[0]);
 		this.temp = data.getDouble(Names.names[1]);
-		this.temp = data.getDouble(Names.names[2]);
+		this.co2 = data.getDouble(Names.names[2]);
 
 	}
-	// Save.getInstance().writeAll(data.getLong(Names.names[0]),
-	// data.getDouble(Names.names[1]), data.getDouble(Names.names[2]));
 
 }

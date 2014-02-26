@@ -23,13 +23,12 @@ public class Read {
 	private double[][] co2;
 	private static Read instance = null;
 
-	// Singletion
+	// Singleton
 	public static Read getInstance() {
 		if (instance == null) {
 			instance = new Read();
 		}
 		return instance;
-
 	}
 
 	public long[] getTime() {
@@ -45,7 +44,6 @@ public class Read {
 					time[counter] = Long.parseLong(i);
 				}
 				counter++;
-
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -58,23 +56,18 @@ public class Read {
 		String[] lineArray;
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(filepathtemp));
-
 			String zeile = null;
+			
 			while ((zeile = in.readLine()) != null) {
-
 				lineArray = zeile.split(":");
-
 				for (String i : lineArray) {
 					if (counter % 2 == 0) {
 						temp[counter][0] = Long.parseLong(i);
-
 					} else {
 						temp[counter][1] = Double.parseDouble(i);
 						counter++;
 					}
-
 				}
-
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -87,12 +80,10 @@ public class Read {
 		String[] lineArray;
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(filepathco2));
-
 			String zeile = null;
+			
 			while ((zeile = in.readLine()) != null) {
-
 				lineArray = zeile.split(":");
-
 				for (String i : lineArray) {
 					if (counter % 2 == 0) {
 						co2[counter][0] = Long.parseLong(i);
@@ -101,9 +92,7 @@ public class Read {
 						co2[counter][1] = Double.parseDouble(i);
 						counter++;
 					}
-
 				}
-
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
