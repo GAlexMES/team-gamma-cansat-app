@@ -4,9 +4,9 @@ import de.teamgamma.cansat.app.json.Json;
 import de.teamgamma.cansat.app.savedata.Save;
 import de.teamgamma.cansat.app.sensors.Sensor;
 
-public class Datenverarbeitung {
+public class DataCoordination {
 
-	public Datenverarbeitung(String message) {
+	public DataCoordination(String message) {
 		Json j = Json.getInstance();
 		Save save = Save.getInstance();
 		Sensor temp = new Sensor();
