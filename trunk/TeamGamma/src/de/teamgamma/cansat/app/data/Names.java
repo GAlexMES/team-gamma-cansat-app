@@ -1,8 +1,7 @@
 package de.teamgamma.cansat.app.data;
 
 public class Names {
-	
-	
-	public static String[] names = {"time", "temp", "co2"};
+
+	public static String[] names = { "time", "temp", "co2" };
 
 }
