@@ -1,7 +1,8 @@
-package de.teamgamma.cansat.app;
+package de.teamgamma.cansat.app.main;
 
 import java.util.Locale;
 
+import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.fragments.HomeFragment;
 import de.teamgamma.cansat.app.fragments.OptionsFragment;
 import de.teamgamma.cansat.app.fragments.ValueFragment;
