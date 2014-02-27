@@ -18,7 +18,7 @@ public class ImportFragment extends Fragment {
      	final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(R.layout.fragment_import,container, false);
      	
      	Read reader = Read.getInstance();
-     	reader.
+     
      	
      	
      	

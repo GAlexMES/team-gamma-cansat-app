@@ -82,9 +82,9 @@
             android:layout_alignParentRight="true"
             android:background="@android:color/holo_blue_light"
             android:text="SAVE" />
-
-        <Button
-            android:id="@+id/button_browser"
+        
+         <Button
+            android:id="@+id/button_browser_export"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/exportPath"
@@ -92,6 +92,15 @@
             android:layout_alignParentRight="true"
             android:background="@android:color/holo_blue_light"
             android:text="BROWS" />
+
+         <Button
+             android:id="@+id/button_browser_storage"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentRight="true"
+             android:layout_below="@+id/textView4"
+             android:background="@android:color/holo_blue_light"
+             android:text="BROWS" />
 
     </RelativeLayout>
 
