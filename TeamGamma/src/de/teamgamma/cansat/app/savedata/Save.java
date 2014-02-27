@@ -3,20 +3,19 @@ package de.teamgamma.cansat.app.savedata;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
-import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.options.Options;
 
 public class Save {
 	private static Save instance = null;
 
 	Options option = Options.getInstance();
-	private String filepathtime = option.getValueStoragePath()
-			+ R.string.value_time;
-	private String filepathtemp = option.getValueStoragePath()
-			+ R.string.value_temp;
-	private String filepathco2 = option.getValueStoragePath()
-			+ R.string.value_co2;
+	private String filepathtemp;
+	private String filepathco2;
+
 	private String writableString = null;
 
 	// Singleton
@@ -28,18 +27,22 @@ public class Save {
 	}
 
 	public void saveAll(long time, Double temp, Double co2) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_kk/mm", Locale.GERMANY);
+		String date = sdf.format(new Date());
 
-		FileOutputStream outtime = null;
+		this.filepathco2 = option.getValueStoragePath() + date + "_co2";
+		this.filepathtemp = option.getValueStoragePath() + date + "_temp";
+
 		FileOutputStream outtemp = null;
 		FileOutputStream outco2 = null;
 
 		try {
 
-			outtime = new FileOutputStream(new File(filepathtime), true);
-			writableString = Long.toString(time);
-			outtime.write(writableString.getBytes());
-			outtime.write(":".getBytes());
-			outtime.close();
+			// outtime = new FileOutputStream(new File(filepathtime), true);
+			// writableString = Long.toString(time);
+			// outtime.write(writableString.getBytes());
+			// outtime.write(":".getBytes());
+			// outtime.close();
 
 			if (temp != null) {
 				outtemp = new FileOutputStream(new File(filepathtemp), true);

@@ -16,6 +16,7 @@ public class DataCoordination {
 		save.saveAll(json.getTime(), json.getTemp(), json.getCo2());
 		temp.setValues(json.getTime(), json.getTemp());
 		co2.setValues(json.getTime(), json.getCo2());
+		
 
 	}
 
