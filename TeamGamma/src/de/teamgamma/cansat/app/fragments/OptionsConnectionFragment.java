@@ -63,14 +63,10 @@ public class OptionsConnectionFragment extends Fragment {
             	itemTypeGroup .check(checkedId);
                 if (checkedId == R.id.radioButtonJavaSocket) {                	
                 	radio_database.setChecked(false);
-                	
-                    //some code
                 } else if (checkedId == R.id.radioButtonDatabase) {
-                	radio_java_socket.setChecked(false);
-                	
-                    //some code
+                	radio_java_socket.setChecked(false);                	
+                   
                 }
-
             }
 
         });
@@ -92,7 +88,7 @@ public class OptionsConnectionFragment extends Fragment {
 	        	int duration = Toast.LENGTH_SHORT;
 	        	Toast toast = Toast.makeText(context, text, duration);
 	        	toast.show();
-	        	connect =  new AndroidSocketConnect();
+	        	//connect =  new AndroidSocketConnect();
 	        }
 	});
      	

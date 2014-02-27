@@ -1,19 +1,43 @@
 package de.teamgamma.cansat.app.options;
 
+import android.os.Environment;
+
 
 
 
 public class Options {
 	private String javaSocketIpAdress = null;;
 	private String javaSocketPort = null;;
-	private OptionsExport optionsExport = new OptionsExport();
+	private OptionsExport optionsExport;
 	private int methodToConnect = 0;
+	
+	
 	private String valueExportPath = null;
 	private String valueStoragePath = null;
-	private String optionsPath = null;
+	private String optionsPath = Environment.getExternalStorageDirectory().getPath() + "/teamgamma/options.txt";
 	private String tempValueExportPath = null;
 	private String tempValueStoragePath = null;
 	private String tempOptionsPath = null;
+	private static Options instance = null;
+	
+	boolean browsButtons[] = {false,false,false};
+	
+	public static Options getInstance(){
+		if(instance==null){
+			instance = new Options();				
+		}
+		return instance;
+	}
+
+	public void setSingleBrowsButtons(int position, boolean browsButtons) {
+		this.browsButtons[position] = browsButtons;
+	}
+	
+	public boolean[] getBrowsButtons() {
+		return browsButtons;
+	}
+
+
 
 	public String getTempValueExportPath() {
 		return tempValueExportPath;
@@ -54,7 +78,7 @@ public class Options {
 		this.optionsPath = optionsPath;
 	}
 
-	private static Options instance = null;
+	
 
 	
 	
@@ -79,16 +103,6 @@ public class Options {
 		writeAllToFile();
 	}
 
-
-	public static Options getInstance(){
-		if(instance==null){
-			instance = new Options();	
-			
-		}
-		return instance;
-	}
-	
-	
 	public int getMethodToConnect() {
 		return methodToConnect;
 	}
@@ -101,6 +115,7 @@ public class Options {
 
 
 	public void getValuesFromFile(){
+		optionsExport = new OptionsExport();
 		javaSocketIpAdress=optionsExport.getValue(0);
 		javaSocketPort=optionsExport.getValue(1);
 		if(optionsExport.getValue(2)!=null){
@@ -135,6 +150,7 @@ public class Options {
 	}
 	
 	private void writeAllToFile(){
+		optionsExport = new OptionsExport();
 		optionsExport.writeAll(javaSocketIpAdress, javaSocketPort, methodToConnect, valueExportPath, valueStoragePath );
 	}
 }
