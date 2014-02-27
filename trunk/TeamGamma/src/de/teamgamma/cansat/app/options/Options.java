@@ -10,6 +10,50 @@ public class Options {
 	private int methodToConnect = 0;
 	private String valueExportPath = null;
 	private String valueStoragePath = null;
+	private String optionsPath = null;
+	private String tempValueExportPath = null;
+	private String tempValueStoragePath = null;
+	private String tempOptionsPath = null;
+
+	public String getTempValueExportPath() {
+		return tempValueExportPath;
+	}
+
+
+	public void setTempValueExportPath(String tempValueExportPath) {
+		this.tempValueExportPath = tempValueExportPath;
+	}
+
+
+	public String getTempValueStoragePath() {
+		return tempValueStoragePath;
+	}
+
+
+	public void setTempValueStoragePath(String tempValueStoragePath) {
+		this.tempValueStoragePath = tempValueStoragePath;
+	}
+
+
+	public String getTempOptionsPath() {
+		return tempOptionsPath;
+	}
+
+
+	public void setTempOptionsPath(String tempOptionsPath) {
+		this.tempOptionsPath = tempOptionsPath;
+	}
+
+
+	public String getOptionsPath() {
+		return optionsPath;
+	}
+
+
+	public void setOptionsPath(String optionsPath) {
+		this.optionsPath = optionsPath;
+	}
+
 	private static Options instance = null;
 
 	
