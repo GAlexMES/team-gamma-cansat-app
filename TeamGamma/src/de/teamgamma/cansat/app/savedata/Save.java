@@ -27,22 +27,17 @@ public class Save {
 	}
 
 	public void saveAll(long time, Double temp, Double co2) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_kk/mm", Locale.GERMANY);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_kk/mm",
+				Locale.GERMANY);
 		String date = sdf.format(new Date());
 
 		this.filepathco2 = option.getValueStoragePath() + date + "_co2";
 		this.filepathtemp = option.getValueStoragePath() + date + "_temp";
 
-		FileOutputStream outtemp = null;
-		FileOutputStream outco2 = null;
+		FileOutputStream outtemp;
+		FileOutputStream outco2;
 
 		try {
-
-			// outtime = new FileOutputStream(new File(filepathtime), true);
-			// writableString = Long.toString(time);
-			// outtime.write(writableString.getBytes());
-			// outtime.write(":".getBytes());
-			// outtime.close();
 
 			if (temp != null) {
 				outtemp = new FileOutputStream(new File(filepathtemp), true);

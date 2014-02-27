@@ -13,8 +13,8 @@ public class AndroidSocketConnect {
 					@Override
 					public void messageArrived(String message) {
 						
-					}
-				});
+							}
+						});
 			}
 		}).start();
 	}
