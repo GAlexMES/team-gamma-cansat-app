@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import de.teamgamma.cansat.app.data.*;
 
 import android.util.Log;
 
@@ -16,10 +17,11 @@ public class AndroidClient {
 
 		private BufferedReader in;
 		private MessageAdapter messageAdapter;
+		private DataCoordination datatransfer = new DataCoordination();
 
 		public CommunicationThread(MessageAdapter messageAdapter) {
 			this.messageAdapter = messageAdapter;
-			
+
 			try {
 				// BufferedReader zum lesen erzeugen
 				in = new BufferedReader(new InputStreamReader(
@@ -27,7 +29,6 @@ public class AndroidClient {
 
 				Log.d("socket_test", "Buffered reader created!");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -40,6 +41,8 @@ public class AndroidClient {
 					if (in.ready()) {
 						message = in.readLine();
 						messageAdapter.messageArrived(message);
+						// DataCoordination wird die Message uebergeben
+						this.datatransfer.coordinateData(message);
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -51,9 +54,9 @@ public class AndroidClient {
 			}
 		}
 	}
-	
+
 	private Thread commThread;
-	
+
 	public AndroidClient(String dst, int dstPort, MessageAdapter messageAdapter) {
 		try {
 			InetAddress inetAddress = InetAddress.getByName(dst);
@@ -75,12 +78,12 @@ public class AndroidClient {
 			e1.printStackTrace();
 		}
 	}
-	
-	public void startStreaming(){
+
+	public void startStreaming() {
 		commThread.start();
 	}
-	
-	public void stopStreaming(){
+
+	public void stopStreaming() {
 		commThread.interrupt();
 	}
 

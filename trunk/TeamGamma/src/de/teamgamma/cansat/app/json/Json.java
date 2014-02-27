@@ -39,7 +39,6 @@ public class Json {
 			this.time = data.getLong(Names.names[0]);
 			this.temp = data.getDouble(Names.names[1]);
 			this.co2 = data.getDouble(Names.names[2]);
-			
 
 		} catch (JSONException e) {
 			e.printStackTrace();

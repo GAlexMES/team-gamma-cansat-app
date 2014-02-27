@@ -57,7 +57,8 @@ public class Read {
 		int counter = 0;
 		String[] lineArray;
 		try {
-			BufferedReader in = new BufferedReader(new FileReader(filepathco2));
+			BufferedReader in = new BufferedReader(new FileReader(
+					this.filepathco2));
 			String zeile = null;
 
 			while ((zeile = in.readLine()) != null) {

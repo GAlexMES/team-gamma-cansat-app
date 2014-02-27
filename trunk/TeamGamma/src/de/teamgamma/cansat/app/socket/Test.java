@@ -1,7 +1,6 @@
 package de.teamgamma.cansat.app.socket;
-import de.teamgamma.cansat.app.options.Options;
-/*
-public class Test {
+
+public class Test {/*
 	public Test(){
 		new Thread(new Runnable() {
 			
@@ -17,6 +16,14 @@ public class Test {
 				});
 			}
 		}).start();
+	}*/
+	
+	
+	public Test(){
+		
+		AndroidSocketConnect a = new AndroidSocketConnect();
+		
+		
+		
 	}
 }
-*/
