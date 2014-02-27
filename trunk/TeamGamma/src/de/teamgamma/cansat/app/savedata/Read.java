@@ -4,21 +4,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.options.Options;
-
-
 
 public class Read {
 	Options option = Options.getInstance();
-	private String filepathtime = option.getValueStoragePath()
-			+ R.string.value_time;
-	private String filepathtemp = option.getValueStoragePath()
-			+ R.string.value_temp;
-	private String filepathco2 = option.getValueStoragePath()
-			+ R.string.value_co2;
 
-	private long[] time;
+	private String filepathtemp;
+	private String filepathco2;
+
 	private double[][] temp;
 	private double[][] co2;
 	private static Read instance = null;
@@ -31,33 +24,15 @@ public class Read {
 		return instance;
 	}
 
-	public long[] getTime() {
-		int counter = 1;
-		String[] lineArray;
-		try {
-			BufferedReader in = new BufferedReader(new FileReader(filepathtime));
-
-			String zeile = null;
-			while ((zeile = in.readLine()) != null) {
-				lineArray = zeile.split(":");
-				for (String i : lineArray) {
-					time[counter] = Long.parseLong(i);
-				}
-				counter++;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return time;
-	}
-
-	public double[][] getTemp() {
+	public double[][] getTemp(String filepathtemp) {
+		this.filepathtemp = filepathtemp;
 		int counter = 0;
 		String[] lineArray;
 		try {
-			BufferedReader in = new BufferedReader(new FileReader(filepathtemp));
+			BufferedReader in = new BufferedReader(new FileReader(
+					this.filepathtemp));
 			String zeile = null;
-			
+
 			while ((zeile = in.readLine()) != null) {
 				lineArray = zeile.split(":");
 				for (String i : lineArray) {
@@ -68,20 +43,23 @@ public class Read {
 						counter++;
 					}
 				}
+				in.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		return temp;
 	}
 
-	public double[][] getCo2() {
+	public double[][] getCo2(String filepathco2) {
+		this.filepathco2 = filepathco2;
 		int counter = 0;
 		String[] lineArray;
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(filepathco2));
 			String zeile = null;
-			
+
 			while ((zeile = in.readLine()) != null) {
 				lineArray = zeile.split(":");
 				for (String i : lineArray) {
@@ -93,31 +71,11 @@ public class Read {
 						counter++;
 					}
 				}
+				in.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return co2;
 	}
-
-	// public void getValue(int positionLine) {
-	// String[] line = null;
-	// int counter = 0;
-	// int arrayCounter = 1;
-	// try {
-	// BufferedReader in = new BufferedReader(new FileReader(filepathtime));
-	// for (int i = 0; i < positionLine + 1; i++) {
-	// counter++;
-	// line = in.readLine().split(":");
-	//
-	// time[i] = Long.parseLong(line[0]);
-	// temp[i] = Long.parseLong(line[1]);
-	// co2[i] = Long.parseLong(line[3]);
-	//
-	// }
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
-	// }
-
 }

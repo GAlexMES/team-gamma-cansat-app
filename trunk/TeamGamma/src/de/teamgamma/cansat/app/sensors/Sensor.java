@@ -4,7 +4,6 @@ public class Sensor {
 	private double[][] values = new double[10][2];
 
 	public double[][] getValues() {
-		// TODO Auto-generated method stub
 		return values;
 	}
 
