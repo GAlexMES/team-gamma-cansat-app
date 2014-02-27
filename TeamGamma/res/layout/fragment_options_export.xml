@@ -25,7 +25,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
             android:layout_below="@+id/textView1"
             android:layout_marginTop="16dp"
             android:ems="10"
@@ -83,6 +82,16 @@
             android:layout_alignParentRight="true"
             android:background="@android:color/holo_blue_light"
             android:text="SAVE" />
+
+        <Button
+            android:id="@+id/button_browser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/exportPath"
+            android:layout_alignBottom="@+id/exportPath"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/holo_blue_light"
+            android:text="BROWS" />
 
     </RelativeLayout>
 
