@@ -16,6 +16,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -91,6 +92,7 @@ public class MainActivity extends Activity {
 											// onPrepareOptionsMenu()
 			}
 		};
+		
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
 		if (savedInstanceState == null) {
@@ -155,13 +157,11 @@ public class MainActivity extends Activity {
 		Fragment fragment;
 		// update the main content by replacing fragments
 		switch (position) {
-		case 0:
-			fragment = new HomeFragment();
-			break;
+		case 0:	fragment = new HomeFragment();break;
 		case 1:
 			fragment = new simple_xy_example();
 			break;
-		// case 2: fragment = new OrientationSensorExampleActivity(); break;
+		//case 2: fragment = new OrientationSensorExampleActivity(); break;
 		case 5:
 			fragment = new OptionsFragment();
 			break;
@@ -202,5 +202,5 @@ public class MainActivity extends Activity {
 		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
-
+	
 }

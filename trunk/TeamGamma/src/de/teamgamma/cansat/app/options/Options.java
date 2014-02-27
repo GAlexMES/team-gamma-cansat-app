@@ -59,7 +59,11 @@ public class Options {
 	public void getValuesFromFile(){
 		javaSocketIpAdress=optionsExport.getValue(0);
 		javaSocketPort=optionsExport.getValue(1);
-		methodToConnect=Integer.parseInt(optionsExport.getValue(2));
+		if(optionsExport.getValue(2)!=null){
+			methodToConnect=Integer.parseInt(optionsExport.getValue(2));
+		}
+	
+		
 		valueExportPath = optionsExport.getValue(3);
 		valueStoragePath = optionsExport.getValue(4);
 		}
