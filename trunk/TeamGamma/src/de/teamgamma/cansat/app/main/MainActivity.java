@@ -1,13 +1,11 @@
 package de.teamgamma.cansat.app.main;
 
-import java.util.Locale;
-
+import java.io.File;
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.fragments.HomeFragment;
 import de.teamgamma.cansat.app.fragments.OptionsFragment;
+import de.teamgamma.cansat.app.fragments.OptionsSearcherFragment;
 import de.teamgamma.cansat.app.fragments.ValueFragment;
-import de.teamgamma.cansat.app.fragments_androidplot.OrientationSensorExampleActivity;
-import de.teamgamma.cansat.app.fragments_androidplot.realtime_xy_example;
 import de.teamgamma.cansat.app.fragments_androidplot.simple_xy_example;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.options.OptionsExport;
@@ -16,10 +14,10 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -31,19 +29,19 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import de.teamgamma.cansat.app.fragments.OptionsFragment;
-import de.teamgamma.cansat.app.fragments.ValueFragment;
+
 
 public class MainActivity extends Activity {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private Options options_data = Options.getInstance();
-	private OptionsExport optionsExport = new OptionsExport();
+	
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 	private String[] mSlidemanueTitels;
 	private Sensor sensor = new Sensor();
+	private Fragment fragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +50,6 @@ public class MainActivity extends Activity {
 		}
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		options_data.getValuesFromFile();
 		mTitle = mDrawerTitle = getTitle();
 		mSlidemanueTitels = getResources().getStringArray(
 				R.array.slidemenu_array);
@@ -94,10 +91,19 @@ public class MainActivity extends Activity {
 		};
 		
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-		if (savedInstanceState == null) {
-			selectItem(0);
+	
+		if(new File(Environment.getExternalStorageDirectory().getPath()+ "/teamgamma/options.txt").exists()){
+			options_data.getValuesFromFile();
+			if (savedInstanceState == null) {
+				selectItem(0,false);
+			}
+			
 		}
+		else{
+			//setContentView(R.layout.activity_main);
+				selectItem(0,true);
+		}
+
 	}
 
 	@Override
@@ -149,15 +155,21 @@ public class MainActivity extends Activity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			selectItem(position);
+			selectItem(position,false);
 		}
 	}
 
-	private void selectItem(int position) {
-		Fragment fragment;
+	private void selectItem(int position,boolean check) {
 		// update the main content by replacing fragments
 		switch (position) {
-		case 0:	fragment = new HomeFragment();break;
+		case 0:if(check){
+			fragment = new OptionsSearcherFragment();
+			break;
+		}
+		else{
+			fragment = new HomeFragment();
+			break;
+		}
 		case 1:
 			fragment = new simple_xy_example();
 			break;
