@@ -3,8 +3,8 @@ package de.teamgamma.cansat.app.main;
 import java.io.File;
 
 import de.teamgamma.cansat.app.R;
+import de.teamgamma.cansat.app.dataImport.ImportFragment;
 import de.teamgamma.cansat.app.fragments.HomeFragment;
-import de.teamgamma.cansat.app.fragments.ImportFragment;
 import de.teamgamma.cansat.app.fragments.OptionsFragment;
 import de.teamgamma.cansat.app.fragments.OptionsSearcherFragment;
 import de.teamgamma.cansat.app.fragments.ValueFragment;

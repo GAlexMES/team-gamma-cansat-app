@@ -1,9 +1,11 @@
-package de.teamgamma.cansat.app.fragments;
+package de.teamgamma.cansat.app.dataImport;
 
 import de.teamgamma.cansat.app.R;
+import de.teamgamma.cansat.app.fragments.HomeFragment;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.savedata.Read;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,9 +56,20 @@ public class ImportFragment extends Fragment {
      	buttonImport.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-		     	Read reader = Read.getInstance();   
-		     	
-		    Log.d("output", String.valueOf(reader.getCo2(importFilepath)[0][0]));
+		     	Read reader = Read.getInstance();   		     	
+		    ImportedFiles.getInstance().setLatestFile(reader.getValuefromFile(importFilepath));
+		 // Create new fragment and transaction
+			Fragment newFragment = new ImportSimpleXYChart();
+			FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+			// Replace whatever is in the fragment_container view with this fragment,
+			// and add the transaction to the back stack
+			transaction.replace(R.id.content_frame, newFragment);
+			transaction.addToBackStack(null);
+
+			// Commit the transaction
+			transaction.commit();
+
 				
 			}
 		});
