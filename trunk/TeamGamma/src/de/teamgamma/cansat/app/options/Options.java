@@ -11,7 +11,6 @@ public class Options {
 	private OptionsExport optionsExport;
 	private int methodToConnect = 0;
 	
-	
 	private String valueExportPath = null;
 	private String valueStoragePath = null;
 	private String optionsPath = Environment.getExternalStorageDirectory().getPath() + "/teamgamma/options.txt";
