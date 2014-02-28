@@ -1,8 +1,10 @@
 package de.teamgamma.cansat.app.main;
 
 import java.io.File;
+
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.fragments.HomeFragment;
+import de.teamgamma.cansat.app.fragments.ImportFragment;
 import de.teamgamma.cansat.app.fragments.OptionsFragment;
 import de.teamgamma.cansat.app.fragments.OptionsSearcherFragment;
 import de.teamgamma.cansat.app.fragments.ValueFragment;
@@ -30,13 +32,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-
 public class MainActivity extends Activity {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private Options options_data = Options.getInstance();
-	
+
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 	private String[] mSlidemanueTitels;
@@ -89,19 +90,19 @@ public class MainActivity extends Activity {
 											// onPrepareOptionsMenu()
 			}
 		};
-		
+
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
-	
-		if(new File(Environment.getExternalStorageDirectory().getPath()+ "/teamgamma/options.txt").exists()){
+
+		if (new File(Environment.getExternalStorageDirectory().getPath()
+				+ "/teamgamma/options.txt").exists()) {
 			options_data.getValuesFromFile();
 			if (savedInstanceState == null) {
-				selectItem(0,false);
+				selectItem(0, false);
 			}
-			
-		}
-		else{
-			//setContentView(R.layout.activity_main);
-				selectItem(0,true);
+
+		} else {
+			// setContentView(R.layout.activity_main);
+			selectItem(0, true);
 		}
 
 	}
@@ -155,26 +156,29 @@ public class MainActivity extends Activity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			selectItem(position,false);
+			selectItem(position, false);
 		}
 	}
 
-	private void selectItem(int position,boolean check) {
+	private void selectItem(int position, boolean check) {
 		// update the main content by replacing fragments
 		switch (position) {
-		case 0:if(check){
-			fragment = new OptionsSearcherFragment();
-			break;
-		}
-		else{
-			fragment = new HomeFragment();
-			break;
-		}
+		case 0:
+			if (check) {
+				fragment = new OptionsSearcherFragment();
+				break;
+			} else {
+				fragment = new HomeFragment();
+				break;
+			}
 		case 1:
 			fragment = new simple_xy_example();
 			break;
-		//case 2: fragment = new OrientationSensorExampleActivity(); break;
-		case 5:
+		// case 2: fragment = new OrientationSensorExampleActivity(); break;
+		case 4:
+			fragment = new ImportFragment();
+			break;
+		case 6:
 			fragment = new OptionsFragment();
 			break;
 		default:
@@ -214,5 +218,5 @@ public class MainActivity extends Activity {
 		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
-	
+
 }

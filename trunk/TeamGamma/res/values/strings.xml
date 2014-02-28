@@ -5,6 +5,7 @@
         <item>Temperature</item>
         <item>Preasure</item>
         <item>Humidity</item>
+        <item>Import</item>
         <item>Start/Stop Stream</item>
         <item>Options</item>
     </string-array>

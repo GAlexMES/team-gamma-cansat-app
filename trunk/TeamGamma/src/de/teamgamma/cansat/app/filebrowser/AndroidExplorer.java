@@ -91,10 +91,12 @@ public class AndroidExplorer extends ListActivity {
 			new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					boolean valueSetted = true;
 					String myPath = dirPath + "/" + fileName;
 					boolean [] browsButton = options.getBrowsButtons();
 					for(int i = 0; i<browsButton.length;i++){
 						if(browsButton[i]){
+							valueSetted=false;
 							switch(i){
 							case 0:	options.setTempOptionsPath(myPath);break;
 							case 1: options.setTempValueExportPath(myPath);break;
@@ -103,7 +105,13 @@ public class AndroidExplorer extends ListActivity {
 						}
 					}
 					
-					options.setTempOptionsPath(myPath);
+					if(valueSetted){
+						options.setTemporaryBrowserResultPath(myPath);
+					}
+					else{
+						valueSetted=true;
+					}
+					
 					Intent intent = new Intent();
 					setResult(RESULT_OK, intent);
 					finish();
