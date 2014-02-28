@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import android.util.Log;
 import de.teamgamma.cansat.app.options.Options;
 
 public class Read {
@@ -62,9 +63,11 @@ public class Read {
 			String zeile = null;
 
 			while ((zeile = in.readLine()) != null) {
+				//counter = 0; vielleicht, vielleicht auch nicht
 				lineArray = zeile.split(":");
 				for (String i : lineArray) {
 					if (counter % 2 == 0) {
+						Log.d("i",i); //wird nur einmal aufgerufen, dann nullPointer in der nächsten Zeile!
 						co2[counter][0] = Long.parseLong(i);
 
 					} else {

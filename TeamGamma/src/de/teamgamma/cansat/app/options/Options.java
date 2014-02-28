@@ -19,7 +19,16 @@ public class Options {
 	private String tempValueStoragePath = null;
 	private String tempOptionsPath = null;
 	private static Options instance = null;
+	private String temporaryBrowserResultPath = null;
 	
+	public String getTemporaryBrowserResultPath() {
+		return temporaryBrowserResultPath;
+	}
+
+	public void setTemporaryBrowserResultPath(String importFilePath) {
+		this.temporaryBrowserResultPath = importFilePath;
+	}
+
 	boolean browsButtons[] = {false,false,false};
 	
 	public static Options getInstance(){
