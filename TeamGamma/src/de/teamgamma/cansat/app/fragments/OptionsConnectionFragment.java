@@ -19,11 +19,11 @@ import android.widget.Toast;
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.socket.AndroidClient;
-import de.teamgamma.cansat.app.socket.AndroidSocketConnect;
+
 
 public class OptionsConnectionFragment extends Fragment {
 	public static final String ARG_SLIDEMENU_VALUES = "slidemenu_values";
-	private AndroidSocketConnect connect = null;
+
 
 	public OptionsConnectionFragment() {
 		// Empty constructor required for fragment subclasses
