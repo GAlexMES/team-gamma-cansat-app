@@ -41,8 +41,6 @@ public class AndroidClient {
 					if (in.ready()) {
 						message = in.readLine();
 						messageAdapter.messageArrived(message);
-						// DataCoordination wird die Message uebergeben
-						this.datatransfer.coordinateData(message);
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
