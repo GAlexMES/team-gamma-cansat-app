@@ -11,6 +11,14 @@ public class DataCoordination {
 	private Save save = Save.getInstance();
 	private Sensor temp = new Sensor();
 	private Sensor co2 = new Sensor();
+	private static DataCoordination instance = null;
+
+	public static DataCoordination getInstance() {
+		if (instance == null) {
+			instance = new DataCoordination();
+		}
+		return instance;
+	}
 
 	public void coordinateData(String message) {
 		json.unpack(message);
