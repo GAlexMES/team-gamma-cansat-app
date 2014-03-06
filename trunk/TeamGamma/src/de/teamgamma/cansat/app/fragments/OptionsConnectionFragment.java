@@ -19,13 +19,14 @@ import android.widget.Toast;
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.socket.AndroidClient;
-import de.teamgamma.cansat.app.socket.ServerConnection;
 
 
 public class OptionsConnectionFragment extends Fragment {
 	public static final String ARG_SLIDEMENU_VALUES = "slidemenu_values";
-
+<<<<<<< .mine
 	private ServerConnection connect = null;
+=======
+>>>>>>> .r28
 
 
 	public OptionsConnectionFragment() {
