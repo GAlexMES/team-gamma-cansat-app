@@ -15,7 +15,11 @@ package de.teamgamma.cansat.app.fragments_androidplot;
 *    See the License for the specific language governing permissions and
 *    limitations under the License.
 */
-import android.app.Activity;
+import java.text.FieldPosition;
+import java.text.Format;
+import java.text.ParsePosition;
+import java.util.Arrays;
+
 import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Color;
@@ -24,6 +28,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,15 +37,14 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
 import com.androidplot.util.PlotStatistics;
-import com.androidplot.xy.*;
+import com.androidplot.xy.BarFormatter;
+import com.androidplot.xy.BarRenderer;
+import com.androidplot.xy.BoundaryMode;
+import com.androidplot.xy.LineAndPointFormatter;
+import com.androidplot.xy.SimpleXYSeries;
+import com.androidplot.xy.XYPlot;
 
 import de.teamgamma.cansat.app.R;
-
-import java.text.FieldPosition;
-import java.text.Format;
-import java.text.ParsePosition;
-import java.util.Arrays;
-import java.util.zip.Inflater;
  
 // Monitor the phone's orientation sensor and plot the resulting azimuth pitch and roll values.
 // See: http://developer.android.com/reference/android/hardware/SensorEvent.html
@@ -79,19 +83,18 @@ public class OrientationSensorExampleActivity extends Fragment implements Sensor
         }
     }
  
-    private static final int HISTORY_SIZE = 30;            // number of points to plot in history
+             // number of points to plot in history
     private SensorManager sensorMgr = null;
     private Sensor orSensor = null;
  
     private XYPlot aprLevelsPlot = null;
-    private XYPlot aprHistoryPlot = null;
+ 
+    
  
     private CheckBox hwAcceleratedCb;
     private CheckBox showFpsCb;
     private SimpleXYSeries aprLevelsSeries = null;
-    private SimpleXYSeries azimuthHistorySeries = null;
-    private SimpleXYSeries pitchHistorySeries = null;
-    private SimpleXYSeries rollHistorySeries = null;
+ 
 
     /** Called when the activity is first created. */
     @Override
@@ -129,55 +132,27 @@ public class OrientationSensorExampleActivity extends Fragment implements Sensor
         aprLevelsPlot.setGridPadding(15, 0, 15, 0);
  
         // setup the APR History plot:
-        aprHistoryPlot = (XYPlot) mLinearLayout.findViewById(R.id.aprHistoryPlot);
- 
-        azimuthHistorySeries = new SimpleXYSeries("Azimuth");
-        azimuthHistorySeries.useImplicitXVals();
-        pitchHistorySeries = new SimpleXYSeries("Pitch");
-        pitchHistorySeries.useImplicitXVals();
-        rollHistorySeries = new SimpleXYSeries("Roll");
-        rollHistorySeries.useImplicitXVals();
- 
-        aprHistoryPlot.setRangeBoundaries(-180, 359, BoundaryMode.FIXED);
-        aprHistoryPlot.setDomainBoundaries(0, 30, BoundaryMode.FIXED);
-        aprHistoryPlot.addSeries(azimuthHistorySeries, new LineAndPointFormatter());
-        aprHistoryPlot.addSeries(pitchHistorySeries, new LineAndPointFormatter());
-        aprHistoryPlot.addSeries(rollHistorySeries, new LineAndPointFormatter());
-        aprHistoryPlot.setDomainStepValue(5);
-        aprHistoryPlot.setTicksPerRangeLabel(3);
-        aprHistoryPlot.setDomainLabel("Sample Index");
-        aprHistoryPlot.getDomainLabelWidget().pack();
-        aprHistoryPlot.setRangeLabel("Angle (Degs)");
-        aprHistoryPlot.getRangeLabelWidget().pack();
- 
+        
         // setup checkboxes:
         hwAcceleratedCb = (CheckBox)mLinearLayout.findViewById(R.id.hwAccelerationCb);
         final PlotStatistics levelStats = new PlotStatistics(1000, false);
         final PlotStatistics histStats = new PlotStatistics(1000, false);
  
         aprLevelsPlot.addListener(levelStats);
-        aprHistoryPlot.addListener(histStats);
         hwAcceleratedCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b) {
                     aprLevelsPlot.setLayerType(View.LAYER_TYPE_NONE, null);
-                    aprHistoryPlot.setLayerType(View.LAYER_TYPE_NONE, null);
+               
                 } else {
                     aprLevelsPlot.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-                    aprHistoryPlot.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+                   
+                    
                 }
             }
         });
- 
-        showFpsCb = (CheckBox) mLinearLayout.findViewById(R.id.showFpsCb);
-        showFpsCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                levelStats.setAnnotatePlotEnabled(b);
-                histStats.setAnnotatePlotEnabled(b);
-            }
-        });
+
  
         // get a ref to the BarRenderer so we can make some changes to it:
         BarRenderer barRenderer = (BarRenderer) aprLevelsPlot.getRenderer(BarRenderer.class);
@@ -220,20 +195,13 @@ public class OrientationSensorExampleActivity extends Fragment implements Sensor
         aprLevelsSeries.setModel(Arrays.asList(series1Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY);
  
         // get rid the oldest sample in history:
-        if (rollHistorySeries.size() > HISTORY_SIZE) {
-            rollHistorySeries.removeFirst();
-            pitchHistorySeries.removeFirst();
-            azimuthHistorySeries.removeFirst();
-        }
- 
+       
         // add the latest history sample:
-        azimuthHistorySeries.addLast(null, sensorEvent.values[0]);
-        pitchHistorySeries.addLast(null, sensorEvent.values[1]);
-        rollHistorySeries.addLast(null, sensorEvent.values[2]);
+
  
         // redraw the Plots:
         aprLevelsPlot.redraw();
-        aprHistoryPlot.redraw();
+      
     }
  
     @Override

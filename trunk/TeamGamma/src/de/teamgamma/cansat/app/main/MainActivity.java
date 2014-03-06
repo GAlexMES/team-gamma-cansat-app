@@ -8,6 +8,7 @@ import de.teamgamma.cansat.app.fragments.HomeFragment;
 import de.teamgamma.cansat.app.fragments.OptionsFragment;
 import de.teamgamma.cansat.app.fragments.OptionsSearcherFragment;
 import de.teamgamma.cansat.app.fragments.ValueFragment;
+import de.teamgamma.cansat.app.fragments_androidplot.OrientationSensorExampleActivity;
 import de.teamgamma.cansat.app.fragments_androidplot.simple_xy_example;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.options.OptionsExport;
@@ -174,7 +175,7 @@ public class MainActivity extends Activity {
 		case 1:
 			fragment = new simple_xy_example();
 			break;
-		// case 2: fragment = new OrientationSensorExampleActivity(); break;
+		case 2: fragment = new OrientationSensorExampleActivity(); break;
 		case 4:
 			fragment = new ImportFragment();
 			break;

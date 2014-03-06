@@ -27,12 +27,12 @@ public class Save {
 	}
 
 	public void saveAll(long time, Double temp, Double co2) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_kk/mm",
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_kk_mm",
 				Locale.GERMANY);
 		String date = sdf.format(new Date());
 
-		this.filepathco2 = option.getValueStoragePath() + date + "_co2";
-		this.filepathtemp = option.getValueStoragePath() + date + "_temp";
+		this.filepathco2 = option.getValueStoragePath() +"/"+ date + "_co2.txt";
+		this.filepathtemp = option.getValueStoragePath() +"/"+ date + "_temp.txt";
 
 		FileOutputStream outtemp;
 		FileOutputStream outco2;
@@ -42,6 +42,8 @@ public class Save {
 			if (temp != null) {
 				outtemp = new FileOutputStream(new File(filepathtemp), true);
 				writableString = time + ":" + Double.toString(temp) + "\n";
+				outtemp.write(writableString.getBytes());
+				outtemp.flush();
 				outtemp.close();
 			}
 

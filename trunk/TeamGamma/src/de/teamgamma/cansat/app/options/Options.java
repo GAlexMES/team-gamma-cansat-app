@@ -84,11 +84,7 @@ public class Options {
 
 	public void setOptionsPath(String optionsPath) {
 		this.optionsPath = optionsPath;
-	}
-
-	
-
-	
+	}	
 	
 	public String getValueStoragePath() {
 		return valueStoragePath;

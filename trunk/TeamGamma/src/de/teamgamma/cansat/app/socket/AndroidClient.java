@@ -57,13 +57,15 @@ public class AndroidClient {
 
 	public AndroidClient(String dst, int dstPort, MessageAdapter messageAdapter) {
 		try {
+			
 			InetAddress inetAddress = InetAddress.getByName(dst);
-
+			
 			try {
 				clientSocket = new Socket(inetAddress, dstPort);
 				Log.d("socket_test", "Socket created, everything fine!");
 
 				commThread = new Thread(new CommunicationThread(messageAdapter));
+				commThread.start();
 			} catch (IOException e) {
 				e.printStackTrace();
 				Log.d("socket_test", "Socket created, IO Exception!");
