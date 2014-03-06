@@ -19,6 +19,7 @@ import android.widget.Toast;
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.socket.AndroidClient;
+import de.teamgamma.cansat.app.socket.ServerConnection;
 
 
 public class OptionsConnectionFragment extends Fragment {
