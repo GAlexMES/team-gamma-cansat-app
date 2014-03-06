@@ -23,10 +23,8 @@ import de.teamgamma.cansat.app.socket.AndroidClient;
 
 public class OptionsConnectionFragment extends Fragment {
 	public static final String ARG_SLIDEMENU_VALUES = "slidemenu_values";
-<<<<<<< .mine
+
 	private ServerConnection connect = null;
-=======
->>>>>>> .r28
 
 
 	public OptionsConnectionFragment() {
