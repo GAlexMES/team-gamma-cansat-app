@@ -7,14 +7,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import de.teamgamma.cansat.app.data.Names;
 import de.teamgamma.cansat.app.options.Options;
 
 public class Save {
 	private static Save instance = null;
 
 	Options option = Options.getInstance();
-	private String filepathtemp;
-	private String filepathco2;
+	private String filepath;
 
 	private String writableString = null;
 
@@ -26,32 +26,29 @@ public class Save {
 		return instance;
 	}
 
-	public void saveAll(long time, Double temp, Double co2) {
+	public void saveAll(Double time, Double[] data) {
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_kk_mm",
 				Locale.GERMANY);
 		String date = sdf.format(new Date());
 
-		this.filepathco2 = option.getValueStoragePath() +"/"+ date + "_co2.txt";
-		this.filepathtemp = option.getValueStoragePath() +"/"+ date + "_temp.txt";
-
-		FileOutputStream outtemp;
-		FileOutputStream outco2;
+		FileOutputStream out;
 
 		try {
 
-			if (temp != null) {
-				outtemp = new FileOutputStream(new File(filepathtemp), true);
-				writableString = time + ":" + Double.toString(temp) + "\n";
-				outtemp.write(writableString.getBytes());
-				outtemp.flush();
-				outtemp.close();
-			}
+			for (int i = 0; i < Names.names.length; i++) {
 
-			if (co2 != null) {
-				outco2 = new FileOutputStream(new File(filepathco2), true);
-				writableString = time + ":" + Double.toString(co2) + "\n";
-				outco2.write(writableString.getBytes());
-				outco2.close();
+				if (data[i] != null) {
+					this.filepath = option.getValueStoragePath() + "/" + date
+							+ Names.names[i] + ".txt";
+					out = new FileOutputStream(new File(this.filepath), true);
+					this.writableString = time + ":" + Double.toString(data[i])
+							+ "\n";
+					out.write(this.writableString.getBytes());
+					out.close();
+
+				}
+
 			}
 
 		} catch (IOException e) {

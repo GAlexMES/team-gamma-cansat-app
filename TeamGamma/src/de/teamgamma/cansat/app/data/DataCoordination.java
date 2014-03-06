@@ -22,7 +22,7 @@ public class DataCoordination {
 
 	public void coordinateData(String message) {
 		json.unpack(message);
-		save.saveAll(json.getTime(), json.getTemp(), json.getCo2());
+		save.saveAll(json.getTemp(), json.getData());
 		temp.setValues(json.getTime(), json.getTemp());
 		co2.setValues(json.getTime(), json.getCo2());
 

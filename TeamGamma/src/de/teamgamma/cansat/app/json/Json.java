@@ -8,20 +8,27 @@ import de.teamgamma.cansat.app.data.Names;
 public class Json {
 
 	private static Json instance = null;
+	private Double[] data = new Double[Names.names.length];
 	private long time;
-	private Double temp;
-	private Double co2;
-
+	
 	public long getTime() {
-		return time;
+		return this.time;
 	}
 
 	public Double getTemp() {
-		return temp;
+		return data[0];
 	}
 
 	public Double getCo2() {
-		return co2;
+		return data[1];
+	}
+
+	public Double[] getData() {
+		return data;
+	}
+
+	public void setData(Double[] data) {
+		this.data = data;
 	}
 
 	public static Json getInstance() {
@@ -36,9 +43,14 @@ public class Json {
 		JSONObject data;
 		try {
 			data = new JSONObject(json);
-			this.time = data.getLong(Names.names[0]);
-			this.temp = data.getDouble(Names.names[1]);
-			this.co2 = data.getDouble(Names.names[2]);
+			int counter = 0;
+			this.time = data.getLong("time");
+			for (String s : Names.names){
+				this.data[counter] = data.getDouble(s);
+				counter++;
+				
+				
+			}
 
 		} catch (JSONException e) {
 			e.printStackTrace();
