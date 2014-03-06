@@ -23,6 +23,10 @@ import de.teamgamma.cansat.app.socket.AndroidClient;
 
 public class OptionsConnectionFragment extends Fragment {
 	public static final String ARG_SLIDEMENU_VALUES = "slidemenu_values";
+<<<<<<< .mine
+	private ServerConnection connect = null;
+=======
+>>>>>>> .r28
 
 
 	public OptionsConnectionFragment() {
@@ -76,6 +80,11 @@ public class OptionsConnectionFragment extends Fragment {
 	        @Override
 	        public void onClick(View v) {
 	        	option_data.setAllConnectionOptions(java_socket_ipAdress.getText().toString(), java_socket_port.getText().toString(),itemTypeGroup.getCheckedRadioButtonId());        	
+	        	Context context = mLinearLayout.getContext();
+	        	CharSequence text = "Saved";
+	        	int duration = Toast.LENGTH_SHORT;
+	        	Toast toast = Toast.makeText(context, text, duration);
+	        	toast.show();
 	        }
 	});
 	
@@ -88,7 +97,7 @@ public class OptionsConnectionFragment extends Fragment {
 	        	int duration = Toast.LENGTH_SHORT;
 	        	Toast toast = Toast.makeText(context, text, duration);
 	        	toast.show();
-	        	//connect =  new AndroidSocketConnect();
+	        	connect =  new ServerConnection();
 	        }
 	});
      	
