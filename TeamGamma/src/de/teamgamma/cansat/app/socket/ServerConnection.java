@@ -22,7 +22,6 @@ public class ServerConnection {
 							public void messageArrived(String message) {
 								datatransfer.coordinateData(message);
 							}
-
 						});
 
 			}
