@@ -32,15 +32,11 @@ public class Read {
 					if (lineArray.length > 20){
 
 						int index = lineArray.length/20 * i;
-						if (index % 2 == 1){
-							index -= 1;
-						}
-						if (index+1 > lineArray.length){
-							
-						}else{
+
+						if (index+1 <= lineArray.length){
 						outputArrayList[i][0] = (double) Long.parseLong(lineArray[index]);
 						outputArrayList[i][1] = (double) Long.parseLong(lineArray[index+1]);
-						}	
+						}
 					}
 				}
 				in.close();
