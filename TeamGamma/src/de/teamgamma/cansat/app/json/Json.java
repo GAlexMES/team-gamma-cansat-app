@@ -4,12 +4,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import de.teamgamma.cansat.app.data.Names;
-import de.teamgamma.cansat.app.sensors.Sensor;
+
 
 public class Json {
 
 	private static Json instance = null;
-	private Sensor[] sensors = new Sensor[Names.names.length];
+	private Double[][] sensors = new Double[Names.names.length][2];
 	
 
 
@@ -20,17 +20,9 @@ public class Json {
 		return instance;
 	}
 	
-	
-	public Json(){
-		// ARRAY SENSOREN MIT NAMESBELEGUNG
-		for (int i = 0; i < Names.names.length; i++){
-			sensors[i] = new Sensor();
-			sensors[i].setName(Names.names[i]);
-			
-		}
-	}
 
-	public Sensor[] unpack(String json) {
+
+	public Double[][] unpack(String json) {
 
 		JSONObject data;
 		try {
@@ -39,7 +31,7 @@ public class Json {
 			time = data.getLong("time");
 			for (int i = 0; i < Names.names.length; i++){
 				// Sensoren mit Werten belegen
-				this.sensors[i].setValues(time,data.getDouble(Names.names[i]));	
+				this.sensors[i][1] = Double.valueOf(time) ;	
 				
 			}return sensors;
 
