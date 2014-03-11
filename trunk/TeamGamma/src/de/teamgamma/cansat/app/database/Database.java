@@ -72,7 +72,6 @@ public class Database {
 			StringBuilder stringBuilder = new StringBuilder();
 
 			for (String line; (line = reader.readLine()) != null;) {
-				System.out.println(line);
 				stringBuilder.append(line);
 			}
 
