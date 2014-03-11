@@ -27,7 +27,10 @@ public class DataCoordination {
 	}
 
 	public void coordinateData(String message) {
-		this.sensors = json.unpack(message);
+		Double[][] data = json.unpack(message);
+		for(int i = 0; i < Names.names.length; i++){
+			this.sensors[i].setValues(data[i][1].longValue(), data[i][2]);
+		}
 		
 		
 		
