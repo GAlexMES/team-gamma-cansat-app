@@ -1,8 +1,7 @@
 package de.teamgamma.cansat.app.data;
 
+import de.teamgamma.cansat.app.database.Database;
 import de.teamgamma.cansat.app.json.Json;
-import de.teamgamma.cansat.app.savedata.Read;
-import de.teamgamma.cansat.app.savedata.Save;
 import de.teamgamma.cansat.app.sensors.Sensor;
 
 public class DataCoordination {
@@ -11,12 +10,16 @@ public class DataCoordination {
 	private static DataCoordination instance = null;
 	private Sensor[] sensors = new Sensor[Names.names.length];
 
+	
+	
+	//Singleton
 	public static DataCoordination getInstance() {
 		if (instance == null) {
 			instance = new DataCoordination();
 		}
 		return instance;
 	}
+	
 	public DataCoordination(){
 		// ARRAY SENSOREN MIT NAMESBELEGUNG
 		for (int i = 0; i < Names.names.length; i++){
@@ -27,20 +30,21 @@ public class DataCoordination {
 	}
 
 	public void coordinateData(String message) {
+		//message wird von Socket übergeben
+		//message wird von json entpackt
 		Double[][] data = json.unpack(message);
+		
+		//Die Returnwerte von message aus json, werden in das Array sensors gesetzt
 		for(int i = 0; i < Names.names.length; i++){
 			this.sensors[i].setValues(data[i][1].longValue(), data[i][2]);
 		}
 		
-		
-		
-		
-		
 	}
 	
 	public Sensor[] getValuesFromDatabase(){
-		// Database...
-		
+		//Daten werden aus der Datenbank ausgelesen und zurueckgegeben
+		Database database = Database.getInstance();
+		this.sensors = database.getValuesFromDatabase();
 		return sensors;
 	}
 

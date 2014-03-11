@@ -16,14 +16,10 @@ import de.teamgamma.cansat.app.data.Names;
 import de.teamgamma.cansat.app.sensors.Sensor;
 
 public class Database {
-	private final String key = "ae635cd72df";
 	private Sensor[] sensors = new Sensor[Names.names.length];
-	
-
-	// fertig!!!!
 	private String apiKey = ""; // Options.getStringApiKey oderso noch nicht
 								// da!!!!
-	
+
 	private static Database instance = null;
 
 	public static Database getInstance() {
@@ -32,24 +28,24 @@ public class Database {
 		}
 		return instance;
 	}
-	public Database(){
-		// ARRAY SENSOREN MIT NAMESBELEGUNG
-		for (int i = 0; i < Names.names.length; i++){
+
+	public Database() {
+		// SENSORENARRAY MIT NAMESBELEGUNG DER SENSOREN WIRD ERZEUGT
+		for (int i = 0; i < Names.names.length; i++) {
 			sensors[i] = new Sensor();
 			sensors[i].setName(Names.names[i]);
-			
 		}
 	}
-	
-	
-	public Sensor[] getValuesFromDatabase(){
+
+	public Sensor[] getValuesFromDatabase() {
+		// Daten werden aus der Datenbank gelesen und zurueckgegeben
 		this.getData(this.connect());
-		
-		
 		return this.sensors;
 	}
-	
-	private String connect(){
+
+	private String connect() {
+		// Verbindung zur Datenbank wird aufgebaut
+		// Die erhaltenen Daten werden zurueckgegeben
 		try {
 			String body = "key=" + URLEncoder.encode(this.apiKey, "UTF-8")
 					+ "&" + "action=" + URLEncoder.encode("get_data", "UTF-8");
@@ -82,71 +78,64 @@ public class Database {
 
 			writer.close();
 			reader.close();
-			
+
 			return stringBuilder.toString();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 
 		}
-		return null; 			
+		return null;
 	}
-	
-	
-	private void getData(String param){
+
+	private void getData(String param) {
+		// Daten werden in die jeweiligen Sensoren des SensorArrays geschrieben
 		JSONObject response;
 		try {
 			response = new JSONObject(param);
-		
-		if (response.getBoolean("error") == false) {
-			JSONArray data = response.getJSONArray("data");
 
-			JSONObject item = null;
+			if (response.getBoolean("error") == false) {
+				JSONArray data = response.getJSONArray("data");
 
-			if (response.length() > 20) {
-				long time = 0;
-				
+				JSONObject item = null;
 
-				int index = 0;
-				for (int i = 0; i < 20; i++) {
+				if (response.length() > 20) {
+					long time = 0;
 
-					index = response.length() / 20 * i;
-					item = data.getJSONObject(index);
+					int index = 0;
+					for (int i = 0; i < 20; i++) {
 
-					index -= 1;
-					// Zeit lesen
-					time = item.getLong("time");
+						index = response.length() / 20 * i;
+						item = data.getJSONObject(index);
 
-					// Zugriff auf einzelne Sensoren
+						index -= 1;
+						// Zeit lesen
+						time = item.getLong("time");
 
-					for (int counter = 0; counter < Names.names.length; counter++) {
-						this.sensors[counter].setValues(time, item.getDouble(Names.names[counter]));
+						// Zugriff auf einzelne Sensoren
 
+						for (int counter = 0; counter < Names.names.length; counter++) {
+							this.sensors[counter].setValues(time,
+									item.getDouble(Names.names[counter]));
 
+						}
 					}
-				}
 
-			} else{
-				long time;
-				for(int i = response.length(); i>0; i++){
-					item = data.getJSONObject(i);
-					time = data.getJSONObject(i).getLong("time");
-					for (int counter = 0; counter < Names.names.length; counter++) {
-						this.sensors[counter].setValues(time, item.getDouble(Names.names[counter]));
-
-
+				} else {
+					long time;
+					for (int i = response.length(); i > 0; i++) {
+						item = data.getJSONObject(i);
+						time = data.getJSONObject(i).getLong("time");
+						for (int counter = 0; counter < Names.names.length; counter++) {
+							this.sensors[counter].setValues(time,
+									item.getDouble(Names.names[counter]));
+						}
 					}
-					
 				}
 			}
-			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	} catch (JSONException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-		
-		
-		
 	}
 }
