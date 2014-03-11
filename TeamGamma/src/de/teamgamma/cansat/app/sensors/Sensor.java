@@ -2,6 +2,15 @@ package de.teamgamma.cansat.app.sensors;
 
 public class Sensor {
 	private double[][] values = new double[10][2];
+	private String name;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public double[][] getValues() {
 		return values;

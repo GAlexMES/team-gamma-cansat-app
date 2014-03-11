@@ -4,32 +4,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import de.teamgamma.cansat.app.data.Names;
+import de.teamgamma.cansat.app.sensors.Sensor;
 
 public class Json {
 
 	private static Json instance = null;
-	private Double[] data = new Double[Names.names.length];
-	private long time;
+	private Sensor[] sensors = new Sensor[Names.names.length];
 	
-	public long getTime() {
-		return this.time;
-	}
 
-	public Double getTemp() {
-		return data[0];
-	}
-
-	public Double getCo2() {
-		return data[1];
-	}
-
-	public Double[] getData() {
-		return data;
-	}
-
-	public void setData(Double[] data) {
-		this.data = data;
-	}
 
 	public static Json getInstance() {
 		if (instance == null) {
@@ -37,24 +19,33 @@ public class Json {
 		}
 		return instance;
 	}
+	
+	
+	public Json(){
+		// ARRAY SENSOREN MIT NAMESBELEGUNG
+		for (int i = 0; i < Names.names.length; i++){
+			sensors[i] = new Sensor();
+			sensors[i].setName(Names.names[i]);
+			
+		}
+	}
 
-	public void unpack(String json) {
+	public Sensor[] unpack(String json) {
 
 		JSONObject data;
 		try {
 			data = new JSONObject(json);
-			int counter = 0;
-			this.time = data.getLong("time");
-			for (String s : Names.names){
-				this.data[counter] = data.getDouble(s);
-				counter++;
+			long time;
+			time = data.getLong("time");
+			for (int i = 0; i < Names.names.length; i++){
+				// Sensoren mit Werten belegen
+				this.sensors[i].setValues(time,data.getDouble(Names.names[i]));	
 				
-				
-			}
+			}return sensors;
 
 		} catch (JSONException e) {
 			e.printStackTrace();
-		}
+		}return sensors;
 	}
 
 }

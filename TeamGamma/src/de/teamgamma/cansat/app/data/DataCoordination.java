@@ -8,10 +8,8 @@ import de.teamgamma.cansat.app.sensors.Sensor;
 public class DataCoordination {
 
 	private Json json = Json.getInstance();
-	private Save save = Save.getInstance();
-	private Sensor temp = new Sensor();
-	private Sensor co2 = new Sensor();
 	private static DataCoordination instance = null;
+	private Sensor[] sensors = new Sensor[Names.names.length];
 
 	public static DataCoordination getInstance() {
 		if (instance == null) {
@@ -19,13 +17,28 @@ public class DataCoordination {
 		}
 		return instance;
 	}
+	public DataCoordination(){
+		// ARRAY SENSOREN MIT NAMESBELEGUNG
+		for (int i = 0; i < Names.names.length; i++){
+			sensors[i] = new Sensor();
+			sensors[i].setName(Names.names[i]);
+			
+		}
+	}
 
 	public void coordinateData(String message) {
-		json.unpack(message);
-		save.saveAll(json.getTemp(), json.getData());
-		temp.setValues(json.getTime(), json.getTemp());
-		co2.setValues(json.getTime(), json.getCo2());
-
+		this.sensors = json.unpack(message);
+		
+		
+		
+		
+		
+	}
+	
+	public Sensor[] getValuesFromDatabase(){
+		// Database...
+		
+		return sensors;
 	}
 
 }
