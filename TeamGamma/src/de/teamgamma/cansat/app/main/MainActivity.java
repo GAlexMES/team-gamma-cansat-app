@@ -3,13 +3,13 @@ package de.teamgamma.cansat.app.main;
 import java.io.File;
 
 import de.teamgamma.cansat.app.R;
+import de.teamgamma.cansat.app.data.Names;
 import de.teamgamma.cansat.app.dataImport.ImportFragment;
 import de.teamgamma.cansat.app.fragments.HomeFragment;
 import de.teamgamma.cansat.app.fragments.OptionsFragment;
 import de.teamgamma.cansat.app.fragments.OptionsSearcherFragment;
 import de.teamgamma.cansat.app.fragments.ValueFragment;
 import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
-import de.teamgamma.cansat.app.fragments_androidplot.TestValues;
 import de.teamgamma.cansat.app.fragments_androidplot.simple_xy_example;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.sensors.Sensor;
@@ -173,18 +173,16 @@ public class MainActivity extends Activity {
 				break;
 			}
 		case 1:
-			fragment = new simple_xy_example();
+			RealtimeGraph.getInstance().onSensorChange(Names.names[0]);
+			fragment = RealtimeGraph.getInstance();
 			break;
 		case 2:
-			
-			fragment = RealtimeGraph.getInstance();
-			TestValues b =new TestValues();
-			b.start();
+			RealtimeGraph.getInstance().onSensorChange(Names.names[1]);
+			fragment = RealtimeGraph.getInstance();			
 			break;
 		case 3:
+			RealtimeGraph.getInstance().onSensorChange(Names.names[2]);
 			fragment = RealtimeGraph.getInstance();
-			TestValues c =new TestValues();
-			c.start();
 			break;
 		case 4:
 			fragment = new ImportFragment();
