@@ -27,11 +27,12 @@ public class Json {
 		JSONObject data;
 		try {
 			data = new JSONObject(json);
-			long time;
+			Long time;
 			time = data.getLong("time");
 			for (int i = 0; i < Names.names.length; i++){
 				// Sensoren mit Werten belegen
-				this.sensors[i][1] = Double.valueOf(time) ;	
+				this.sensors[i][1] = Double.valueOf(Names.names[i]);
+				this.sensors[i][0] =Double.valueOf(time);
 				
 			}return sensors;
 
