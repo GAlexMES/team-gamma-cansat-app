@@ -10,7 +10,6 @@ import de.teamgamma.cansat.app.fragments.OptionsFragment;
 import de.teamgamma.cansat.app.fragments.OptionsSearcherFragment;
 import de.teamgamma.cansat.app.fragments.ValueFragment;
 import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
-import de.teamgamma.cansat.app.fragments_androidplot.simple_xy_example;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.sensors.Sensor;
 import android.app.Activity;
@@ -37,13 +36,13 @@ public class MainActivity extends Activity {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
-	private Options options_data = Options.getInstance();
+	private Options options = Options.getInstance();
 
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 	private String[] mSlidemanueTitels;
 	private Sensor sensor = new Sensor();
-	private Fragment fragment;
+	private static Fragment fragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +95,7 @@ public class MainActivity extends Activity {
 
 		if (new File(Environment.getExternalStorageDirectory().getPath()
 				+ "/teamgamma/options.txt").exists()) {
-			options_data.getValuesFromFile();
+			options.getValuesFromFile();
 			if (savedInstanceState == null) {
 				selectItem(0, false);
 			}
@@ -173,16 +172,16 @@ public class MainActivity extends Activity {
 				break;
 			}
 		case 1:
-			RealtimeGraph.getInstance().onSensorChange(Names.names[0]);
-			fragment = RealtimeGraph.getInstance();
+			options.setActiveSensorName(Names.names[0]);
+			fragment = new RealtimeGraph();
 			break;
 		case 2:
-			RealtimeGraph.getInstance().onSensorChange(Names.names[1]);
-			fragment = RealtimeGraph.getInstance();			
+			options.setActiveSensorName(Names.names[1]);
+			fragment = new RealtimeGraph();		
 			break;
 		case 3:
-			RealtimeGraph.getInstance().onSensorChange(Names.names[2]);
-			fragment = RealtimeGraph.getInstance();
+			options.setActiveSensorName(Names.names[2]);
+			fragment = new RealtimeGraph();
 			break;
 		case 4:
 			fragment = new ImportFragment();
@@ -226,6 +225,10 @@ public class MainActivity extends Activity {
 		super.onConfigurationChanged(newConfig);
 		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
+	
+	public static Fragment getCurrentFragment(){
+		return fragment;
 	}
 
 }

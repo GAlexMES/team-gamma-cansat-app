@@ -34,11 +34,11 @@ public class simple_xy_example extends Fragment
  
         // fun little snippet that prevents users from taking screenshots
         // on ICS+ devices :-)
-        final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(R.layout.androidplot_simple_xy_plot_example,
+        final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(R.layout.androidplo_xyplot,
                 container, false);
  
         // initialize our XYPlot reference:
-        plot = (XYPlot)mLinearLayout.findViewById(R.id.mySimpleXYPlot);
+        plot = (XYPlot)mLinearLayout.findViewById(R.id.simpleXYPlot);
  
         // Create a couple arrays of y-values to plot:
         Number[] series1Numbers = {1, 8, 5, 2, 7, 4};
