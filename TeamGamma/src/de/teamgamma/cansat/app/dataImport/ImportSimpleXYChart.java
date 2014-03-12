@@ -28,10 +28,10 @@ public class ImportSimpleXYChart extends Fragment {
 		// fun little snippet that prevents users from taking screenshots
 		// on ICS+ devices :-)
 		final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(
-				R.layout.androidplot_simple_xy_plot_example, container, false);
+				R.layout.androidplo_xyplot, container, false);
 
 		// initialize our XYPlot reference:
-		plot = (XYPlot) mLinearLayout.findViewById(R.id.mySimpleXYPlot);
+		plot = (XYPlot) mLinearLayout.findViewById(R.id.simpleXYPlot);
 		
 		Number[] series1Numbers = new Number[30];
 		ImportedFiles importedFile = ImportedFiles.getInstance();

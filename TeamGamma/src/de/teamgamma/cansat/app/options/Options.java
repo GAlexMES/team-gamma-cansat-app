@@ -10,6 +10,8 @@ public class Options {
 	private String javaSocketPort = null;;
 	private OptionsExport optionsExport;
 	private int methodToConnect = 0;
+	private String activeSensorName = "";
+	
 	
 	private String valueExportPath = null;
 	private String valueStoragePath = null;
@@ -19,6 +21,16 @@ public class Options {
 	private String tempOptionsPath = null;
 	private static Options instance = null;
 	private String temporaryBrowserResultPath = null;
+	
+	
+	public String getActiveSensorName() {
+		return activeSensorName;
+	}
+
+	public void setActiveSensorName(String activeSensorName) {
+		this.activeSensorName = activeSensorName;
+	}
+
 	
 	public String getTemporaryBrowserResultPath() {
 		return temporaryBrowserResultPath;
