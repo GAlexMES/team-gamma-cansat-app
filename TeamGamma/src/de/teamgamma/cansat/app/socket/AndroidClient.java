@@ -63,7 +63,6 @@ public class AndroidClient {
 			try {
 				clientSocket = new Socket(inetAddress, dstPort);
 				Log.d("socket_test", "Socket created, everything fine!");
-
 				commThread = new Thread(new CommunicationThread(messageAdapter));
 				commThread.start();
 			} catch (IOException e) {

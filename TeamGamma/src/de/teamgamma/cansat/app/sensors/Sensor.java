@@ -16,13 +16,22 @@ public class Sensor {
 		return values;
 	}
 
-	public void setValues(long time, Double value) {
+	public void setValues(long time,Double value) {
 		if (value != null) {
 
 			newValue();
 			values[9][0] = time;
 			values[9][1] = value;
 		}
+	}
+	
+	public void setFirstValue(long time,Double value){
+		if (value != null) {
+			newValue();
+			values[0][0] = time;
+			values[0][1] = value;
+		}
+		
 	}
 
 	private void newValue() {
