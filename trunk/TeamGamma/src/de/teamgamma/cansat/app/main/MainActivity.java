@@ -8,7 +8,6 @@ import de.teamgamma.cansat.app.dataImport.ImportFragment;
 import de.teamgamma.cansat.app.fragments.HomeFragment;
 import de.teamgamma.cansat.app.fragments.OptionsFragment;
 import de.teamgamma.cansat.app.fragments.OptionsSearcherFragment;
-import de.teamgamma.cansat.app.fragments.ValueFragment;
 import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.sensors.Sensor;
@@ -189,9 +188,7 @@ public class MainActivity extends Activity {
 		case 6:
 			fragment = new OptionsFragment();
 			break;
-		default:
-			fragment = new ValueFragment();
-			break;
+
 		}
 		Bundle args = new Bundle();
 		args.putInt(OptionsFragment.ARG_SLIDEMENU_VALUES, position);

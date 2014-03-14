@@ -1,23 +1,34 @@
 package de.teamgamma.cansat.app.fragments;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import de.teamgamma.cansat.app.R;
+
+/**
+ * 
+ * 
+ * @author Alexander Brennecke
+ *
+ *shows the home screen when an object is initialized
+ *initialized when app opened
+ *
+ */
 
 public class HomeFragment extends Fragment {
     public static final String ARG_SLIDEMENU_VALUES = "slidemenu_values";
 
     public HomeFragment() {
-        // Empty constructor required for fragment subclasses
+        // Empty constructor
     }
 
+    /**
+     * 
+     * called when an object of this class was created
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {

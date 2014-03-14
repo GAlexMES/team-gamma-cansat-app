@@ -34,7 +34,7 @@ public class simple_xy_example extends Fragment
  
         // fun little snippet that prevents users from taking screenshots
         // on ICS+ devices :-)
-        final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(R.layout.androidplo_xyplot,
+        final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(R.layout.androidplot_xyplot,
                 container, false);
  
         // initialize our XYPlot reference:

@@ -1,6 +1,7 @@
 package de.teamgamma.cansat.app.fragments;
 
 import android.app.Fragment;
+
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,10 +17,19 @@ import de.teamgamma.cansat.app.options.GenerateOptions;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.options.OptionsExport;
 
+/**
+ * 
+ * @author Alexander Brennecke
+ * gives the user the option to select an own options.txt or to generate a new one
+ *
+ */
 public class OptionsSearcherFragment extends Fragment {
 	
 	private Options options = Options.getInstance();
 
+	/**
+	 * called when the fragment will be displayed first time
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -34,12 +44,16 @@ public class OptionsSearcherFragment extends Fragment {
 		Button buttonBrowser = (Button) mLinearLayout
 				.findViewById(R.id.button_browser);
 
+		// called when the generateOptions button was clicked
 		buttonGenerateOptions.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				//creates a new optionsExport object
 				OptionsExport optionsExport = new OptionsExport();
+				//creates a mewGenerateOptions object
 				GenerateOptions generateOptions = new GenerateOptions();
-				optionsExport.writeSingle(generateOptions.getFilepath(),generateOptions.generate());
+				//writes gerneral options into a new options.txt
+				optionsExport.writeSingle(generateOptions.getOptionsFilepath(),generateOptions.generate());
 				// Create new fragment and transaction
 				Fragment newFragment = new HomeFragment();
 				FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -54,6 +68,8 @@ public class OptionsSearcherFragment extends Fragment {
 
 			}
 		});
+		
+		//called when a 
 		buttonOptionsSave.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -72,10 +88,16 @@ public class OptionsSearcherFragment extends Fragment {
 
 			}
 		});
+		
+		//called when the file brwoser button was clicked
 		buttonBrowser.setOnClickListener(new OnClickListener() {
+			/**
+			 * opens a new activity with the file browser
+			 */
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(	getActivity(),de.teamgamma.cansat.app.filebrowser.AndroidExplorer.class);
+				//starst the activity
 				startActivity(intent);
 			}
 		});

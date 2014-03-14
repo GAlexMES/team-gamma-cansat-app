@@ -26,20 +26,21 @@ public class ImportedFiles {
 		}
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @return a double[][] out of the latest file
+	 */
 	public Double[][] getLatestFile() {
 		return latestFile;
 	}
+	
+	/**
+	 * 
+	 * @param latestFile a double[][] of the latest import
+	 */
 
 	public void setLatestFile(Double[][] latestFile) {
 		this.latestFile = latestFile;
 	}
-
-	public static void setInstance(ImportedFiles instance) {
-		ImportedFiles.instance = instance;
-	}
-	
-
-	
-	
-
 }

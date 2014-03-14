@@ -16,15 +16,25 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+
+/**
+ * 
+ * @author Alexander Brennecke
+ * FileExplorer which shows every file located on the phone
+ *
+ */
 public class AndroidExplorer extends ListActivity {
+	// initialize a few importend variables
 	private Options options = Options.getInstance();
 	private List<String> item = null;
 	private List<String> path = null;
 	private String root = "/";
 	private TextView myPath;
 	private String dirPath;
-	/** Called when the activity is first created. */
-
+	
+	/**
+	 *  Called when the activity is first created
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,15 +42,24 @@ public class AndroidExplorer extends ListActivity {
 		myPath = (TextView) findViewById(R.id.path);
 		getDir(root);
 	}
+	
+	/** 
+	 * 
+	 * @param dirPath path of a dir, that was opened
+	 * creates Lists which contains every file or dir inside the dir path
+	 */
 
 	private void getDir(String dirPath)
 	{
+		// variables get there current values
 		this.dirPath = dirPath;
 		myPath.setText("Location: " + dirPath);
 		item = new ArrayList<String>();
 		path = new ArrayList<String>();
 		File f = new File(dirPath);
 		File[] files = f.listFiles();
+		
+		// when the dirPath is not the root path
 		if (!dirPath.equals(root))
 		{
 			item.add(root);
@@ -48,6 +67,8 @@ public class AndroidExplorer extends ListActivity {
 			item.add("../");
 			path.add(f.getParent());
 		}
+		
+		// goes throw every object insinde the dir and put its into th item List
 		for (int i = 0; i < files.length; i++)
 		{
 			File file = files[i];
@@ -57,15 +78,23 @@ public class AndroidExplorer extends ListActivity {
 			else
 				item.add(file.getName());
 		}
-		ArrayAdapter<String> fileList =
-		new ArrayAdapter<String>(this, R.layout.row, item);
+		
+		ArrayAdapter<String> fileList = new ArrayAdapter<String>(this, R.layout.row, item);
 		setListAdapter(fileList);
 	}
+	
+	/**
+	 * called when clicked on an dir or an file
+	 */
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
+		
+		// initialize a few importend variables
 		File file = new File(path.get(position));
 		final String fileName = file.getName();
+		
+		// if the file is a dir the getDir method will be called to update the screen
 		if (file.isDirectory())
 		{
 			if (file.canRead())
@@ -82,6 +111,10 @@ public class AndroidExplorer extends ListActivity {
 				}).show();
 			}
 		}
+		
+		// if the file is not a dir
+		// a message box will appear which shows the filename
+		// and gives the user the option to select thif ile by pressing the "OK" button
 
 		else
 		{
