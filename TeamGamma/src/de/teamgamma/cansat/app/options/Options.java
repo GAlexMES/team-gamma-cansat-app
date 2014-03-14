@@ -4,25 +4,39 @@ import android.os.Environment;
 
 
 
-
+/**
+ * 
+ * @author Alexander
+ * saves every option for this app permanently
+ */
 public class Options {
-	private String javaSocketIpAdress = null;;
-	private String javaSocketPort = null;;
 	private OptionsExport optionsExport;
+	// variables for every option that should be saved
+		
 	private int methodToConnect = 0;
-	private String activeSensorName = "";
-	
-	
+	private String javaSocketIpAdress = null;;
+	private String javaSocketPort = null;
+	private String activeSensorName = "";	
 	private String valueExportPath = null;
 	private String valueStoragePath = null;
 	private String optionsPath = Environment.getExternalStorageDirectory().getPath() + "/teamgamma/options.txt";
 	private String tempValueExportPath = null;
 	private String tempValueStoragePath = null;
 	private String tempOptionsPath = null;
-	private static Options instance = null;
 	private String temporaryBrowserResultPath = null;
+	boolean browsButtons[] = {false,false,false};
 	
+	// instance for singelton pattern
+	private static Options instance = null;
 	
+	public static Options getInstance(){
+		if(instance==null){
+			instance = new Options();				
+		}
+		return instance;
+	}
+	
+	//getter and setter for every option variable
 	public String getActiveSensorName() {
 		return activeSensorName;
 	}
@@ -38,15 +52,6 @@ public class Options {
 
 	public void setTemporaryBrowserResultPath(String importFilePath) {
 		this.temporaryBrowserResultPath = importFilePath;
-	}
-
-	boolean browsButtons[] = {false,false,false};
-	
-	public static Options getInstance(){
-		if(instance==null){
-			instance = new Options();				
-		}
-		return instance;
 	}
 
 	public void setSingleBrowsButtons(int position, boolean browsButtons) {

@@ -11,30 +11,47 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import de.teamgamma.cansat.app.R;
 
+/**
+ * 
+ * @author Alexander Brennecke
+ * 
+ * fragment that displays buttons where the user can choose options e want to change
+ *
+ */
 public class OptionsFragment extends Fragment {
     public static final String ARG_SLIDEMENU_VALUES = "slidemenu_values";
 
     public OptionsFragment() {
-        // Empty constructor required for fragment subclasses
+        // Empty constructor
     }
+    
+    /**
+     * 
+     * called when the fragment will shown the first time
+     */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+    	//initialize a few importand variables
      	final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(R.layout.fargment_options,
                  container, false);        	
     	Button buttonConnection = (Button) mLinearLayout.findViewById(R.id.connection);
     	Button buttonExport = (Button) mLinearLayout.findViewById(R.id.export);
+    	
+    	//called when the connection button was clicked
     	buttonConnection.setOnClickListener(new OnClickListener() {
     	        @Override
     	        public void onClick(View v) {
-    	        	selectedOption(0);        	        	
+    	        	selectedOption(R.id.connection);        	        	
     	        }
     	});
+    	
+    	//called when the export button was clicked
     	buttonExport.setOnClickListener(new OnClickListener() {
 	        @Override
 	        public void onClick(View v) {
-	        	selectedOption(1);        	        	
+	        	selectedOption(R.id.export);        	        	
 	        }
 	});
     	
@@ -42,15 +59,18 @@ public class OptionsFragment extends Fragment {
         return mLinearLayout;
     }
     
-	private void selectedOption(int position) {
+    /**
+     * @param button id of the pressed button
+     */
+	private void selectedOption(int button) {
     	Fragment fragment = null;
         // update the main content by replacing fragments
-    	switch (position){
-    	case 0:  fragment = new OptionsConnectionFragment(); break;
-    	case 1: fragment = new OptionsExportFragment(); break;
+    	switch (button){
+    	case R.id.connection:  fragment = new OptionsConnectionFragment(); break;
+    	case R.id.export: fragment = new OptionsExportFragment(); break;
     	}    	
         Bundle args = new Bundle();
-        args.putInt(OptionsFragment.ARG_SLIDEMENU_VALUES, position);
+        args.putInt(OptionsFragment.ARG_SLIDEMENU_VALUES, button);
         fragment.setArguments(args);
 
         FragmentManager fragmentManager = getFragmentManager();

@@ -13,8 +13,14 @@ public class OptionsExport {
 	private String filepath = options.getOptionsPath();
 	private String writeableString = null;
 
-	public void writeAll(String java_socket_ipAdress, String java_socket_port,
-			int methodToConnect, String valueExportPath, String valueStoragePath) {
+	public void writeAll( //writes data into options.txt
+			String java_socket_ipAdress, //JavaSocketIPAdress
+			String java_socket_port,//JavaSocketPort
+			int methodToConnect, //MethodToConnect
+			String valueExportPath, //Path for valueExport
+			String valueStoragePath //Path for value storage
+			){
+		
 		writeableString = java_socket_ipAdress + newLine + java_socket_port
 				+ newLine + methodToConnect + newLine + valueExportPath
 				+ newLine + valueStoragePath;

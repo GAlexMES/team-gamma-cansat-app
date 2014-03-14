@@ -14,60 +14,50 @@ import de.teamgamma.cansat.app.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
 /**
- * A straightforward example of using AndroidPlot to plot some data.
+ * 
+ * @author Alexander Brennecke
+ * Shows a fragment which displays a SimpleXYChart of the
+ * selected import file
  */
+
 public class ImportSimpleXYChart extends Fragment {
 
 	private XYPlot plot;
 
+	
+	/**
+	 * called when an object of this class will be created
+	 */
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
-		// fun little snippet that prevents users from taking screenshots
-		// on ICS+ devices :-)
+		
+		// LinearLayout object, of the androitplot_xyplot.xml fragment
 		final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(
-				R.layout.androidplo_xyplot, container, false);
+				R.layout.androidplot_xyplot, container, false);
 
-		// initialize our XYPlot reference:
+		// initialize the plot by using the XYPlot in the fragment
 		plot = (XYPlot) mLinearLayout.findViewById(R.id.simpleXYPlot);
 		
-		Number[] series1Numbers = new Number[30];
+		// initialize a few importend variables to display the values correct
+		Number[] seriesNumbers = new Number[30];
 		ImportedFiles importedFile = ImportedFiles.getInstance();
 		Double[][] valueArray = importedFile.getLatestFile();
+		//push the datas out of the valueArray into an Number Array
 		for(int i=0;i<20;i++){
-			series1Numbers[i]=valueArray[i][1];
+			seriesNumbers[i]=valueArray[i][1];
 		}
-		// Turn the above arrays into XYSeries':
-		XYSeries series1 = new SimpleXYSeries(Arrays.asList(series1Numbers), // SimpleXYSeries
-																				// takes
-																				// a
-																				// List
-																				// so
-																				// turn
-																				// our
-																				// array
-																				// into
-																				// a
-																				// List
-				SimpleXYSeries.ArrayFormat.XY_VALS_INTERLEAVED, // Y_VALS_ONLY means use
-														// the element index as
-														// the x value
-				"Series1"); // Set the display title of the series
+		// Make the seriesNumbers [] to an XYSeries
+		XYSeries series1 = new SimpleXYSeries(Arrays.asList(seriesNumbers), 
+				SimpleXYSeries.ArrayFormat.XY_VALS_INTERLEAVED, 
+				""); //Name od the series
 
-		// Create a formatter to use for drawing a series using
-		// LineAndPointRenderer
-		// and configure it from xml:
+		// Configures the graph
 		LineAndPointFormatter series1Format = new LineAndPointFormatter(
 				Color.RED, Color.GREEN, Color.BLUE, null);
 
 		// add a new series' to the xyplot:
 		plot.addSeries(series1, series1Format);
-
-		// same as above:
-		LineAndPointFormatter series2Format = new LineAndPointFormatter(
-				Color.RED, Color.GREEN, Color.BLUE, null);
 
 		// reduce the number of range labels
 		plot.setTicksPerRangeLabel(3);

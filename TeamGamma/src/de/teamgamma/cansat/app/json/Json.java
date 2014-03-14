@@ -1,4 +1,4 @@
-package de.teamgamma.cansat.app.json;
+ package de.teamgamma.cansat.app.json;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,8 +10,6 @@ public class Json {
 
 	private static Json instance = null;
 	private Double[][] sensors = new Double[Names.names.length][2];
-	
-
 
 	public static Json getInstance() {
 		if (instance == null) {
@@ -20,8 +18,6 @@ public class Json {
 		return instance;
 	}
 	
-
-
 	public Double[][] unpack(String json) {
 
 		JSONObject data;
