@@ -15,7 +15,7 @@ public class Save {
 
 	Options option = Options.getInstance();
 	private String filepath;
-
+	private final String header = Names.head + "\n";
 	private String writableString = null;
 
 	// Singleton
@@ -35,13 +35,21 @@ public class Save {
 		FileOutputStream out;
 
 		try {
-
+			
+			//prueft ob datei exestiert und wenn nicht wird der header hinzugefuegt
+			File f;
 			for (int i = 0; i < Names.names.length; i++) {
+				f = new File(this.filepath = option.getValueStoragePath() + "/"
+						+ date + Names.names[i] + ".txt");
 
 				if (data[i] != null) {
 					this.filepath = option.getValueStoragePath() + "/" + date
 							+ Names.names[i] + ".txt";
 					out = new FileOutputStream(new File(this.filepath), true);
+					if (!f.exists()) {
+						out.write(this.header.getBytes());
+					}
+
 					this.writableString = time + ":" + Double.toString(data[i])
 							+ "\n";
 					out.write(this.writableString.getBytes());
