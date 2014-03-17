@@ -1,7 +1,7 @@
 package de.teamgamma.cansat.app.sensors;
 
 public class Sensor {
-	private double[][] values = new double[10][2];
+	private double[][] values = new double[20][2];
 	private String name;
 
 	public String getName() {
@@ -20,8 +20,8 @@ public class Sensor {
 		if (value != null) {
 
 			newValue();
-			values[9][0] = time;
-			values[9][1] = value;
+			values[19][0] = time;
+			values[19][1] = value;
 		}
 	}
 	
@@ -35,7 +35,7 @@ public class Sensor {
 	}
 
 	private void newValue() {
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 19; i++) {
 			values[i][1] = values[i + 1][1];
 		}
 	}

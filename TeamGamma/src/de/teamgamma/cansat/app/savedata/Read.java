@@ -32,21 +32,30 @@ public class Read {
 
 				if (counter > 0) {
 					lineArray = zeile.split(":");
-					for (int i = 0; i < 20; i += 1) {
-						if (lineArray.length > 20) {
+					if (lineArray.length > 20) {
+						for (int i = 0; i < 20; i += 1) {
 
 							int index = lineArray.length / 20 * i;
-
-							if (index + 1 <= lineArray.length) {
-								outputArrayList[i][0] = (double) Long
-										.parseLong(lineArray[index]);
-								outputArrayList[i][1] = (double) Long
-										.parseLong(lineArray[index + 1]);
+							if (index % 2 != 0 && index > 1) {
+								index--;
 							}
+							outputArrayList[i][0] = (double) Long
+									.parseLong(lineArray[index]);
+							outputArrayList[i][1] = (double) Long
+									.parseLong(lineArray[index + 1]);
+
+						}
+					} else {
+						for (int i = 0; i < lineArray.length; i++) {
+							outputArrayList[i][0] = (double) Long
+									.parseLong(lineArray[i]);
+							outputArrayList[i][1] = (double) Long
+									.parseLong(lineArray[i + 1]);
 						}
 					}
 					in.close();
 				} else {
+					// testen ob \n mit uebergeben wird... auch beim auslesen der werte
 					if (zeile != Names.head) {
 						// Fehelerausgabe.....Falsche Datei
 						break;

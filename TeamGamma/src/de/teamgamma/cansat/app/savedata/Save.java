@@ -35,8 +35,9 @@ public class Save {
 		FileOutputStream out;
 
 		try {
-			
-			//prueft ob datei exestiert und wenn nicht wird der header hinzugefuegt
+
+			// prueft ob datei exestiert und wenn nicht wird der header
+			// hinzugefuegt
 			File f;
 			for (int i = 0; i < Names.names.length; i++) {
 				f = new File(this.filepath = option.getValueStoragePath() + "/"
@@ -56,7 +57,6 @@ public class Save {
 					out.close();
 
 				}
-
 			}
 
 		} catch (IOException e) {
