@@ -1,5 +1,7 @@
 package de.teamgamma.cansat.app.sensors;
 
+import android.util.Log;
+
 public class Sensor {
 	private double[][] values = new double[20][2];
 	private String name;
@@ -18,11 +20,12 @@ public class Sensor {
 
 	public void setValues(long time,Double value) {
 		if (value != null) {
-
 			newValue();
 			values[19][0] = time;
 			values[19][1] = value;
 		}
+		Log.d("sensor",String.valueOf(time));
+		Log.d("Sensor",String.valueOf(values[19][1]));
 	}
 	
 	public void setFirstValue(long time,Double value){

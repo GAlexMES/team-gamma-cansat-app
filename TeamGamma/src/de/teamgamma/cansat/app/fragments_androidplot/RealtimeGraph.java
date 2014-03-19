@@ -73,13 +73,15 @@ public class RealtimeGraph extends Fragment {
 	}
 
 	public synchronized void onValueChanged(Sensor sensor) {
+		Log.d("graph",sensor.getName());
+		Log.d("graph",String.valueOf(sensor.getValues()[19][1]));
 		// get rid the oldest sample in history:
 		if (series1.size() > HISTORY_SIZE) {
 			((SimpleXYSeries) series1).removeFirst();
 		}
 		// add the latest history sample:
 		((SimpleXYSeries) series1).addLast(null,
-				sensor.getValues()[0][0]);
+				sensor.getValues()[19][1]);
 
 		// redraw the Plots:
 		plot.redraw();
