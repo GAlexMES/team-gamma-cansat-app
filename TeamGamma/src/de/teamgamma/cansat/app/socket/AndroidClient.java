@@ -17,7 +17,7 @@ public class AndroidClient {
 
 		private BufferedReader in;
 		private MessageAdapter messageAdapter;
-		private DataCoordination datatransfer = new DataCoordination();
+
 
 		public CommunicationThread(MessageAdapter messageAdapter) {
 			this.messageAdapter = messageAdapter;
