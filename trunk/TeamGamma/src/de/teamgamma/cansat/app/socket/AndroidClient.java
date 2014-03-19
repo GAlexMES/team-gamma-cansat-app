@@ -40,7 +40,9 @@ public class AndroidClient {
 				try {
 					if (in.ready()) {
 						message = in.readLine();
+						Log.d("values",message);
 						messageAdapter.messageArrived(message);
+						
 					}
 				} catch (IOException e) {
 					e.printStackTrace();

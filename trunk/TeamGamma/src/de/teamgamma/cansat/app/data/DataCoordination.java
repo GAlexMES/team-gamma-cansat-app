@@ -1,5 +1,6 @@
 package de.teamgamma.cansat.app.data;
 
+import android.util.Log;
 import de.teamgamma.cansat.app.database.Database;
 import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
 import de.teamgamma.cansat.app.json.Json;
@@ -38,14 +39,19 @@ public class DataCoordination {
 		//message wird von json entpackt
 		Double[][] data = json.unpack(message);
 		
+		//Log.d("gamma", message);
 		//Die Returnwerte von message aus json, werden in das Array sensors gesetzt
 		for(int i = 0; i < Names.names.length; i++){
 			this.sensors[i].setValues(data[i][0].longValue(), data[i][1]);
+			
 		}
 		
 		for(Sensor sensor : sensors){
+			Log.d("Data","for");
 			if(sensor.getName().equals(options.getActiveSensorName())){
+				Log.d("Data","if1");
 				if(MainActivity.getCurrentFragment().getClass().equals(RealtimeGraph.class)){
+					Log.d("Data","if2");
 					((RealtimeGraph)MainActivity.getCurrentFragment()).onValueChanged(sensor);
 				}
 			}
