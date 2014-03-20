@@ -17,6 +17,7 @@ public class Save {
 	private String filepath;
 	private final String header = Names.head + "\n";
 	private String writableString = null;
+	private String exportTime;
 
 	// Singleton
 	public static Save getInstance() {
@@ -26,32 +27,41 @@ public class Save {
 		return instance;
 	}
 
-	public void saveAll(Double time, Double[] data) {
-
+	private Save(){
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_kk_mm",
 				Locale.GERMANY);
-		String date = sdf.format(new Date());
+		this.exportTime = sdf.format(new Date());
+		
+	}
+	
+	public void saveAll(Double[][] data) {
+
+		
 
 		FileOutputStream out;
 
 		try {
+			Double time = data[0][0];
 
 			// prueft ob datei exestiert und wenn nicht wird der header
 			// hinzugefuegt
 			File f;
-			for (int i = 0; i < Names.names.length; i++) {
+			for (int i = 1; i < Names.names.length; i++) {
 				f = new File(this.filepath = option.getValueStoragePath() + "/"
-						+ date + Names.names[i] + ".txt");
-
-				if (data[i] != null) {
-					this.filepath = option.getValueStoragePath() + "/" + date
+						+ this.exportTime + Names.names[i] + ".txt");
+				
+				
+				// Mithilfe von Sensoren speichen
+				if (data[i][1] != null) {
+					this.filepath = option.getValueStoragePath() + "/" + this.exportTime
 							+ Names.names[i] + ".txt";
 					out = new FileOutputStream(new File(this.filepath), true);
 					if (!f.exists()) {
 						out.write(this.header.getBytes());
 					}
 
-					this.writableString = time + ":" + Double.toString(data[i])
+					this.writableString = String.valueOf(time) + ":" + Double.toString(data[i][1])
 							+ "\n";
 					out.write(this.writableString.getBytes());
 					out.close();
