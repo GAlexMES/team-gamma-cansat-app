@@ -25,7 +25,7 @@ public class Options {
 	private String tempOptionsPath = null;
 	private String temporaryBrowserResultPath = null;
 	boolean browsButtons[] = {false,false,false};
-	private int numbersOfValues;
+	private int numbersOfValues = 20;
 	
 	public int getNumberOfValues() {
 		return numbersOfValues;
