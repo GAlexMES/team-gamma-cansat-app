@@ -13,13 +13,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import de.teamgamma.cansat.app.data.Names;
+import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.sensors.Sensor;
 
 public class Database {
 	private Sensor[] sensors = new Sensor[Names.names.length];
 	private String apiKey = ""; // Options.getStringApiKey oderso noch nicht
 								// da!!!!
-
 	private static Database instance = null;
 
 	public static Database getInstance() {
@@ -97,14 +97,15 @@ public class Database {
 				JSONArray data = response.getJSONArray("data");
 
 				JSONObject item = null;
+				int numberOfValues = Options.getInstance().getNumberOfValues();
 
-				if (response.length() > 20) {
+				if (response.length() > numberOfValues ) {
 					long time = 0;
 
 					int index = 0;
-					for (int i = 0; i < 20; i++) {
+					for (int i = 0; i < numberOfValues; i++) {
 
-						index = response.length() / 20 * i;
+						index = response.length() / numberOfValues * i;
 						item = data.getJSONObject(index);
 
 						index -= 1;

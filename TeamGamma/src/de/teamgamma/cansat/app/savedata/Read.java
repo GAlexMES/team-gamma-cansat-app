@@ -10,7 +10,7 @@ import de.teamgamma.cansat.app.options.Options;
 public class Read {
 	Options option = Options.getInstance();
 
-	private Double[][] outputArrayList = new Double[20][2];
+	private Double[][] outputArrayList = new Double[Options.getInstance().getNumberOfValues()][2];
 	private static Read instance = null;
 
 	// Singleton
@@ -28,14 +28,15 @@ public class Read {
 			BufferedReader in = new BufferedReader(new FileReader(filepath));
 			String zeile = null;
 			int counter = 0;
+			int numberOfValues = Options.getInstance().getNumberOfValues();
 			while ((zeile = in.readLine()) != null) {
 
 				if (counter > 0) {
 					lineArray = zeile.split(":");
-					if (lineArray.length > 20) {
-						for (int i = 0; i < 20; i += 1) {
+					if (lineArray.length > numberOfValues) {
+						for (int i = 0; i < numberOfValues; i += 1) {
 
-							int index = lineArray.length / 20 * i;
+							int index = lineArray.length / numberOfValues * i;
 							if (index % 2 != 0 && index > 1) {
 								index--;
 							}
@@ -70,7 +71,7 @@ public class Read {
 	}
 
 	private void refreshOutputArray() {
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < Options.getInstance().getNumberOfValues(); i++) {
 			for (int b = 0; b < 2; b++) {
 				outputArrayList[i][b] = 0.0;
 			}

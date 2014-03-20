@@ -25,7 +25,16 @@ public class Options {
 	private String tempOptionsPath = null;
 	private String temporaryBrowserResultPath = null;
 	boolean browsButtons[] = {false,false,false};
+	private int numbersOfValues;
 	
+	public int getNumberOfValues() {
+		return numbersOfValues;
+	}
+
+	public void setNumbersOfValues(int numbersOfValues) {
+		this.numbersOfValues = numbersOfValues;
+	}
+
 	// instance for singelton pattern
 	private static Options instance = null;
 	
