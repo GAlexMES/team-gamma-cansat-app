@@ -47,12 +47,9 @@ public class DataCoordination {
 		}
 
 		for (Sensor sensor : sensors) {
-			Log.d("Data", "for");
 			if (sensor.getName().equals(options.getActiveSensorName())) {
-				Log.d("Data", "if1");
 				if (MainActivity.getCurrentFragment().getClass()
 						.equals(RealtimeGraph.class)) {
-					Log.d("Data", "if2");
 					((RealtimeGraph) MainActivity.getCurrentFragment())
 							.onValueChanged(sensor);
 				}
