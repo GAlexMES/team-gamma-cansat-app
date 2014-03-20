@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import de.teamgamma.cansat.app.data.*;
 
 import android.util.Log;
 

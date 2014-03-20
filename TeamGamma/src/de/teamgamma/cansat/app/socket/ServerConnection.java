@@ -1,6 +1,5 @@
 package de.teamgamma.cansat.app.socket;
 
-import android.util.Log;
 import de.teamgamma.cansat.app.data.DataCoordination;
 import de.teamgamma.cansat.app.options.Options;
 
