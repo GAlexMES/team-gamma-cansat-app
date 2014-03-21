@@ -3,14 +3,16 @@ package de.teamgamma.cansat.app.savedata;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
-import de.teamgamma.cansat.app.data.Names;
+import android.util.Log;
 import de.teamgamma.cansat.app.options.Options;
 
 public class Read {
 	Options option = Options.getInstance();
+	ArrayList<Values> data = new ArrayList<Values>();
+	Double[][] output;
 
-	private Double[][] outputArrayList = new Double[Options.getInstance().getNumberOfValues()][2];
 	private static Read instance = null;
 
 	// Singleton
@@ -22,60 +24,45 @@ public class Read {
 	}
 
 	public Double[][] getValuefromFile(String filepath) {
-		refreshOutputArray();
 		String[] lineArray;
+		Double[] lineDouble = new Double[2];
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(filepath));
 			String zeile = null;
 			int counter = 0;
-			int numberOfValues = Options.getInstance().getNumberOfValues();
+			
 			while ((zeile = in.readLine()) != null) {
+				
+				lineArray = zeile.split(":");
+				Log.d("row", zeile);
+				if (lineArray.length > 1){
+				lineDouble[0] = Double.valueOf(lineArray[0]);
+				lineDouble[1] = Double.valueOf(lineArray[1]);
+				this.data.add(new Values());
+				this.data.get(counter).setValues(lineDouble);
 
-				if (counter > 0) {
-					lineArray = zeile.split(":");
-					if (lineArray.length > numberOfValues) {
-						for (int i = 0; i < numberOfValues; i += 1) {
-
-							int index = lineArray.length / numberOfValues * i;
-							if (index % 2 != 0 && index > 1) {
-								index--;
-							}
-							outputArrayList[i][0] = (double) Long
-									.parseLong(lineArray[index]);
-							outputArrayList[i][1] = (double) Long
-									.parseLong(lineArray[index + 1]);
-
-						}
-					} else {
-						for (int i = 0; i < lineArray.length; i++) {
-							outputArrayList[i][0] = (double) Long
-									.parseLong(lineArray[i]);
-							outputArrayList[i][1] = (double) Long
-									.parseLong(lineArray[i + 1]);
-						}
-					}
-					in.close();
-				} else {
-					// testen ob \n mit uebergeben wird... auch beim auslesen der werte
-					if (zeile != Names.head) {
-						// Fehelerausgabe.....Falsche Datei
-						break;
-					}
-				}
+				
 				counter++;
+				}
 			}
+			for (int i = 0; i < this.data.size(); i++) {
+				output = new Double[this.data.size()][2];
+				output[i][0] = this.data.get(i).getValues()[0];
+				output[i][1] = this.data.get(i).getValues()[1];
+			
+				
+			}
+			for (Double[] d : output){
+
+				Log.d("DATA", String.valueOf(d[0]));
+				
+			}
+			in.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return outputArrayList;
-	}
 
-	private void refreshOutputArray() {
-		for (int i = 0; i < Options.getInstance().getNumberOfValues(); i++) {
-			for (int b = 0; b < 2; b++) {
-				outputArrayList[i][b] = 0.0;
-			}
-		}
+		return output;
 	}
 
 }

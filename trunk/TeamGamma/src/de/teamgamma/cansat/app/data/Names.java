@@ -12,7 +12,7 @@ public class Names {
 	public static String[] names = { "time","co2","temp" };
 
 
-	public static final String head = "!!Team-Gamma.Android-App";
+	public static final String head = "Team-Gamma_Android-App";
 	private static HashMap<String, String> namesDic = new HashMap<String, String>();
 	
 	public static  void generateMap(String[] stringArray){
