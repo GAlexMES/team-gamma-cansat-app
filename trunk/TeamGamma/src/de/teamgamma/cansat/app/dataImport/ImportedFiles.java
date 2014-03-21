@@ -1,6 +1,5 @@
 package de.teamgamma.cansat.app.dataImport;
 
-import java.util.ArrayList;
 
 /**
  * 

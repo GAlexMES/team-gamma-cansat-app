@@ -38,7 +38,7 @@ public class RealtimeGraph extends Fragment {
 		
 		// initialize our XYPlot reference:
 		plot = (XYPlot) mLinearLayout.findViewById(R.id.simpleXYPlot);
-		plot.setTitle(options.getActiveSensorName());
+		plot.setTitle(Names.getStringFromHashmap(options.getActiveSensorName()));
 
 		// Create a couple arrays of y-values to plot:
 		Number[] series1Numbers = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
