@@ -24,7 +24,7 @@ public class Options {
 	private String tempValueStoragePath = null;
 	private String tempOptionsPath = null;
 	private String temporaryBrowserResultPath = null;
-	private boolean streamRuns = false;
+	private boolean streamRuns = true;
 
 	boolean browsButtons[] = {false,false,false};
 	private int numbersOfValues = 20;
