@@ -46,23 +46,19 @@ public class Save {
 
 			// prueft ob datei exestiert und wenn nicht wird der header
 			// hinzugefuegt
-			File f;
+
 			for (int i = 1; i < Names.names.length; i++) {
-				f = new File(this.filepath = option.getValueStoragePath() + "/"
-						+ this.exportTime + Names.names[i] + ".txt");
+
 				
 				
 				// Mithilfe von Sensoren speichen
 				if (data[i][1] != null) {
 					this.filepath = option.getValueStoragePath() + "/" + this.exportTime
-							+ Names.names[i] + ".txt";
+							+ Names.names[i] + ".teamgamma";
 					out = new FileOutputStream(new File(this.filepath), true);
-					if (!f.exists()) {
-						out.write(this.header.getBytes());
-					}
 
-					this.writableString = String.valueOf(time) + ":" + Double.toString(data[i][1])
-							+ "\n";
+
+					this.writableString = String.valueOf(time) + ":" + Double.toString(data[i][1]) + "\n";
 					out.write(this.writableString.getBytes());
 					out.close();
 

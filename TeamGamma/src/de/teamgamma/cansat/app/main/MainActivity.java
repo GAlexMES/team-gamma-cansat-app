@@ -2,15 +2,6 @@ package de.teamgamma.cansat.app.main;
 
 import java.io.File;
 
-import de.teamgamma.cansat.app.R;
-import de.teamgamma.cansat.app.data.Names;
-import de.teamgamma.cansat.app.dataImport.ImportFragment;
-import de.teamgamma.cansat.app.fragments.HomeFragment;
-import de.teamgamma.cansat.app.fragments.OptionsFragment;
-import de.teamgamma.cansat.app.fragments.OptionsSearcherFragment;
-import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
-import de.teamgamma.cansat.app.options.Options;
-import de.teamgamma.cansat.app.sensors.Sensor;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -30,6 +21,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import de.teamgamma.cansat.app.R;
+import de.teamgamma.cansat.app.data.Names;
+import de.teamgamma.cansat.app.dataImport.ImportFragment;
+import de.teamgamma.cansat.app.fragments.HomeFragment;
+import de.teamgamma.cansat.app.fragments.OptionsFragment;
+import de.teamgamma.cansat.app.fragments.OptionsSearcherFragment;
+import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
+import de.teamgamma.cansat.app.options.Options;
+import de.teamgamma.cansat.app.sensors.Sensor;
 
 public class MainActivity extends Activity {
 	private DrawerLayout mDrawerLayout;
