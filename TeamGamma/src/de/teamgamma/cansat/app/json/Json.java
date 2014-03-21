@@ -29,13 +29,9 @@ public class Json {
 			Long time;
 			time = data.getLong("time");
 			for (int i = 0; i < Names.names.length; i++) {
-				// Sensoren mit Werten belegen
-				Log.d("Json","for1");
-				
+				// Sensoren mit Werten belegen				
 				this.sensors[i][1] = data.getDouble(Names.names[i]);
-				Log.d("Json","for2");
 				this.sensors[i][0] = Double.valueOf(time);
-				Log.d("Json","for3");
 //				if (i > 1) {
 //					this.dataToSave[i - 1] = this.sensors[i][1];
 //				}

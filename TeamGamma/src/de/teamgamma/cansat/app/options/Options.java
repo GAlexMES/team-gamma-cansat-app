@@ -24,6 +24,8 @@ public class Options {
 	private String tempValueStoragePath = null;
 	private String tempOptionsPath = null;
 	private String temporaryBrowserResultPath = null;
+	private boolean streamRuns = false;
+
 	boolean browsButtons[] = {false,false,false};
 	private int numbersOfValues = 20;
 	
@@ -46,6 +48,15 @@ public class Options {
 	}
 	
 	//getter and setter for every option variable
+	
+	public boolean isStreamRuns() {
+		return streamRuns;
+	}
+
+	public void toggleStreamRuns() {
+		this.streamRuns = !streamRuns;
+	}
+	
 	public String getActiveSensorName() {
 		return activeSensorName;
 	}
