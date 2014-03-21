@@ -186,6 +186,9 @@ public class MainActivity extends Activity {
 		case 4:
 			fragment = new ImportFragment();
 			break;
+		case 5:
+			options.toggleStreamRuns();
+			break;
 		case 6:
 			fragment = new OptionsFragment();
 			break;
