@@ -53,6 +53,7 @@ public class MainActivity extends Activity {
 		mTitle = mDrawerTitle = getTitle();
 		mSlidemanueTitels = getResources().getStringArray(
 				R.array.slidemenu_array);
+		Names.generateMap(mSlidemanueTitels);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
