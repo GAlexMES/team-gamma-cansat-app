@@ -34,7 +34,6 @@ public class Read {
 			while ((zeile = in.readLine()) != null) {
 				
 				lineArray = zeile.split(":");
-				Log.d("row", zeile);
 				if (lineArray.length > 1){
 				lineDouble[0] = Double.valueOf(lineArray[0]);
 				lineDouble[1] = Double.valueOf(lineArray[1]);
@@ -45,18 +44,15 @@ public class Read {
 				counter++;
 				}
 			}
+			this.output = new Double[this.data.size()][2];
 			for (int i = 0; i < this.data.size(); i++) {
-				output = new Double[this.data.size()][2];
-				output[i][0] = this.data.get(i).getValues()[0];
-				output[i][1] = this.data.get(i).getValues()[1];
+				this.output[i][0] = this.data.get(i).getValues()[0];
+				this.output[i][1] = this.data.get(i).getValues()[1];
+				Log.d("getValues", String.valueOf(output[i][0]));
 			
 				
 			}
-			for (Double[] d : output){
 
-				Log.d("DATA", String.valueOf(d[0]));
-				
-			}
 			in.close();
 		} catch (IOException e) {
 			e.printStackTrace();
