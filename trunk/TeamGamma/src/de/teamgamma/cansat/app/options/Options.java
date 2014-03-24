@@ -1,6 +1,7 @@
 package de.teamgamma.cansat.app.options;
 
 import android.os.Environment;
+import android.util.Log;
 
 
 
@@ -24,7 +25,7 @@ public class Options {
 	private String tempValueStoragePath = null;
 	private String tempOptionsPath = null;
 	private String temporaryBrowserResultPath = null;
-	private boolean streamRuns = true;
+	private boolean streamRuns = false;
 
 	boolean browsButtons[] = {false,false,false};
 	private int numbersOfValues = 20;

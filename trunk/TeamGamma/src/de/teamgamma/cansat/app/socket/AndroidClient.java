@@ -12,9 +12,6 @@ import android.util.Log;
 
 public class AndroidClient {
 	private Socket clientSocket = null;
-	private boolean streamRuns = false;
-	
-
 
 	class CommunicationThread implements Runnable {
 
@@ -41,7 +38,8 @@ public class AndroidClient {
 
 			while (clientSocket.isConnected()) {
 				try {
-					if (in.ready()&& Options.getInstance().isStreamRuns()) {
+					if (in.ready() && Options.getInstance().isStreamRuns()) {
+						Log.d("gamma",String.valueOf(Options.getInstance().isStreamRuns()));
 						message = in.readLine();
 						Log.d("values",message);
 						messageAdapter.messageArrived(message);
