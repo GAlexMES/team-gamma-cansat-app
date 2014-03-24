@@ -24,41 +24,47 @@ public class Read {
 	}
 
 	public Double[][] getValuefromFile(String filepath) {
-		String[] lineArray;
-		Double[] lineDouble = new Double[2];
-		try {
-			BufferedReader in = new BufferedReader(new FileReader(filepath));
-			String zeile = null;
-			int counter = 0;
-			
-			while ((zeile = in.readLine()) != null) {
-				
-				lineArray = zeile.split(":");
-				if (lineArray.length > 1){
-				lineDouble[0] = Double.valueOf(lineArray[0]);
-				lineDouble[1] = Double.valueOf(lineArray[1]);
-				this.data.add(new Values());
-				this.data.get(counter).setValues(lineDouble);
 
-				
-				counter++;
+		if (filepath.endsWith("teamgamma")){
+			String[] lineArray;
+			Double[] lineDouble = new Double[2];
+			try {
+				BufferedReader in = new BufferedReader(new FileReader(filepath));
+				String zeile = null;
+				int counter = 0;
+
+				while ((zeile = in.readLine()) != null) {
+
+					lineArray = zeile.split(":");
+					if (lineArray.length > 1) {
+						lineDouble[0] = Double.valueOf(lineArray[0]);
+						lineDouble[1] = Double.valueOf(lineArray[1]);
+						this.data.add(new Values());
+						this.data.get(counter).setValues(lineDouble);
+
+						counter++;
+					}
 				}
-			}
-			this.output = new Double[this.data.size()][2];
-			for (int i = 0; i < this.data.size(); i++) {
-				this.output[i][0] = this.data.get(i).getValues()[0];
-				this.output[i][1] = this.data.get(i).getValues()[1];
-				Log.d("getValues", String.valueOf(output[i][0]));
-			
-				
+				this.output = new Double[this.option.getNumberOfValues()][2];
+				int index = 0;
+				for (int i = 0; i < this.output.length; i++) {
+					index = (int) (this.data.size() / this.output.length * i);
+					this.output[i][0] = this.data.get(index).getValues()[0];
+					this.output[i][1] = this.data.get(index).getValues()[1];
+					Log.d("getValues", String.valueOf(output[i][0]));
+
+				}
+
+				in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 
-			in.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+			return output;
 		}
 
-		return output;
+		else {
+			return null;
+		}
 	}
-
 }
