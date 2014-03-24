@@ -9,7 +9,7 @@ package de.teamgamma.cansat.app.dataImport;
  *
  */
 public class ImportedFiles {
-	private Double[][] latestFile = new Double[20][2];
+	private Double[][] latestFile;
 	private static ImportedFiles instance  = null;	
 	/**
 	 * 

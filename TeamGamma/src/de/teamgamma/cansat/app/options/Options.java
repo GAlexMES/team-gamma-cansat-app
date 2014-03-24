@@ -28,7 +28,7 @@ public class Options {
 	private boolean streamRuns = false;
 
 	boolean browsButtons[] = {false,false,false};
-	private int numbersOfValues = 20;
+	private int numbersOfValues = 100;
 	
 	public int getNumberOfValues() {
 		return numbersOfValues;
