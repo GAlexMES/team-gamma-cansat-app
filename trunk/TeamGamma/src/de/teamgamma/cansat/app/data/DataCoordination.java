@@ -13,7 +13,7 @@ public class DataCoordination {
 
 	private Json json = Json.getInstance();
 	private static DataCoordination instance = null;
-	private Sensor[] sensors = new Sensor[Names.names.length];
+	private Sensor[] sensors = new Sensor[constantValues.names.length];
 	private Options options = Options.getInstance();
 	private Save save = Save.getInstance();
 
@@ -27,9 +27,9 @@ public class DataCoordination {
 
 	public DataCoordination() {
 		// ARRAY SENSOREN MIT NAMESBELEGUNG
-		for (int i = 0; i < Names.names.length; i++) {
+		for (int i = 0; i < constantValues.names.length; i++) {
 			sensors[i] = new Sensor();
-			sensors[i].setName(Names.names[i]);
+			sensors[i].setName(constantValues.names[i]);
 
 		}
 	}
@@ -42,7 +42,7 @@ public class DataCoordination {
 		Log.d("Data", "json");
 		// Die Returnwerte von message aus json, werden in das Array sensors
 		// gesetzt
-		for (int i = 0; i < Names.names.length; i++) {
+		for (int i = 0; i < constantValues.names.length; i++) {
 			this.sensors[i].setValues(data[i][0].longValue(), data[i][1]);
 		}
 

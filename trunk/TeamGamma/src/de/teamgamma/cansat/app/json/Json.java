@@ -4,13 +4,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
-import de.teamgamma.cansat.app.data.Names;
+import de.teamgamma.cansat.app.data.constantValues;
 import de.teamgamma.cansat.app.savedata.Save;
 
 public class Json {
 
 	private static Json instance = null;
-	private Double[][] sensors = new Double[Names.names.length][2];
+	private Double[][] sensors = new Double[constantValues.names.length][2];
 	private Save save = Save.getInstance();
 	private Double[] dataToSave;
 
@@ -28,9 +28,9 @@ public class Json {
 			data = new JSONObject(json);
 			Long time;
 			time = data.getLong("time");
-			for (int i = 0; i < Names.names.length; i++) {
+			for (int i = 0; i < constantValues.names.length; i++) {
 				// Sensoren mit Werten belegen				
-				this.sensors[i][1] = data.getDouble(Names.names[i]);
+				this.sensors[i][1] = data.getDouble(constantValues.names[i]);
 				this.sensors[i][0] = Double.valueOf(time);
 //				if (i > 1) {
 //					this.dataToSave[i - 1] = this.sensors[i][1];

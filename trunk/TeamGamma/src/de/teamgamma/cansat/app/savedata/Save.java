@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import de.teamgamma.cansat.app.data.Names;
+import de.teamgamma.cansat.app.data.constantValues;
 import de.teamgamma.cansat.app.options.Options;
 
 public class Save {
@@ -15,7 +15,7 @@ public class Save {
 
 	Options option = Options.getInstance();
 	private String filepath;
-	private final String header = Names.head + "\n";
+	private final String header = constantValues.head + "\n";
 	private String writableString = null;
 	private String exportTime;
 
@@ -47,14 +47,14 @@ public class Save {
 			// prueft ob datei exestiert und wenn nicht wird der header
 			// hinzugefuegt
 
-			for (int i = 1; i < Names.names.length; i++) {
+			for (int i = 1; i < constantValues.names.length; i++) {
 
 				
 				
 				// Mithilfe von Sensoren speichen
 				if (data[i][1] != null) {
 					this.filepath = option.getValueStoragePath() + "/" + this.exportTime
-							+ Names.names[i] + ".teamgamma";
+							+ constantValues.names[i] + ".teamgamma";
 					out = new FileOutputStream(new File(this.filepath), true);
 
 

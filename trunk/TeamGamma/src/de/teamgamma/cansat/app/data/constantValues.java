@@ -7,7 +7,7 @@ import de.teamgamma.cansat.app.R;
 
 
 
-public class Names {
+public class constantValues {
 
 	public static String[] names = { "time","co2","temp" };
 
