@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import com.androidplot.xy.*;
 
 import de.teamgamma.cansat.app.R;
+import de.teamgamma.cansat.app.options.Options;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,7 +55,7 @@ public class ImportSimpleXYChart extends Fragment {
 
 		// Configures the graph
 		LineAndPointFormatter series1Format = new LineAndPointFormatter(
-				Color.RED, Color.GREEN, Color.BLUE, null);
+				Options.getInstance().getSelectedColors()[0], Options.getInstance().getSelectedColors()[1], Options.getInstance().getSelectedColors()[2], null);
 
 		// add a new series' to the xyplot:
 		plot.addSeries(series1, series1Format);

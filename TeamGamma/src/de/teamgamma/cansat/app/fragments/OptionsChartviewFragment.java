@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import android.widget.TextView.BufferType;
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.data.constantValues;
 import de.teamgamma.cansat.app.options.Options;
@@ -57,11 +58,15 @@ public class OptionsChartviewFragment extends Fragment implements OnSeekBarChang
 		Button button_save = (Button) mLinearLayout
 				.findViewById(R.id.button_save);
 		final EditText numberOfShownPoints = (EditText)mLinearLayout.findViewById(R.id.selectedNumber);
-		numberOfShownPoints.setText(options.getNumberOfValues());
+		numberOfShownPoints.setText(String.valueOf(options.getNumberOfValues()),BufferType.EDITABLE);
 		for(int i = 0; i<seekBarIdArray.length;i++){
+			textViewArray[i]= (TextView)mLinearLayout.findViewById(textViewIdArray[i]);
 			seekBarArray[i] = (SeekBar)mLinearLayout.findViewById(seekBarIdArray[i]);
 			seekBarArray[i].setOnSeekBarChangeListener(this);
-			textViewArray[i]= (TextView)mLinearLayout.findViewById(textViewIdArray[i]);
+		}
+		for(int i=0; i<seekBarIdArray.length;i++){
+			Log.d("numbers",String.valueOf(options.getSelectedColors()[i]));
+			onProgressChanged(seekBarArray[i],options.getSelectedColors()[i],false);
 		}
 		//called when the save button was clicked
 		button_save.setOnClickListener(new OnClickListener() {
@@ -92,6 +97,7 @@ public class OptionsChartviewFragment extends Fragment implements OnSeekBarChang
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress,
 			boolean fromUser) {
+		seekBar.setProgress(progress);
 		updateColor();
 
 		
