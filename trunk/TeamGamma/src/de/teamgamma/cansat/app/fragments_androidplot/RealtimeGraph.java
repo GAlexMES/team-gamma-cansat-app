@@ -60,7 +60,10 @@ public class RealtimeGraph extends Fragment {
 		// LineAndPointRenderer
 		// and configure it from xml:
 		LineAndPointFormatter series1Format = new LineAndPointFormatter(
-				Color.BLUE, Color.YELLOW, Color.WHITE, null);
+				constantValues.selectableColors[Options.getInstance().getSelectedColors()[0]],
+				constantValues.selectableColors[Options.getInstance().getSelectedColors()[1]],
+				constantValues.selectableColors[Options.getInstance().getSelectedColors()[2]],
+				null);
 
 		// add a new series' to the xyplot:
 		plot.addSeries(series1, series1Format);
