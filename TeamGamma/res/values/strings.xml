@@ -2,9 +2,9 @@
     <string name="app_name">Team Gamma</string>
     <string-array name="slidemenu_array">
         <item>Home</item>
+        <item>Time</item>
+        <item>Air pollution</item>
         <item>Temperature</item>
-        <item>Preasure</item>
-        <item>Humidity</item>
         <item>Import</item>
         <item>Start/Stop Stream</item>
         <item>Options</item>
