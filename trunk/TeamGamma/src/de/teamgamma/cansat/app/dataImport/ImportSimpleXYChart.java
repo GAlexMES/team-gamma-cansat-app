@@ -3,6 +3,7 @@ package de.teamgamma.cansat.app.dataImport;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import com.androidplot.xy.*;
 
 import de.teamgamma.cansat.app.R;
+import de.teamgamma.cansat.app.data.constantValues;
 import de.teamgamma.cansat.app.options.Options;
 
 import java.util.ArrayList;
@@ -53,9 +55,13 @@ public class ImportSimpleXYChart extends Fragment {
 				SimpleXYSeries.ArrayFormat.XY_VALS_INTERLEAVED, 
 				""); //Name od the series
 
+		Log.d("graph",String.valueOf(Options.getInstance().getSelectedColors()[1]));
 		// Configures the graph
 		LineAndPointFormatter series1Format = new LineAndPointFormatter(
-				Options.getInstance().getSelectedColors()[0], Options.getInstance().getSelectedColors()[1], Options.getInstance().getSelectedColors()[2], null);
+				constantValues.selectableColors[Options.getInstance().getSelectedColors()[0]],
+				constantValues.selectableColors[Options.getInstance().getSelectedColors()[1]],
+				constantValues.selectableColors[Options.getInstance().getSelectedColors()[2]],
+				null);
 
 		// add a new series' to the xyplot:
 		plot.addSeries(series1, series1Format);
