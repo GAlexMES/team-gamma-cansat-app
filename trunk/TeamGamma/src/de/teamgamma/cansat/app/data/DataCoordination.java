@@ -1,12 +1,11 @@
 package de.teamgamma.cansat.app.data;
 
-import android.util.Log;
 import de.teamgamma.cansat.app.database.Database;
+import de.teamgamma.cansat.app.fileoperations.Save;
 import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
 import de.teamgamma.cansat.app.json.Json;
 import de.teamgamma.cansat.app.main.MainActivity;
 import de.teamgamma.cansat.app.options.Options;
-import de.teamgamma.cansat.app.savedata.Save;
 import de.teamgamma.cansat.app.sensors.Sensor;
 
 public class DataCoordination {
@@ -35,11 +34,9 @@ public class DataCoordination {
 	}
 
 	public void coordinateData(String message) {
-		Log.d("Data", "Data");
 		// message wird von Socket übergeben
 		// message wird von json entpackt
 		Double[][] data = json.unpack(message);
-		Log.d("Data", "json");
 		// Die Returnwerte von message aus json, werden in das Array sensors
 		// gesetzt
 		for (int i = 0; i < constantValues.names.length; i++) {

@@ -1,4 +1,4 @@
-package de.teamgamma.cansat.app.savedata;
+package de.teamgamma.cansat.app.data;
 
 public class Values {
 	private Double[] values = new Double[2];
