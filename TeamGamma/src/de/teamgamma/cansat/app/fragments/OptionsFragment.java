@@ -40,6 +40,8 @@ public class OptionsFragment extends Fragment {
     	Button buttonExport = (Button) mLinearLayout.findViewById(R.id.export);
     	Button buttonChartView = (Button) mLinearLayout.findViewById(R.id.chartView);
     	
+    	
+    	
     	//called when the connection button was clicked
     	buttonConnection.setOnClickListener(new OnClickListener() {
     	        @Override

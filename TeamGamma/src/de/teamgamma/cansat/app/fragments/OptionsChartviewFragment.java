@@ -13,7 +13,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 import de.teamgamma.cansat.app.R;
+import de.teamgamma.cansat.app.data.constantValues;
 import de.teamgamma.cansat.app.options.Options;
 
 /**
@@ -26,11 +28,14 @@ import de.teamgamma.cansat.app.options.Options;
 public class OptionsChartviewFragment extends Fragment implements OnSeekBarChangeListener {
 	//initialize some variables
 	public static final String ARG_SLIDEMENU_VALUES = "slidemenu_values";
-	LinearLayout mLinearLayout;	
+	LinearLayout mLinearLayout;
+	TextView currentPointColor,currentLineColor,currentAreaColor;
 	SeekBar pointSeekBar,lineSeekBar,areaSeekBar;
 	SeekBar[] seekBarArray = {pointSeekBar,lineSeekBar,areaSeekBar};
 	int[] seekBarValue = new int[3];
 	int[] seekBarIdArray = {R.id.pointSeekBar,R.id.lineSeekBar,R.id.areaSeekBar};
+	TextView[] textViewArray = {currentPointColor,currentLineColor,currentAreaColor};
+	int[] textViewIdArray = {R.id.selectedPointColor,R.id.selectedLinesColor,R.id.selectedAreaColor};
 
 	public OptionsChartviewFragment() {
 		// Empty constructor
@@ -46,14 +51,17 @@ public class OptionsChartviewFragment extends Fragment implements OnSeekBarChang
 			Bundle savedInstanceState) {
 		
 		// initialized variables and create object out of fragment xml objects
-		final Options options_data = Options.getInstance();
+		final Options options = Options.getInstance();
 		mLinearLayout = (LinearLayout) inflater.inflate(
 				R.layout.fragment_options_chartview, container, false);
 		Button button_save = (Button) mLinearLayout
 				.findViewById(R.id.button_save);
+		final EditText numberOfShownPoints = (EditText)mLinearLayout.findViewById(R.id.selectedNumber);
+		numberOfShownPoints.setText(options.getNumberOfValues());
 		for(int i = 0; i<seekBarIdArray.length;i++){
 			seekBarArray[i] = (SeekBar)mLinearLayout.findViewById(seekBarIdArray[i]);
 			seekBarArray[i].setOnSeekBarChangeListener(this);
+			textViewArray[i]= (TextView)mLinearLayout.findViewById(textViewIdArray[i]);
 		}
 		//called when the save button was clicked
 		button_save.setOnClickListener(new OnClickListener() {
@@ -62,7 +70,8 @@ public class OptionsChartviewFragment extends Fragment implements OnSeekBarChang
 			 */
 			@Override
 			public void onClick(View v) {
-				
+				options.setSelectedColors(seekBarValue);
+				options.setNumbersOfValues(Integer.valueOf(numberOfShownPoints.getText().toString()));
 			}
 
 		});
@@ -73,8 +82,9 @@ public class OptionsChartviewFragment extends Fragment implements OnSeekBarChang
 	private void updateColor(){
 		for(int i = 0; i<seekBarIdArray.length;i++){
 			seekBarValue[i]=seekBarArray[i].getProgress();
-		Log.d("seekBar",String.valueOf(seekBarValue[i]));
+			textViewArray[i].setBackgroundColor(constantValues.selectableColors[seekBarValue[i]]);
 		}
+
 		
 	}
 
