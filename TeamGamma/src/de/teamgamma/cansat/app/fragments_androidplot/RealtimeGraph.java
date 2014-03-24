@@ -17,7 +17,7 @@ import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 
 import de.teamgamma.cansat.app.R;
-import de.teamgamma.cansat.app.data.Names;
+import de.teamgamma.cansat.app.data.constantValues;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.sensors.Sensor;
 
@@ -38,7 +38,7 @@ public class RealtimeGraph extends Fragment {
 		
 		// initialize our XYPlot reference:
 		plot = (XYPlot) mLinearLayout.findViewById(R.id.simpleXYPlot);
-		plot.setTitle(Names.getStringFromHashmap(options.getActiveSensorName()));
+		plot.setTitle(constantValues.getStringFromHashmap(options.getActiveSensorName()));
 
 		// Create a couple arrays of y-values to plot:
 		Number[] series1Numbers = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};

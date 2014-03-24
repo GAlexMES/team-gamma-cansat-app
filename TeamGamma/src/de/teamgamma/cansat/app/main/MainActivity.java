@@ -23,7 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import de.teamgamma.cansat.app.R;
-import de.teamgamma.cansat.app.data.Names;
+import de.teamgamma.cansat.app.data.constantValues;
 import de.teamgamma.cansat.app.dataImport.ImportFragment;
 import de.teamgamma.cansat.app.fragments.HomeFragment;
 import de.teamgamma.cansat.app.fragments.OptionsFragment;
@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
 		mTitle = mDrawerTitle = getTitle();
 		mSlidemanueTitels = getResources().getStringArray(
 				R.array.slidemenu_array);
-		Names.generateMap(mSlidemanueTitels);
+		constantValues.generateMap(mSlidemanueTitels);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -173,15 +173,15 @@ public class MainActivity extends Activity {
 				break;
 			}
 		case 1:
-			options.setActiveSensorName(Names.names[0]);
+			options.setActiveSensorName(constantValues.names[0]);
 			fragment = new RealtimeGraph();
 			break;
 		case 2:
-			options.setActiveSensorName(Names.names[1]);
+			options.setActiveSensorName(constantValues.names[1]);
 			fragment = new RealtimeGraph();		
 			break;
 		case 3:
-			options.setActiveSensorName(Names.names[2]);
+			options.setActiveSensorName(constantValues.names[2]);
 			fragment = new RealtimeGraph();
 			break;
 		case 4:

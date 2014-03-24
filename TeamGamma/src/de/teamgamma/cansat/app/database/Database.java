@@ -12,12 +12,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import de.teamgamma.cansat.app.data.Names;
+import de.teamgamma.cansat.app.data.constantValues;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.sensors.Sensor;
 
 public class Database {
-	private Sensor[] sensors = new Sensor[Names.names.length];
+	private Sensor[] sensors = new Sensor[constantValues.names.length];
 	private String apiKey = ""; // Options.getStringApiKey oderso noch nicht
 								// da!!!!
 	private static Database instance = null;
@@ -31,9 +31,9 @@ public class Database {
 
 	public Database() {
 		// SENSORENARRAY MIT NAMESBELEGUNG DER SENSOREN WIRD ERZEUGT
-		for (int i = 0; i < Names.names.length; i++) {
+		for (int i = 0; i < constantValues.names.length; i++) {
 			sensors[i] = new Sensor();
-			sensors[i].setName(Names.names[i]);
+			sensors[i].setName(constantValues.names[i]);
 		}
 	}
 
@@ -114,9 +114,9 @@ public class Database {
 
 						// Zugriff auf einzelne Sensoren
 
-						for (int counter = 0; counter < Names.names.length; counter++) {
+						for (int counter = 0; counter < constantValues.names.length; counter++) {
 							this.sensors[counter].setValues(time,
-									item.getDouble(Names.names[counter]));
+									item.getDouble(constantValues.names[counter]));
 
 						}
 					}
@@ -126,9 +126,9 @@ public class Database {
 					for (int i = response.length(); i > 0; i++) {
 						item = data.getJSONObject(i);
 						time = data.getJSONObject(i).getLong("time");
-						for (int counter = 0; counter < Names.names.length; counter++) {
+						for (int counter = 0; counter < constantValues.names.length; counter++) {
 							this.sensors[counter].setValues(time,
-									item.getDouble(Names.names[counter]));
+									item.getDouble(constantValues.names[counter]));
 						}
 					}
 				}

@@ -38,6 +38,7 @@ public class OptionsFragment extends Fragment {
                  container, false);        	
     	Button buttonConnection = (Button) mLinearLayout.findViewById(R.id.connection);
     	Button buttonExport = (Button) mLinearLayout.findViewById(R.id.export);
+    	Button buttonChartView = (Button) mLinearLayout.findViewById(R.id.chartView);
     	
     	//called when the connection button was clicked
     	buttonConnection.setOnClickListener(new OnClickListener() {
@@ -55,6 +56,13 @@ public class OptionsFragment extends Fragment {
 	        }
 	});
     	
+    	buttonChartView.setOnClickListener(new OnClickListener() {
+	        @Override
+	        public void onClick(View v) {
+	        	selectedOption(R.id.chartView);        	        	
+	        }
+	});
+    	
 
         return mLinearLayout;
     }
@@ -68,6 +76,7 @@ public class OptionsFragment extends Fragment {
     	switch (button){
     	case R.id.connection:  fragment = new OptionsConnectionFragment(); break;
     	case R.id.export: fragment = new OptionsExportFragment(); break;
+    	case R.id.chartView: fragment = new OptionsChartviewFragment(); break;
     	}    	
         Bundle args = new Bundle();
         args.putInt(OptionsFragment.ARG_SLIDEMENU_VALUES, button);
