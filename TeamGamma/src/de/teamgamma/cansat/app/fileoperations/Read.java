@@ -59,6 +59,7 @@ public class Read {
 				in.close();
 			} catch (IOException e) {
 				e.printStackTrace();
+				return null;
 			}
 
 			return output;
