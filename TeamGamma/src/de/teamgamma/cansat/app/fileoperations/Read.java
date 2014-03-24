@@ -1,4 +1,4 @@
-package de.teamgamma.cansat.app.savedata;
+package de.teamgamma.cansat.app.fileoperations;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,12 +6,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import android.util.Log;
+import de.teamgamma.cansat.app.data.Values;
 import de.teamgamma.cansat.app.options.Options;
 
 public class Read {
-	Options option = Options.getInstance();
-	ArrayList<Values> data = new ArrayList<Values>();
-	Double[][] output;
+	private Options option = Options.getInstance();
+	private ArrayList<Values> data = new ArrayList<Values>();
+	private Double[][] output;
 
 	private static Read instance = null;
 
@@ -25,7 +26,7 @@ public class Read {
 
 	public Double[][] getValuefromFile(String filepath) {
 
-		if (filepath.endsWith("teamgamma")){
+		if (filepath.endsWith("teamgamma")) {
 			String[] lineArray;
 			Double[] lineDouble = new Double[2];
 			try {
@@ -64,6 +65,7 @@ public class Read {
 		}
 
 		else {
+			// FEHLERBEHEBUNG fuer Alex
 			return null;
 		}
 	}

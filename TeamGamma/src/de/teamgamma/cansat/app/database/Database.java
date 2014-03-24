@@ -99,10 +99,10 @@ public class Database {
 				JSONObject item = null;
 				int numberOfValues = Options.getInstance().getNumberOfValues();
 
-				if (response.length() > numberOfValues ) {
-					long time = 0;
+				if (response.length() > numberOfValues) {
 
-					int index = 0;
+					long time;
+					int index;
 					for (int i = 0; i < numberOfValues; i++) {
 
 						index = response.length() / numberOfValues * i;
@@ -115,8 +115,8 @@ public class Database {
 						// Zugriff auf einzelne Sensoren
 
 						for (int counter = 0; counter < constantValues.names.length; counter++) {
-							this.sensors[counter].setValues(time,
-									item.getDouble(constantValues.names[counter]));
+							this.sensors[counter].setValues(time, item
+									.getDouble(constantValues.names[counter]));
 
 						}
 					}
@@ -127,8 +127,8 @@ public class Database {
 						item = data.getJSONObject(i);
 						time = data.getJSONObject(i).getLong("time");
 						for (int counter = 0; counter < constantValues.names.length; counter++) {
-							this.sensors[counter].setValues(time,
-									item.getDouble(constantValues.names[counter]));
+							this.sensors[counter].setValues(time, item
+									.getDouble(constantValues.names[counter]));
 						}
 					}
 				}

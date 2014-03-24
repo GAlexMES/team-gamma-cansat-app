@@ -1,4 +1,4 @@
-package de.teamgamma.cansat.app.savedata;
+package de.teamgamma.cansat.app.fileoperations;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,9 +13,8 @@ import de.teamgamma.cansat.app.options.Options;
 public class Save {
 	private static Save instance = null;
 
-	Options option = Options.getInstance();
+	private Options option = Options.getInstance();
 	private String filepath;
-	private final String header = constantValues.head + "\n";
 	private String writableString = null;
 	private String exportTime;
 
