@@ -23,4 +23,5 @@
     <string name="action_websearch">Web search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
     <string name="WELCOMEMESSAGE">Welcome to the Official Team Gamma CanSat 2014 Android Application. We hope you enjoy it!</string>
+    <string name="graphical_line_chart_options">Graphical line chart options</string>
 </resources>

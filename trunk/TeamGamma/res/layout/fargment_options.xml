@@ -2,8 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-  	android:background="@android:color/black"
-    android:orientation="vertical">
+    android:background="@android:color/black"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/chartView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:gravity="left|center_vertical"
+        android:text="Chart view"
+        android:textColor="@android:color/white"
+        android:textSize="30dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="#FF0099CC" />
 
     <Button
         android:id="@+id/connection"
@@ -13,15 +28,13 @@
         android:gravity="left|center_vertical"
         android:text="Connection"
         android:textColor="@android:color/white"
-        android:textSize="30dp" 
-        />
+        android:textSize="30dp" />
 
-	<TextView
-    android:layout_width="fill_parent"
-    android:layout_height="2dip"
-    android:background="#FF0099CC"
-    />
-	
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="#FF0099CC" />
+
     <Button
         android:id="@+id/export"
         android:layout_width="match_parent"
@@ -31,7 +44,6 @@
         android:text="Export"
         android:textColor="@android:color/white"
         android:textSize="30dp" />
-
 "
 
 </LinearLayout>

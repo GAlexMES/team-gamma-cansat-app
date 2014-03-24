@@ -20,27 +20,27 @@ public class Sensor {
 		return values;
 	}
 
-	public void setValues(long time,Double value) {
+	public void setValues(long time, Double value) {
 		if (value != null) {
 			newValue();
-			values[numberOfValues-1][0] = time;
-			values[numberOfValues-1][1] = value;
+			if (numberOfValues > 0) {
+				values[numberOfValues - 1][0] = time;
+				values[numberOfValues - 1][1] = value;
+			}
 		}
-		Log.d("sensor",String.valueOf(time));
-		Log.d("Sensor",String.valueOf(values[numberOfValues-1][1]));
 	}
-	
-	public void setFirstValue(long time,Double value){
+
+	public void setFirstValue(long time, Double value) {
 		if (value != null) {
 			newValue();
 			values[0][0] = time;
 			values[0][1] = value;
 		}
-		
+
 	}
 
 	private void newValue() {
-		for (int i = 0; i < numberOfValues-1; i++) {
+		for (int i = 0; i < numberOfValues - 1; i++) {
 			values[i][1] = values[i + 1][1];
 		}
 	}

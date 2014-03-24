@@ -18,12 +18,17 @@ public class OptionsExport {
 			String java_socket_port,//JavaSocketPort
 			int methodToConnect, //MethodToConnect
 			String valueExportPath, //Path for valueExport
-			String valueStoragePath //Path for value storage
+			String valueStoragePath, //Path for value storage
+			int numberOfShownPoints, //Numbers of Points, shown in a chart
+			int [] selectedChartColors // selected colors for points/lines/areas
 			){
 		
 		writeableString = java_socket_ipAdress + newLine + java_socket_port
 				+ newLine + methodToConnect + newLine + valueExportPath
-				+ newLine + valueStoragePath;
+				+ newLine + valueStoragePath + newLine + numberOfShownPoints + newLine+
+				selectedChartColors[0]+ newLine+
+				selectedChartColors[1]+ newLine+
+				selectedChartColors[2];
 		writeSingle(this.filepath, writeableString);
 	}
 
