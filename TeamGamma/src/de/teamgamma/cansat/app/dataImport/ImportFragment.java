@@ -83,7 +83,10 @@ public class ImportFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Read reader = Read.getInstance();
-				if (reader.getValuefromFile(importFilepath) == null) {
+				ImportedFiles.getInstance().setLatestFile(
+						reader.getValuefromFile(importFilepath));
+				
+				if (ImportedFiles.getInstance().getLatestFile() == null) {
 					Context context = mLinearLayout.getContext();
 					CharSequence text = "Wrong file format ";
 					int duration = Toast.LENGTH_SHORT;
@@ -91,8 +94,8 @@ public class ImportFragment extends Fragment {
 					toast.show();
 				}
 				else{
-					ImportedFiles.getInstance().setLatestFile(
-							reader.getValuefromFile(importFilepath));
+					//ImportedFiles.getInstance().setLatestFile(
+						//	reader.getValuefromFile(importFilepath));
 					// Create new fragment and transaction
 					Fragment newFragment = new ImportSimpleXYChart();
 					FragmentTransaction transaction = getFragmentManager()
