@@ -25,6 +25,7 @@ public class Read {
 	}
 
 	public Double[][] getValuefromFile(String filepath) {
+		
 
 		if (filepath.endsWith("teamgamma")) {
 			String[] lineArray;
@@ -55,6 +56,7 @@ public class Read {
 					Log.d("getValues", String.valueOf(output[i][0]));
 
 				}
+				this.data.clear();
 
 				in.close();
 			} catch (IOException e) {
