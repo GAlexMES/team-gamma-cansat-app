@@ -37,8 +37,7 @@ public class HomeFragment extends Fragment {
             Bundle savedInstanceState) {
      	final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(R.layout.fragment_home,
                  container, false);
-     	WebView webview = (WebView) mLinearLayout.findViewById(R.id.webView1);
-     	
+     	WebView webview = (WebView) mLinearLayout.findViewById(R.id.webView1);     	
      	webview.setWebViewClient(new TeamGammaWebVieClient());
         webview.getSettings().setBuiltInZoomControls(false); 
         webview.getSettings().setSupportZoom(false);
