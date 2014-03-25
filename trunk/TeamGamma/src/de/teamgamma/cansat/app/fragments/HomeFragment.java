@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import de.teamgamma.cansat.app.R;
+import de.teamgamma.cansat.app.webView.TeamGammaWebVieClient;
 
 /**
  * 
@@ -34,10 +37,18 @@ public class HomeFragment extends Fragment {
             Bundle savedInstanceState) {
      	final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(R.layout.fragment_home,
                  container, false);
-    	
+     	WebView webview = (WebView) mLinearLayout.findViewById(R.id.webView1);
+     	
+     	webview.setWebViewClient(new TeamGammaWebVieClient());
+        //webview.getSettings().setPluginsEnabled(true);
+        webview.getSettings().setBuiltInZoomControls(false); 
+        webview.getSettings().setSupportZoom(false);
+        webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);   
+        webview.getSettings().setAllowFileAccess(true); 
+        webview.getSettings().setDomStorageEnabled(true);
+        webview.loadUrl("http://www.team-gamma.de");  
+    return mLinearLayout;
+}
 
-        return mLinearLayout;
-    }
-   
-    
+
 }

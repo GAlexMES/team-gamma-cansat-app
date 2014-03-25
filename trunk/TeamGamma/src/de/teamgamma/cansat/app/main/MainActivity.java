@@ -29,6 +29,7 @@ import de.teamgamma.cansat.app.fragments.HomeFragment;
 import de.teamgamma.cansat.app.fragments.OptionsFragment;
 import de.teamgamma.cansat.app.fragments.OptionsSearcherFragment;
 import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
+import de.teamgamma.cansat.app.fragments_androidplot.scrollGraph;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.sensors.Sensor;
 
