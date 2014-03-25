@@ -102,6 +102,7 @@
             android:layout_marginBottom="19dp"
             android:layout_toRightOf="@+id/displayingpoints"
             android:ems="10"
+            android:maxLength="2"
             android:inputType="number"
             android:textColor="@android:color/holo_orange_light" >
 
