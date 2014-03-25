@@ -1,7 +1,6 @@
 package de.teamgamma.cansat.app.fragments_androidplot;
 
 import android.app.Fragment;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +15,6 @@ import de.teamgamma.cansat.app.data.constantValues;
 import de.teamgamma.cansat.app.dataImport.ImportedFiles;
 import de.teamgamma.cansat.app.options.Options;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 /**
  * 
