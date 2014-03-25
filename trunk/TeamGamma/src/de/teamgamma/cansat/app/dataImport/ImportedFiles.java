@@ -43,5 +43,8 @@ public class ImportedFiles {
 
 	public void setLatestFile(Double[][] latestFile) {
 		this.latestFile = latestFile;
+		for(int i = 0; i < this.latestFile.length; i++){
+		Log.d("ficken", String.valueOf(this.latestFile[i][0]));
+		}
 	}
 }
