@@ -43,8 +43,5 @@ public class ImportedFiles {
 
 	public void setLatestFile(Double[][] latestFile) {
 		this.latestFile = latestFile;
-		for(int i=0; i<latestFile.length;i++){
-			Log.d("import", "ImportedFile:"+ String.valueOf(latestFile[i][0]));
-		}
 	}
 }

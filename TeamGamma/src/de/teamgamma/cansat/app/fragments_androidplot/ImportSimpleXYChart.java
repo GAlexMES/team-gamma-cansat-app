@@ -1,4 +1,4 @@
-package de.teamgamma.cansat.app.dataImport;
+package de.teamgamma.cansat.app.fragments_androidplot;
 
 import android.app.Fragment;
 import android.graphics.Color;
@@ -13,6 +13,7 @@ import com.androidplot.xy.*;
 
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.data.constantValues;
+import de.teamgamma.cansat.app.dataImport.ImportedFiles;
 import de.teamgamma.cansat.app.options.Options;
 
 import java.util.ArrayList;
@@ -46,27 +47,15 @@ public class ImportSimpleXYChart extends Fragment {
 		Number[] seriesNumbers = new Number[Options.getInstance().getNumberOfValues()*2];
 		ImportedFiles importedFile = ImportedFiles.getInstance();
 		Double[][] valueArray = importedFile.getLatestFile();
-		for(int i=0;i<valueArray.length;i++){
-			Log.d("import",String.valueOf(valueArray[i][0]));
-			Log.d("import",String.valueOf(valueArray[i][1]));
-		}
-		Log.d("import","valueArray:"+String.valueOf(valueArray.length));
-		Log.d("import","seriesNumbers:"+String.valueOf(seriesNumbers.length));
 		//push the datas out of the valueArray into an Number Array
 		for(int i=0;i<valueArray.length;i++){
-			Log.d("import","2*i"+String.valueOf(2*i));
 			seriesNumbers[2*i]=valueArray[i][0];
-			Log.d("import",String.valueOf(seriesNumbers[2*i]));
 			seriesNumbers[2*i+1]=valueArray[i][1];
-			Log.d("import","2*i+1"+String.valueOf(2*i+1));
-			Log.d("import",String.valueOf(seriesNumbers[2*i+1]));
 		}
-		Log.d("import","end of for");
 		// Make the seriesNumbers [] to an XYSeries
 		XYSeries series1 = new SimpleXYSeries(Arrays.asList(seriesNumbers), 
 				SimpleXYSeries.ArrayFormat.XY_VALS_INTERLEAVED, 
 				""); //Name od the series
-		Log.d("import","xyseries");
 		// Configures the graph
 		LineAndPointFormatter series1Format = new LineAndPointFormatter(
 				constantValues.selectableColors[Options.getInstance().getSelectedColors()[1]], //Line color
