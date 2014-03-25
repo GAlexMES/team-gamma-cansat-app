@@ -1,10 +1,14 @@
 package de.teamgamma.cansat.app.fragments;
 
-import android.app.Fragment;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,12 +23,12 @@ import de.teamgamma.cansat.app.options.OptionsExport;
 
 /**
  * 
- * @author Alexander Brennecke
- * gives the user the option to select an own options.txt or to generate a new one
- *
+ * @author Alexander Brennecke gives the user the option to select an own
+ *         options.txt or to generate a new one
+ * 
  */
 public class OptionsSearcherFragment extends Fragment {
-	
+
 	private Options options = Options.getInstance();
 
 	/**
@@ -48,17 +52,43 @@ public class OptionsSearcherFragment extends Fragment {
 		buttonGenerateOptions.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//creates a new optionsExport object
+				// creates a new optionsExport object
 				OptionsExport optionsExport = new OptionsExport();
-				//creates a mewGenerateOptions object
+				// creates a mewGenerateOptions object
 				GenerateOptions generateOptions = new GenerateOptions();
-				//writes gerneral options into a new options.txt
-				optionsExport.writeSingle(generateOptions.getOptionsFilepath(),generateOptions.generate());
+				File f = new File(Environment
+						.getExternalStorageDirectory().getPath()+"/teamgamma");
+				if (!f.exists()) {
+					if (!f.mkdirs()) {
+						// create a File object for the parent directory
+						File teamgamma = new File(Environment
+								.getExternalStorageDirectory().getPath());
+						// have the object build the directory structure, if
+						// needed.
+						teamgamma.mkdirs();
+						// create a File object for the output file
+						File outputFile = new File(teamgamma, "teamgamma");
+						// now attach the OutputStream to the file object,
+						// instead of a String representation
+						try {
+							FileOutputStream fos = new FileOutputStream(
+									outputFile);
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+				// writes gerneral options into a new options.txt
+				optionsExport.writeSingle(generateOptions.getOptionsFilepath(),
+						generateOptions.generate());
 				// Create new fragment and transaction
 				Fragment newFragment = new HomeFragment();
-				FragmentTransaction transaction = getFragmentManager().beginTransaction();
+				FragmentTransaction transaction = getFragmentManager()
+						.beginTransaction();
 
-				// Replace whatever is in the fragment_container view with this fragment,
+				// Replace whatever is in the fragment_container view with this
+				// fragment,
 				// and add the transaction to the back stack
 				transaction.replace(R.id.content_frame, newFragment);
 				transaction.addToBackStack(null);
@@ -68,17 +98,19 @@ public class OptionsSearcherFragment extends Fragment {
 
 			}
 		});
-		
-		//called when a 
+
+		// called when a
 		buttonOptionsSave.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				options.setOptionsPath(optionsPath.getText().toString());
 				// Create new fragment and transaction
 				Fragment newFragment = new HomeFragment();
-				FragmentTransaction transaction = getFragmentManager().beginTransaction();
+				FragmentTransaction transaction = getFragmentManager()
+						.beginTransaction();
 
-				// Replace whatever is in the fragment_container view with this fragment,
+				// Replace whatever is in the fragment_container view with this
+				// fragment,
 				// and add the transaction to the back stack
 				transaction.replace(R.id.content_frame, newFragment);
 				transaction.addToBackStack(null);
@@ -88,16 +120,18 @@ public class OptionsSearcherFragment extends Fragment {
 
 			}
 		});
-		
-		//called when the file brwoser button was clicked
+
+		// called when the file brwoser button was clicked
 		buttonBrowser.setOnClickListener(new OnClickListener() {
 			/**
 			 * opens a new activity with the file browser
 			 */
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(	getActivity(),de.teamgamma.cansat.app.filebrowser.AndroidExplorer.class);
-				//starst the activity
+				Intent intent = new Intent(
+						getActivity(),
+						de.teamgamma.cansat.app.filebrowser.AndroidExplorer.class);
+				// starst the activity
 				startActivity(intent);
 			}
 		});
