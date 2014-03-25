@@ -44,9 +44,9 @@ public class ImportSimpleXYChart extends Fragment {
 		plot = (XYPlot) mLinearLayout.findViewById(R.id.simpleXYPlot);
 		
 		// initialize a few importend variables to display the values correct
-		Number[] seriesNumbers = new Number[Options.getInstance().getNumberOfValues()*2];
 		ImportedFiles importedFile = ImportedFiles.getInstance();
 		Double[][] valueArray = importedFile.getLatestFile();
+		Number[] seriesNumbers = new Number[valueArray.length*2];
 		//push the datas out of the valueArray into an Number Array
 		for(int i=0;i<valueArray.length;i++){
 			seriesNumbers[2*i]=valueArray[i][0];

@@ -95,8 +95,6 @@ public class ImportFragment extends Fragment {
 					toast.show();
 				}
 				else{
-					//ImportedFiles.getInstance().setLatestFile(
-						//	reader.getValuefromFile(importFilepath));
 					// Create new fragment and transaction
 					Fragment newFragment = new ImportSimpleXYChart();
 					FragmentTransaction transaction = getFragmentManager()
