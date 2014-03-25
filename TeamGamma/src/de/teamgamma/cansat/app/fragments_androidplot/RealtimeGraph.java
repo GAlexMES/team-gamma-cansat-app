@@ -41,7 +41,10 @@ public class RealtimeGraph extends Fragment {
 		plot.setTitle(constantValues.getStringFromHashmap(options.getActiveSensorName()));
 
 		// Create a couple arrays of y-values to plot:
-		Number[] series1Numbers = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+		Number[] series1Numbers = new Number[options.getNumberOfValues()];
+		for(Number a : series1Numbers){
+			a = 0;
+		}
 
 		// Turn the above arrays into XYSeries':
 		series1 = new SimpleXYSeries(Arrays.asList(series1Numbers), // SimpleXYSeries
@@ -60,9 +63,9 @@ public class RealtimeGraph extends Fragment {
 		// LineAndPointRenderer
 		// and configure it from xml:
 		LineAndPointFormatter series1Format = new LineAndPointFormatter(
-				constantValues.selectableColors[Options.getInstance().getSelectedColors()[0]],
-				constantValues.selectableColors[Options.getInstance().getSelectedColors()[1]],
-				constantValues.selectableColors[Options.getInstance().getSelectedColors()[2]],
+				constantValues.selectableColors[Options.getInstance().getSelectedColors()[1]], //Line color
+				constantValues.selectableColors[Options.getInstance().getSelectedColors()[0]], //Point color
+				constantValues.selectableColors[Options.getInstance().getSelectedColors()[2]], //Area colorh6
 				null);
 
 		// add a new series' to the xyplot:
