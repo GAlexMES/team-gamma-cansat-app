@@ -2,6 +2,7 @@ package de.teamgamma.cansat.app.data;
 
 import de.teamgamma.cansat.app.database.Database;
 import de.teamgamma.cansat.app.fileoperations.Save;
+import de.teamgamma.cansat.app.fileoperations.SaveThread;
 import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
 import de.teamgamma.cansat.app.json.Json;
 import de.teamgamma.cansat.app.main.MainActivity;
@@ -52,14 +53,17 @@ public class DataCoordination {
 				}
 			}
 		}
-		save.saveAll(data);
+		SaveThread saveData = new SaveThread();
+		saveData.setData(data);
+		Thread saveThread = new Thread(saveData);
+		saveThread.start();
 
 		// RealtimeGraph.getInstance().onValueChanged(this.sensors);
 	}
 
 	public Sensor[] getValuesFromDatabase() {
 		// Daten werden aus der Datenbank ausgelesen und zurueckgegeben
-		Database database = Database.getInstance();
+		Database database = Database.getInstance(); 
 		this.sensors = database.getValuesFromDatabase();
 		return sensors;
 	}
