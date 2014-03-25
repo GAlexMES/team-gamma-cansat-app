@@ -23,12 +23,15 @@ public class OptionsExport {
 			int [] selectedChartColors // selected colors for points/lines/areas
 			){
 		
-		writeableString = java_socket_ipAdress + newLine + java_socket_port
-				+ newLine + methodToConnect + newLine + valueExportPath
-				+ newLine + valueStoragePath + newLine + numberOfShownPoints + newLine+
-				selectedChartColors[0]+ newLine+
-				selectedChartColors[1]+ newLine+
-				selectedChartColors[2];
+		writeableString = java_socket_ipAdress + newLine 
+						+ java_socket_port + newLine
+						+ methodToConnect + newLine
+						+ valueExportPath + newLine
+						+ valueStoragePath + newLine
+						+ numberOfShownPoints + newLine
+						+ selectedChartColors[0]+ newLine
+						+ selectedChartColors[1]+ newLine
+						+ selectedChartColors[2];
 		writeSingle(this.filepath, writeableString);
 	}
 
