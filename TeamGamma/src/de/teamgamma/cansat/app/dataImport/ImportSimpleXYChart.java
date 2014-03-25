@@ -69,8 +69,8 @@ public class ImportSimpleXYChart extends Fragment {
 		Log.d("import","xyseries");
 		// Configures the graph
 		LineAndPointFormatter series1Format = new LineAndPointFormatter(
-				constantValues.selectableColors[Options.getInstance().getSelectedColors()[0]],
 				constantValues.selectableColors[Options.getInstance().getSelectedColors()[1]],
+				constantValues.selectableColors[Options.getInstance().getSelectedColors()[0]],
 				constantValues.selectableColors[Options.getInstance().getSelectedColors()[2]],
 				null);
 
