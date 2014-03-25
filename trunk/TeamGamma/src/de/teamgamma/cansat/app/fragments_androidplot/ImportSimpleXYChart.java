@@ -52,6 +52,9 @@ public class ImportSimpleXYChart extends Fragment {
 			seriesNumbers[2*i]=valueArray[i][0];
 			seriesNumbers[2*i+1]=valueArray[i][1];
 		}
+		for(int i =0; i<seriesNumbers.length;i++){
+			Log.d("gamma",String.valueOf(seriesNumbers[i]));
+		}
 		// Make the seriesNumbers [] to an XYSeries
 		XYSeries series1 = new SimpleXYSeries(Arrays.asList(seriesNumbers), 
 				SimpleXYSeries.ArrayFormat.XY_VALS_INTERLEAVED, 
