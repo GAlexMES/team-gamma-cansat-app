@@ -40,7 +40,6 @@ public class HomeFragment extends Fragment {
      	WebView webview = (WebView) mLinearLayout.findViewById(R.id.webView1);
      	
      	webview.setWebViewClient(new TeamGammaWebVieClient());
-        //webview.getSettings().setPluginsEnabled(true);
         webview.getSettings().setBuiltInZoomControls(false); 
         webview.getSettings().setSupportZoom(false);
         webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);   
