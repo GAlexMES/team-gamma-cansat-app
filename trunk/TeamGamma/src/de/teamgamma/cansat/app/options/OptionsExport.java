@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 
+import android.util.Log;
+
 public class OptionsExport {
 	private Options options = Options.getInstance();
 	private String newLine = "\n";
