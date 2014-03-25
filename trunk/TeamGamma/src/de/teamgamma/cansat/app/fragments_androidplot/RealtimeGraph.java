@@ -79,8 +79,6 @@ public class RealtimeGraph extends Fragment {
 	}
 
 	public synchronized void onValueChanged(Sensor sensor) {
-		Log.d("graph",sensor.getName());
-		Log.d("graph",String.valueOf(sensor.getValues()[19][1]));
 		// get rid the oldest sample in history:
 		if (series1.size() > HISTORY_SIZE) {
 			((SimpleXYSeries) series1).removeFirst();

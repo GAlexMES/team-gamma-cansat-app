@@ -1,6 +1,7 @@
 package de.teamgamma.cansat.app.fragments;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
@@ -65,7 +67,6 @@ public class OptionsChartviewFragment extends Fragment implements OnSeekBarChang
 			seekBarArray[i].setOnSeekBarChangeListener(this);
 		}
 		for(int i=0; i<seekBarIdArray.length;i++){
-			Log.d("numbers",String.valueOf(options.getSelectedColors()[i]));
 			onProgressChanged(seekBarArray[i],options.getSelectedColors()[i],false);
 		}
 		//called when the save button was clicked
@@ -77,6 +78,12 @@ public class OptionsChartviewFragment extends Fragment implements OnSeekBarChang
 			public void onClick(View v) {
 				options.setSelectedColors(seekBarValue);
 				options.setNumbersOfValues(Integer.valueOf(numberOfShownPoints.getText().toString()));
+				// a toast will show that the data was saved
+				Context context = mLinearLayout.getContext();
+				CharSequence text = "Saved";
+				int duration = Toast.LENGTH_SHORT;
+				Toast toast = Toast.makeText(context, text, duration);
+				toast.show();
 			}
 
 		});

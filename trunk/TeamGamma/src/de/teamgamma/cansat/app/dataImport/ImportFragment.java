@@ -3,6 +3,7 @@ package de.teamgamma.cansat.app.dataImport;
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.fileoperations.Read;
 import de.teamgamma.cansat.app.fragments.HomeFragment;
+import de.teamgamma.cansat.app.fragments_androidplot.ImportSimpleXYChart;
 import de.teamgamma.cansat.app.options.Options;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
