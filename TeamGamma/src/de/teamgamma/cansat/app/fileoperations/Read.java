@@ -9,10 +9,10 @@ import android.util.Log;
 import de.teamgamma.cansat.app.data.Values;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
-import de.teamgamma.cansat.app.options.newOptions;
+import de.teamgamma.cansat.app.options.Options;
 
 public class Read {
-	private newOptions option = newOptions.getInstance();
+	private Options option = Options.getInstance();
 	private ArrayList<Values> data = new ArrayList<Values>();
 	private Double[][] output;
 

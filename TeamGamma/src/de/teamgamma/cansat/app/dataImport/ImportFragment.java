@@ -17,9 +17,8 @@ import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.fileoperations.Read;
 import de.teamgamma.cansat.app.fragments_androidplot.ImportSimpleXYChart;
 import de.teamgamma.cansat.app.options.KindOfOption;
-import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.options.PathOptions;
-import de.teamgamma.cansat.app.options.newOptions;
+import de.teamgamma.cansat.app.options.Options;
 
 /**
  * 
@@ -43,7 +42,7 @@ public class ImportFragment extends Fragment {
 	 */
 	@Override
 	public void onResume() {
-		final newOptions option = newOptions.getInstance();
+		final Options option = Options.getInstance();
 		super.onResume();
 		final EditText filePath = (EditText) mLinearLayout
 				.findViewById(R.id.filePath);

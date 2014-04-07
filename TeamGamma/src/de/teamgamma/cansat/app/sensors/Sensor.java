@@ -3,7 +3,7 @@ package de.teamgamma.cansat.app.sensors;
 import android.util.Log;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
-import de.teamgamma.cansat.app.options.newOptions;
+import de.teamgamma.cansat.app.options.Options;
 
 public class Sensor {
 	private int numberOfValues;
@@ -12,7 +12,7 @@ public class Sensor {
 	
 	
 	public Sensor(){
-		newOptions options = newOptions.getInstance();
+		Options options = Options.getInstance();
 		if(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.NUMBEROFSHOWNVALUE)==null){
 			
 		}

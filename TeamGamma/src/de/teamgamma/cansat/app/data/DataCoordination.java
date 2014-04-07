@@ -7,7 +7,7 @@ import de.teamgamma.cansat.app.json.Json;
 import de.teamgamma.cansat.app.main.MainActivity;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
-import de.teamgamma.cansat.app.options.newOptions;
+import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.sensors.Sensor;
 
 public class DataCoordination {
@@ -15,7 +15,7 @@ public class DataCoordination {
 	private Json json = Json.getInstance();
 	private static DataCoordination instance = null;
 	private Sensor[] sensors = new Sensor[constantValues.names.length];
-	private newOptions options = newOptions.getInstance();
+	private Options options = Options.getInstance();
 
 	// Singleton
 	public static DataCoordination getInstance() {

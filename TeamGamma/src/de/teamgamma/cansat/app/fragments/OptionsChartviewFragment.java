@@ -19,7 +19,7 @@ import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.data.constantValues;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
-import de.teamgamma.cansat.app.options.newOptions;
+import de.teamgamma.cansat.app.options.Options;
 
 /**
  * 
@@ -54,7 +54,7 @@ public class OptionsChartviewFragment extends Fragment implements OnSeekBarChang
 			Bundle savedInstanceState) {
 		
 		// initialized variables and create object out of fragment xml objects
-		final newOptions options = newOptions.getInstance();
+		final Options options = Options.getInstance();
 		mLinearLayout = (LinearLayout) inflater.inflate(
 				R.layout.fragment_options_chartview, container, false);
 		Button button_save = (Button) mLinearLayout
