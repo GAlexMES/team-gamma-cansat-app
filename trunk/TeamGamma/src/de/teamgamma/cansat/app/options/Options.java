@@ -1,211 +1,66 @@
 package de.teamgamma.cansat.app.options;
 
-import android.os.Environment;
-import android.util.Log;
 
-/**
- * 
- * @author Alexander saves every option for this app permanently
- */
 public class Options {
-	private OptionsExport optionsExport;
-	// variables for every option that should be saved
 
-	private int methodToConnect = 0;
-	private String javaSocketIpAdress = null;;
-	private String javaSocketPort = null;
-	private String activeSensorName = "";
-	private String valueExportPath = null;
-	private String valueStoragePath = null;
-	private String optionsPath = Environment.getExternalStorageDirectory()
-			.getPath() + "/teamgamma/options.txt";
-	private String tempValueExportPath = null;
-	private String tempValueStoragePath = null;
-	private String tempOptionsPath = null;
-	private String temporaryBrowserResultPath = null;
-	private boolean streamRuns = true;
-	private int[] selectedColors = new int[3];	
-	private int numbersOfValues;
-	boolean browsButtons[] = { false, false, false };
+	private OptionsInterface[] options = new OptionsInterface[3];
 
-	// instance for singelton pattern
+	private OptionsReviewer check = new OptionsReviewer();
+	
+	
 	private static Options instance = null;
 
 	public static Options getInstance() {
 		if (instance == null) {
 			instance = new Options();
+			return instance;
+		} else {
+			return instance;
 		}
-		return instance;
 	}
 
-	// getter and setter for every option variable
-
-	public int getNumberOfValues() {
-		return numbersOfValues;
+	private Options() {
+		options[0] = new ConnectionOptions();
+		options[1] = new PathOptions();
+		options[2] = new ChartViewOptions();
 	}
 
-	public void setNumbersOfValues(int numbersOfValues) {
-		this.numbersOfValues = numbersOfValues;
-		writeAllToFile();
+	public OptionsInterface[] getOptions() {
+		return options;
 	}
 
-	public int[] getSelectedColors() {
-		return selectedColors;
-	}
-
-	public void setSelectedColors(int[] selectedColors) {
-		this.selectedColors = selectedColors;
-		writeAllToFile();
-	}
-
-	public boolean isStreamRuns() {
-		return streamRuns;
-	}
-
-	public void toggleStreamRuns() {
-		this.streamRuns = !streamRuns;
-	}
-
-	public String getActiveSensorName() {
-		return activeSensorName;
-	}
-
-	public void setActiveSensorName(String activeSensorName) {
-		this.activeSensorName = activeSensorName;
-	}
-
-	public String getTemporaryBrowserResultPath() {
-		return temporaryBrowserResultPath;
-	}
-
-	public void setTemporaryBrowserResultPath(String importFilePath) {
-		this.temporaryBrowserResultPath = importFilePath;
-	}
-
-	public void setSingleBrowsButtons(int position, boolean browsButtons) {
-		this.browsButtons[position] = browsButtons;
-	}
-
-	public boolean[] getBrowsButtons() {
-		return browsButtons;
-	}
-
-	public String getTempValueExportPath() {
-		return tempValueExportPath;
-	}
-
-	public void setTempValueExportPath(String tempValueExportPath) {
-		this.tempValueExportPath = tempValueExportPath;
-	}
-
-	public String getTempValueStoragePath() {
-		return tempValueStoragePath;
-	}
-
-	public void setTempValueStoragePath(String tempValueStoragePath) {
-		this.tempValueStoragePath = tempValueStoragePath;
-	}
-
-	public String getTempOptionsPath() {
-		return tempOptionsPath;
-	}
-
-	public void setTempOptionsPath(String tempOptionsPath) {
-		this.tempOptionsPath = tempOptionsPath;
-	}
-
-	public String getOptionsPath() {
-		return optionsPath;
-	}
-
-	public void setOptionsPath(String optionsPath) {
-		this.optionsPath = optionsPath;
-	}
-
-	public String getValueStoragePath() {
-		return valueStoragePath;
-	}
-
-	public void setValueStoragePath(String valueStoragePath) {
-		this.valueStoragePath = valueStoragePath;
-		writeAllToFile();
-	}
-
-	public String getValueExportPath() {
-		return valueExportPath;
-	}
-
-	public void setValueExportPath(String valueExportPath) {
-		this.valueExportPath = valueExportPath;
-		writeAllToFile();
-	}
-
-	public int getMethodToConnect() {
-		return methodToConnect;
-	}
-
-	public void setMethodToConnect(int methodToConnect) {
-		this.methodToConnect = methodToConnect;
-		writeAllToFile();
-	}
-
-	public String getJavaSocketIpAdress() {
-		return javaSocketIpAdress;
-	}
-
-	public String getJavaSocketPort() {
-		return javaSocketPort;
-	}
-
-	public void setJavaSocketIpAdress(String javaSocketIpAdress) {
-		this.javaSocketIpAdress = javaSocketIpAdress;
-		writeAllToFile();
-	}
-
-	public void setJavaSocketPort(String javaSocketPort) {
-		this.javaSocketPort = javaSocketPort;
-		writeAllToFile();
-	}
-
-	public void setAllConnectionOptions(String ipAdress, String port,
-			int checkedRadioButton) {
-		javaSocketIpAdress = ipAdress;
-		javaSocketPort = port;
-		methodToConnect = checkedRadioButton;
-		writeAllToFile();
-	}
-
-	private void writeAllToFile() {
-		optionsExport = new OptionsExport();
-		optionsExport.writeAll(javaSocketIpAdress, javaSocketPort,
-				methodToConnect, valueExportPath, valueStoragePath,
-				numbersOfValues, selectedColors);
+	public boolean setOption(int kindOfOption, int nameOfOption, Object value) {
+		OptionsExport exporter = new OptionsExport();
+		if (check.checkBetween(0, options.length - 1, kindOfOption)) {
+			if (check.checkBetween(0,
+					options[kindOfOption].getValues().length - 1, nameOfOption)) {
+				String[] currentValues = options[kindOfOption].getValues();
+				currentValues[nameOfOption] = String.valueOf(value);
+				options[kindOfOption].setValues(currentValues);
+				exporter.newWrite();
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 	
-	
+	public void readAll(){
+		OptionsExport exporter = new OptionsExport();
+		exporter.newReadFile();
+	}
 
-//	public void getValuesFromFile() {
-//		optionsExport = new OptionsExport();
-//		javaSocketIpAdress = optionsExport.getValue(0);
-//		javaSocketPort = optionsExport.getValue(1);
-//		if (optionsExport.getValue(2) != null) {
-//			methodToConnect = Integer.parseInt(optionsExport.getValue(2));
-//		}
-//		valueExportPath = optionsExport.getValue(3);
-//		valueStoragePath = optionsExport.getValue(4);
-//		if (optionsExport.getValue(5) != null) {
-//			numbersOfValues = Integer.parseInt(optionsExport.getValue(5));
-//			if (numbersOfValues < 20) {
-//				numbersOfValues = 20;
-//			}
-//		}
-//		for (int i = 0; i < selectedColors.length; i++) {
-//			if (optionsExport.getValue(6 + i) != null) {
-//				selectedColors[i] = Integer.parseInt(optionsExport
-//						.getValue(6 + i));
-//			} else {
-//				selectedColors[i] = i + 1;
-//			}
-//		}
-//	}
+	public String getOption(int kindOfOption, int nameOfOption) {
+		if (check.checkBetween(0, options.length - 1, kindOfOption)) {
+			if (check.checkBetween(0,
+					options[kindOfOption].getValues().length - 1, nameOfOption)) {
+				return options[kindOfOption].getValues()[nameOfOption];
+			}
+			return "";
+		}
+		return "";
+	}
 }
+	

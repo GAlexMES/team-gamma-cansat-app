@@ -13,7 +13,9 @@ import com.androidplot.xy.*;
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.data.constantValues;
 import de.teamgamma.cansat.app.dataImport.ImportedFiles;
+import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.Options;
+
 
 import java.util.Arrays;
 /**
@@ -26,6 +28,7 @@ import java.util.Arrays;
 public class ImportSimpleXYChart extends Fragment {
 
 	private XYPlot plot;
+	private Options options = Options.getInstance();
 
 	
 	/**
@@ -58,10 +61,10 @@ public class ImportSimpleXYChart extends Fragment {
 				SimpleXYSeries.ArrayFormat.XY_VALS_INTERLEAVED, 
 				""); //Name od the series
 		// Configures the graph
-		LineAndPointFormatter series1Format = new LineAndPointFormatter(
-				constantValues.selectableColors[Options.getInstance().getSelectedColors()[1]], //Line color
-				constantValues.selectableColors[Options.getInstance().getSelectedColors()[0]], //Point color
-				constantValues.selectableColors[Options.getInstance().getSelectedColors()[2]], //Area color
+		LineAndPointFormatter series1Format = new LineAndPointFormatter(				
+				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW.ordinal()].getColors()[1]], //Line color
+				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW.ordinal()].getColors()[0]], //Point color
+				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW.ordinal()].getColors()[2]], //Area color
 				null);
 
 		// add a new series' to the xyplot:

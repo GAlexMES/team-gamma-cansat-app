@@ -10,7 +10,7 @@ import java.io.IOException;
 import android.util.Log;
 
 public class OptionsExport {
-	private newOptions options = newOptions.getInstance();
+	private Options options = Options.getInstance();
 	private String newLine = "\n";
 	private String filepath = options.getOption(KindOfOption.PATH.ordinal(),
 			PathOptions.OPTIONSPATH);

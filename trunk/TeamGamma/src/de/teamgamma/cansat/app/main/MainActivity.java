@@ -30,14 +30,14 @@ import de.teamgamma.cansat.app.fragments.OptionsSearcherFragment;
 import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
-import de.teamgamma.cansat.app.options.newOptions;
+import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.sensors.Sensor;
 
 public class MainActivity extends Activity {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
-	private newOptions options = newOptions.getInstance();
+	private Options options = Options.getInstance();
 
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;

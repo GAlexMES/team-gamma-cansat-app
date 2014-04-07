@@ -3,9 +3,7 @@ package de.teamgamma.cansat.app.fragments_androidplot;
 import java.util.Arrays;
 
 import android.app.Fragment;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +16,8 @@ import com.androidplot.xy.XYSeries;
 
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.data.constantValues;
+import de.teamgamma.cansat.app.options.ChartViewOptions;
+import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.sensors.Sensor;
 
@@ -25,7 +25,9 @@ public class RealtimeGraph extends Fragment {
 	private XYPlot plot;
 	private static final int HISTORY_SIZE = 30;
 	private XYSeries series1 = null;
+	
 	private Options options = Options.getInstance();
+	
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -35,14 +37,17 @@ public class RealtimeGraph extends Fragment {
 		final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(
 				R.layout.androidplot_xyplot, container, false);
 
-		
 		// initialize our XYPlot reference:
 		plot = (XYPlot) mLinearLayout.findViewById(R.id.simpleXYPlot);
-		plot.setTitle(constantValues.getStringFromHashmap(options.getActiveSensorName()));
+		plot.setTitle(constantValues.getStringFromHashmap(options.getOption(
+				KindOfOption.CHARTVIEW.ordinal(),
+				ChartViewOptions.ACTIVESENSORNAME)));
 
 		// Create a couple arrays of y-values to plot:
-		Number[] series1Numbers = new Number[options.getNumberOfValues()];
-		for(Number a : series1Numbers){
+		Number[] series1Numbers = new Number[Integer.valueOf(options.getOption(
+				KindOfOption.CHARTVIEW.ordinal(),
+				ChartViewOptions.NUMBEROFSHOWNVALUE))];
+		for (Number a : series1Numbers) {
 			a = 0;
 		}
 
@@ -57,15 +62,21 @@ public class RealtimeGraph extends Fragment {
 				SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, // Y_VALS_ONLY means use
 														// the element index as
 														// the x value
-				options.getActiveSensorName()); // Set the display title of the series
+				options.getOption(KindOfOption.CHARTVIEW.ordinal(),
+						ChartViewOptions.ACTIVESENSORNAME)); // Set the display
+																// title of the
+																// series
 
 		// Create a formatter to use for drawing a series using
 		// LineAndPointRenderer
 		// and configure it from xml:
 		LineAndPointFormatter series1Format = new LineAndPointFormatter(
-				constantValues.selectableColors[Options.getInstance().getSelectedColors()[1]], //Line color
-				constantValues.selectableColors[Options.getInstance().getSelectedColors()[0]], //Point color
-				constantValues.selectableColors[Options.getInstance().getSelectedColors()[2]], //Area colorh6
+				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW
+						.ordinal()].getColors()[1]], // Line color
+				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW
+						.ordinal()].getColors()[0]], // Point color
+				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW
+						.ordinal()].getColors()[2]], // Area color
 				null);
 
 		// add a new series' to the xyplot:
@@ -84,8 +95,7 @@ public class RealtimeGraph extends Fragment {
 			((SimpleXYSeries) series1).removeFirst();
 		}
 		// add the latest history sample:
-		((SimpleXYSeries) series1).addLast(null,
-				sensor.getValues()[19][1]);
+		((SimpleXYSeries) series1).addLast(null, sensor.getValues()[19][1]);
 
 		// redraw the Plots:
 		plot.redraw();

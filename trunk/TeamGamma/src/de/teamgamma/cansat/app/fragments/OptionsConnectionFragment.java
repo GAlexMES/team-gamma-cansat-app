@@ -16,7 +16,7 @@ import android.widget.Toast;
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.options.ConnectionOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
-import de.teamgamma.cansat.app.options.newOptions;
+import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.socket.ServerConnection;
 
 /**
@@ -45,7 +45,7 @@ public class OptionsConnectionFragment extends Fragment {
 			Bundle savedInstanceState) {
 
 		// initialized objects with objects out of the fragment xml file
-		final newOptions options = newOptions.getInstance();
+		final Options options = Options.getInstance();
 		final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(
 				R.layout.fragment_options_connection, container, false);
 		final EditText java_socket_ipAdress = (EditText) mLinearLayout

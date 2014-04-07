@@ -19,10 +19,10 @@ import android.widget.LinearLayout;
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.options.GenerateOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
-import de.teamgamma.cansat.app.options.Options;
+
 import de.teamgamma.cansat.app.options.OptionsExport;
 import de.teamgamma.cansat.app.options.PathOptions;
-import de.teamgamma.cansat.app.options.newOptions;
+import de.teamgamma.cansat.app.options.Options;
 
 /**
  * 
@@ -32,7 +32,7 @@ import de.teamgamma.cansat.app.options.newOptions;
  */
 public class OptionsSearcherFragment extends Fragment {
 
-	private newOptions options = newOptions.getInstance();
+	private Options options = Options.getInstance();
 
 	/**
 	 * called when the fragment will be displayed first time

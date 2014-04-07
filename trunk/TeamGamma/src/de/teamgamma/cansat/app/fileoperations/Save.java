@@ -10,12 +10,12 @@ import java.util.Locale;
 import de.teamgamma.cansat.app.data.constantValues;
 import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.PathOptions;
-import de.teamgamma.cansat.app.options.newOptions;
+import de.teamgamma.cansat.app.options.Options;
 
 public class Save {
 	private static Save instance = null;
 
-	private newOptions option = newOptions.getInstance();
+	private Options option = Options.getInstance();
 	private String filepath;
 	private String writableString = null;
 	private String exportTime;

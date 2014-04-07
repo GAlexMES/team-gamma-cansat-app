@@ -17,7 +17,7 @@ import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.PathOptions;
-import de.teamgamma.cansat.app.options.newOptions;
+import de.teamgamma.cansat.app.options.Options;
 
 
 /**
@@ -28,7 +28,7 @@ import de.teamgamma.cansat.app.options.newOptions;
  */
 public class AndroidExplorer extends ListActivity {
 	// initialize a few importend variables
-	private newOptions options = newOptions.getInstance();
+	private Options options = Options.getInstance();
 	private List<String> item = null;
 	private List<String> path = null;
 	private String root = "/";

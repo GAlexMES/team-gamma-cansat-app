@@ -13,9 +13,8 @@ import android.widget.LinearLayout;
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
-import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.options.PathOptions;
-import de.teamgamma.cansat.app.options.newOptions;
+import de.teamgamma.cansat.app.options.Options;
 
 /**
  * 
@@ -27,7 +26,7 @@ import de.teamgamma.cansat.app.options.newOptions;
 public class OptionsExportFragment extends Fragment {
 	//initialize some variables
 	public static final String ARG_SLIDEMENU_VALUES = "slidemenu_values";
-	private final newOptions options = newOptions.getInstance();
+	private final Options options = Options.getInstance();
 	private boolean[] browserButton = new boolean[2];
 	LinearLayout mLinearLayout;
 
@@ -85,7 +84,7 @@ public class OptionsExportFragment extends Fragment {
 			Bundle savedInstanceState) {
 		
 		// initialized variables and create object out of fragment xml objects
-		final newOptions options = newOptions.getInstance();
+		final Options options = Options.getInstance();
 		mLinearLayout = (LinearLayout) inflater.inflate(
 				R.layout.fragment_options_export, container, false);
 		Button button_save = (Button) mLinearLayout
