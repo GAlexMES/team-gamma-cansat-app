@@ -10,36 +10,59 @@ import java.io.IOException;
 import android.util.Log;
 
 public class OptionsExport {
-	private Options options = Options.getInstance();
+	private newOptions options = newOptions.getInstance();
 	private String newLine = "\n";
-	private String filepath = options.getOptionsPath();
-	private String writeableString = null;
+	private String filepath = options.getOption(KindOfOption.PATH.ordinal(),
+			PathOptions.OPTIONSPATH);
+	private String writeableString = "";
 
-	public void writeAll( //writes data into options.txt
-			String java_socket_ipAdress, //JavaSocketIPAdress
-			String java_socket_port,//JavaSocketPort
-			int methodToConnect, //MethodToConnect
-			String valueExportPath, //Path for valueExport
-			String valueStoragePath, //Path for value storage
-			int numberOfShownPoints, //Numbers of Points, shown in a chart
-			int [] selectedChartColors // selected colors for points/lines/areas
-			){
-		
-		writeableString = java_socket_ipAdress + newLine 
-						+ java_socket_port + newLine
-						+ methodToConnect + newLine
-						+ valueExportPath + newLine
-						+ valueStoragePath + newLine
-						+ numberOfShownPoints + newLine
-						+ selectedChartColors[0]+ newLine
-						+ selectedChartColors[1]+ newLine
-						+ selectedChartColors[2];
+	public void newWrite() {
+		OptionsInterface[] optionsArray = options.getOptions();
+		for (OptionsInterface element:optionsArray) {
+			for(int b =0; b<element.getValues().length;b++){
+				writeableString=writeableString+element.getValues()[b]+newLine;
+			}
+		}
+		writeSingle(options.getOption(KindOfOption.PATH.ordinal(),PathOptions.OPTIONSPATH), writeableString);
+		writeableString="";
+	}
+	
+	public void newReadFile(){
+		int counter = 0;
+		OptionsInterface[] optionsArray = options.getOptions();
+		for (OptionsInterface element:optionsArray) {
+			String[] values = new String[element.getValues().length];
+			for(int b =0; b<element.getValues().length;b++){
+				values[b]= getValue(counter);
+				counter++;
+			}
+			element.setValues(values);
+		}
+	}
+
+	public void writeAll( // writes data into options.txt
+			String java_socket_ipAdress, // JavaSocketIPAdress
+			String java_socket_port,// JavaSocketPort
+			int methodToConnect, // MethodToConnect
+			String valueExportPath, // Path for valueExport
+			String valueStoragePath, // Path for value storage
+			int numberOfShownPoints, // Numbers of Points, shown in a chart
+			int[] selectedChartColors // selected colors for points/lines/areas
+	) {
+
+		writeableString = java_socket_ipAdress + newLine + java_socket_port
+				+ newLine + methodToConnect + newLine + valueExportPath
+				+ newLine + valueStoragePath + newLine + numberOfShownPoints
+				+ newLine + selectedChartColors[0] + newLine
+				+ selectedChartColors[1] + newLine + selectedChartColors[2];
 		writeSingle(this.filepath, writeableString);
 	}
 
 	public void writeSingle(String filepath, String message) {
+		Log.d("gamma",filepath);
 		FileOutputStream out = null;
 		try {
+			
 			out = new FileOutputStream(new File(filepath));
 		} catch (FileNotFoundException e2) {
 			// TODO Auto-generated catch block
@@ -58,7 +81,9 @@ public class OptionsExport {
 			e.printStackTrace();
 		}
 	}
-	public String getValue(int positionLine) {
+	
+
+	private String getValue(int positionLine) {
 		String zeile = null;
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(filepath));

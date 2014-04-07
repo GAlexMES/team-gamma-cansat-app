@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.teamgamma.cansat.app.R;
-import de.teamgamma.cansat.app.options.Options;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
@@ -15,6 +13,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import de.teamgamma.cansat.app.R;
+import de.teamgamma.cansat.app.options.ChartViewOptions;
+import de.teamgamma.cansat.app.options.KindOfOption;
+import de.teamgamma.cansat.app.options.PathOptions;
+import de.teamgamma.cansat.app.options.newOptions;
 
 
 /**
@@ -25,12 +28,13 @@ import android.widget.TextView;
  */
 public class AndroidExplorer extends ListActivity {
 	// initialize a few importend variables
-	private Options options = Options.getInstance();
+	private newOptions options = newOptions.getInstance();
 	private List<String> item = null;
 	private List<String> path = null;
 	private String root = "/";
 	private TextView myPath;
 	private String dirPath;
+
 	
 	/**
 	 *  Called when the activity is first created
@@ -43,6 +47,7 @@ public class AndroidExplorer extends ListActivity {
 		getDir(root);
 	}
 	
+
 	/** 
 	 * 
 	 * @param dirPath path of a dir, that was opened
@@ -68,7 +73,7 @@ public class AndroidExplorer extends ListActivity {
 			path.add(f.getParent());
 		}
 		
-		// goes throw every object insinde the dir and put its into th item List
+		// goes throw every object insinde the dir and put its into teh item List
 		for (int i = 0; i < files.length; i++)
 		{
 			File file = files[i];
@@ -126,20 +131,15 @@ public class AndroidExplorer extends ListActivity {
 				public void onClick(DialogInterface dialog, int which) {
 					boolean valueSetted = true;
 					String myPath = dirPath + "/" + fileName;
-					boolean [] browsButton = options.getBrowsButtons();
-					for(int i = 0; i<browsButton.length;i++){
-						if(browsButton[i]){
-							valueSetted=false;
-							switch(i){
-							case 0:	options.setTempOptionsPath(myPath);break;
-							case 1: options.setTempValueExportPath(myPath);break;
-							case 2: options.setTempValueStoragePath(myPath);break;
+
+							switch(Integer.valueOf(options.getOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.LASTACTIVESCREEN))){
+							case 0:	options.setOption(KindOfOption.PATH.ordinal(), PathOptions.TEMPOPTIONSPATH, myPath);break;
+							case 1: options.setOption(KindOfOption.PATH.ordinal(), PathOptions.TEMPVALUEEXPORTPATH, myPath);break;
+							case 2: options.setOption(KindOfOption.PATH.ordinal(), PathOptions.TEMPVALUESTORAGEPATH, myPath);break;
 							}
-						}
-					}
 					
 					if(valueSetted){
-						options.setTemporaryBrowserResultPath(myPath);
+						options.setOption(KindOfOption.PATH.ordinal(),PathOptions.TEMBROWSERRESULTPATH, myPath);
 					}
 					else{
 						valueSetted=true;

@@ -18,8 +18,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.options.GenerateOptions;
+import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.options.OptionsExport;
+import de.teamgamma.cansat.app.options.PathOptions;
+import de.teamgamma.cansat.app.options.newOptions;
 
 /**
  * 
@@ -29,7 +32,7 @@ import de.teamgamma.cansat.app.options.OptionsExport;
  */
 public class OptionsSearcherFragment extends Fragment {
 
-	private Options options = Options.getInstance();
+	private newOptions options = newOptions.getInstance();
 
 	/**
 	 * called when the fragment will be displayed first time
@@ -82,6 +85,7 @@ public class OptionsSearcherFragment extends Fragment {
 				// writes gerneral options into a new options.txt
 				optionsExport.writeSingle(generateOptions.getOptionsFilepath(),
 						generateOptions.generate());
+				options.readAll();
 				// Create new fragment and transaction
 				Fragment newFragment = new HomeFragment();
 				FragmentTransaction transaction = getFragmentManager()
@@ -103,7 +107,7 @@ public class OptionsSearcherFragment extends Fragment {
 		buttonOptionsSave.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				options.setOptionsPath(optionsPath.getText().toString());
+				options.setOption(KindOfOption.PATH.ordinal(), PathOptions.OPTIONSPATH, optionsPath.getText().toString());
 				// Create new fragment and transaction
 				Fragment newFragment = new HomeFragment();
 				FragmentTransaction transaction = getFragmentManager()

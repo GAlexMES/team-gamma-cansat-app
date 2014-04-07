@@ -3,16 +3,12 @@ package de.teamgamma.cansat.app.json;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
 import de.teamgamma.cansat.app.data.constantValues;
-import de.teamgamma.cansat.app.fileoperations.Save;
 
 public class Json {
 
 	private static Json instance = null;
 	private Double[][] sensors = new Double[constantValues.names.length][2];
-	private Save save = Save.getInstance();
-	private Double[] dataToSave;
 
 	public static Json getInstance() {
 		if (instance == null) {

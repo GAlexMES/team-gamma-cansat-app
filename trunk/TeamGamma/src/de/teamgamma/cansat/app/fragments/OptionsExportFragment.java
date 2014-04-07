@@ -11,7 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import de.teamgamma.cansat.app.R;
+import de.teamgamma.cansat.app.options.ChartViewOptions;
+import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.Options;
+import de.teamgamma.cansat.app.options.PathOptions;
+import de.teamgamma.cansat.app.options.newOptions;
 
 /**
  * 
@@ -23,6 +27,8 @@ import de.teamgamma.cansat.app.options.Options;
 public class OptionsExportFragment extends Fragment {
 	//initialize some variables
 	public static final String ARG_SLIDEMENU_VALUES = "slidemenu_values";
+	private final newOptions options = newOptions.getInstance();
+	private boolean[] browserButton = new boolean[2];
 	LinearLayout mLinearLayout;
 
 	public OptionsExportFragment() {
@@ -36,7 +42,7 @@ public class OptionsExportFragment extends Fragment {
 	@Override
 	public void onResume() {
 
-		final Options options_data = Options.getInstance();
+		
 		super.onResume();
 
 		// update the TextViews
@@ -45,27 +51,25 @@ public class OptionsExportFragment extends Fragment {
 		final EditText storagePath = (EditText) mLinearLayout
 				.findViewById(R.id.storagePath);
 
-		boolean browserButton[] = options_data.getBrowsButtons();
+		
 		for (int i = 1; i < browserButton.length; i++) {
 			if (browserButton[i]) {
-				options_data.setSingleBrowsButtons(i, false);
+				browserButton[i] = false;
 				switch (i) {
 				case 1:
-					exportPath.setText(Options.getInstance()
-							.getTempValueExportPath());
+					exportPath.setText(options.getOption(KindOfOption.PATH.ordinal(), PathOptions.TEMPVALUEEXPORTPATH));
 					break;
 				case 2:
-					storagePath.setText(Options.getInstance()
-							.getTempValueStoragePath());
+					storagePath.setText(options.getOption(KindOfOption.PATH.ordinal(), PathOptions.TEMPVALUESTORAGEPATH));
 					break;
 				}
 			} else {
 				switch (i) {
 				case 1:
-					exportPath.setText(Options.getInstance().getValueExportPath());
+					exportPath.setText(options.getOption(KindOfOption.PATH.ordinal(), PathOptions.VALUEEXPOTPATH));
 					break;
 				case 2:
-					storagePath.setText(Options.getInstance().getValueStoragePath());
+					storagePath.setText(options.getOption(KindOfOption.PATH.ordinal(), PathOptions.VALUESTORAGEPATH));
 					break;
 				}
 			}
@@ -81,7 +85,7 @@ public class OptionsExportFragment extends Fragment {
 			Bundle savedInstanceState) {
 		
 		// initialized variables and create object out of fragment xml objects
-		final Options options_data = Options.getInstance();
+		final newOptions options = newOptions.getInstance();
 		mLinearLayout = (LinearLayout) inflater.inflate(
 				R.layout.fragment_options_export, container, false);
 		Button button_save = (Button) mLinearLayout
@@ -96,8 +100,8 @@ public class OptionsExportFragment extends Fragment {
 				.findViewById(R.id.storagePath);
 		
 		// set text to TextViews
-		exportPath.setText(options_data.getValueExportPath());
-		storagePath.setText(options_data.getValueStoragePath());
+		exportPath.setText(options.getOption(KindOfOption.PATH.ordinal(), PathOptions.VALUEEXPOTPATH));
+		storagePath.setText(options.getOption(KindOfOption.PATH.ordinal(), PathOptions.VALUESTORAGEPATH));
 		
 		//called when the save button was clicked
 		button_save.setOnClickListener(new OnClickListener() {
@@ -106,10 +110,8 @@ public class OptionsExportFragment extends Fragment {
 			 */
 			@Override
 			public void onClick(View v) {
-				options_data
-						.setValueExportPath(exportPath.getText().toString());
-				options_data.setValueStoragePath(storagePath.getText()
-						.toString());
+				options.setOption(KindOfOption.PATH.ordinal(), PathOptions.VALUEEXPOTPATH, exportPath.getText().toString());
+				options.setOption(KindOfOption.PATH.ordinal(), PathOptions.VALUESTORAGEPATH, storagePath.getText().toString());
 			}
 
 		});
@@ -121,7 +123,7 @@ public class OptionsExportFragment extends Fragment {
 			 */
 			@Override
 			public void onClick(View v) {
-				options_data.setSingleBrowsButtons(1, true);
+				options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.LASTACTIVESCREEN,1);
 				Intent intent = new Intent(
 						getActivity(),
 						de.teamgamma.cansat.app.filebrowser.AndroidExplorer.class);
@@ -137,7 +139,7 @@ public class OptionsExportFragment extends Fragment {
 			 */
 			@Override
 			public void onClick(View v) {
-				options_data.setSingleBrowsButtons(2, true);
+				options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.LASTACTIVESCREEN,2);
 				Intent intent = new Intent(
 						getActivity(),
 						de.teamgamma.cansat.app.filebrowser.AndroidExplorer.class);

@@ -1,12 +1,26 @@
 package de.teamgamma.cansat.app.sensors;
 
-import de.teamgamma.cansat.app.options.Options;
 import android.util.Log;
+import de.teamgamma.cansat.app.options.ChartViewOptions;
+import de.teamgamma.cansat.app.options.KindOfOption;
+import de.teamgamma.cansat.app.options.newOptions;
 
 public class Sensor {
-	private int numberOfValues = Options.getInstance().getNumberOfValues();
+	private int numberOfValues;
 	private double[][] values = new double[numberOfValues][2];
 	private String name;
+	
+	
+	public Sensor(){
+		newOptions options = newOptions.getInstance();
+		if(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.NUMBEROFSHOWNVALUE)==null){
+			
+		}
+		else{
+			this.numberOfValues = Integer.valueOf(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.NUMBEROFSHOWNVALUE));
+			
+		}
+	}
 
 	public String getName() {
 		return name;

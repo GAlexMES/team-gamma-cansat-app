@@ -7,10 +7,12 @@ import java.util.ArrayList;
 
 import android.util.Log;
 import de.teamgamma.cansat.app.data.Values;
-import de.teamgamma.cansat.app.options.Options;
+import de.teamgamma.cansat.app.options.ChartViewOptions;
+import de.teamgamma.cansat.app.options.KindOfOption;
+import de.teamgamma.cansat.app.options.newOptions;
 
 public class Read {
-	private Options option = Options.getInstance();
+	private newOptions option = newOptions.getInstance();
 	private ArrayList<Values> data = new ArrayList<Values>();
 	private Double[][] output;
 
@@ -50,8 +52,13 @@ public class Read {
 					}
 				}
 				int index = 0;
-				if (this.option.getNumberOfValues() < this.data.size()) {
-					this.output = new Double[this.option.getNumberOfValues()][2];
+				if (Integer.valueOf(this.option.getOption(
+						KindOfOption.CHARTVIEW.ordinal(),
+						ChartViewOptions.NUMBEROFSHOWNVALUE)) < this.data
+						.size()) {
+					this.output = new Double[Integer.valueOf(this.option
+							.getOption(KindOfOption.CHARTVIEW.ordinal(),
+									ChartViewOptions.NUMBEROFSHOWNVALUE))][2];
 					for (int i = 0; i < this.output.length; i++) {
 						index = (int) (this.data.size() / this.output.length * i);
 
@@ -61,14 +68,14 @@ public class Read {
 						Log.d("getValues", String.valueOf(output[i][0]));
 
 					}
-				}else{
+				} else {
 					this.output = new Double[this.data.size()][2];
-					for (int i = 0; i < this.data.size(); i++){
+					for (int i = 0; i < this.data.size(); i++) {
 						this.output[i][0] = this.data.get(i).getValues()[0];
 						this.output[i][1] = this.data.get(i).getValues()[1];
 						Log.d("getValues", String.valueOf(output[i][0]));
 					}
-					
+
 				}
 				this.data.clear();
 

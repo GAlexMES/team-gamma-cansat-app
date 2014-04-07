@@ -35,7 +35,8 @@ public class OptionsFragment extends Fragment {
             Bundle savedInstanceState) {
     	//initialize a few importand variables
      	final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(R.layout.fargment_options,
-                 container, false);        	
+                 container, false);       
+     	
     	Button buttonConnection = (Button) mLinearLayout.findViewById(R.id.connection);
     	Button buttonExport = (Button) mLinearLayout.findViewById(R.id.export);
     	Button buttonChartView = (Button) mLinearLayout.findViewById(R.id.chartView);

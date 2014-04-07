@@ -8,12 +8,14 @@ import java.util.Date;
 import java.util.Locale;
 
 import de.teamgamma.cansat.app.data.constantValues;
-import de.teamgamma.cansat.app.options.Options;
+import de.teamgamma.cansat.app.options.KindOfOption;
+import de.teamgamma.cansat.app.options.PathOptions;
+import de.teamgamma.cansat.app.options.newOptions;
 
 public class Save {
 	private static Save instance = null;
 
-	private Options option = Options.getInstance();
+	private newOptions option = newOptions.getInstance();
 	private String filepath;
 	private String writableString = null;
 	private String exportTime;
@@ -52,7 +54,7 @@ public class Save {
 				
 				// Mithilfe von Sensoren speichen
 				if (data[i][1] != null) {
-					this.filepath = option.getValueStoragePath() + "/" + this.exportTime
+					this.filepath = option.getOption(KindOfOption.PATH.ordinal(), PathOptions.VALUESTORAGEPATH)+ "/" + this.exportTime
 							+ constantValues.names[i] + ".teamgamma";
 					out = new FileOutputStream(new File(this.filepath), true);
 

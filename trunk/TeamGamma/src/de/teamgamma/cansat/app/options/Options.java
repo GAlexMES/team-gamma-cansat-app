@@ -24,9 +24,9 @@ public class Options {
 	private String tempOptionsPath = null;
 	private String temporaryBrowserResultPath = null;
 	private boolean streamRuns = true;
-	private int[] selectedColors = new int[3];
-	boolean browsButtons[] = { false, false, false };
+	private int[] selectedColors = new int[3];	
 	private int numbersOfValues;
+	boolean browsButtons[] = { false, false, false };
 
 	// instance for singelton pattern
 	private static Options instance = null;
@@ -181,29 +181,31 @@ public class Options {
 				methodToConnect, valueExportPath, valueStoragePath,
 				numbersOfValues, selectedColors);
 	}
+	
+	
 
-	public void getValuesFromFile() {
-		optionsExport = new OptionsExport();
-		javaSocketIpAdress = optionsExport.getValue(0);
-		javaSocketPort = optionsExport.getValue(1);
-		if (optionsExport.getValue(2) != null) {
-			methodToConnect = Integer.parseInt(optionsExport.getValue(2));
-		}
-		valueExportPath = optionsExport.getValue(3);
-		valueStoragePath = optionsExport.getValue(4);
-		if (optionsExport.getValue(5) != null) {
-			numbersOfValues = Integer.parseInt(optionsExport.getValue(5));
-			if (numbersOfValues < 20) {
-				numbersOfValues = 20;
-			}
-		}
-		for (int i = 0; i < selectedColors.length; i++) {
-			if (optionsExport.getValue(6 + i) != null) {
-				selectedColors[i] = Integer.parseInt(optionsExport
-						.getValue(6 + i));
-			} else {
-				selectedColors[i] = i + 1;
-			}
-		}
-	}
+//	public void getValuesFromFile() {
+//		optionsExport = new OptionsExport();
+//		javaSocketIpAdress = optionsExport.getValue(0);
+//		javaSocketPort = optionsExport.getValue(1);
+//		if (optionsExport.getValue(2) != null) {
+//			methodToConnect = Integer.parseInt(optionsExport.getValue(2));
+//		}
+//		valueExportPath = optionsExport.getValue(3);
+//		valueStoragePath = optionsExport.getValue(4);
+//		if (optionsExport.getValue(5) != null) {
+//			numbersOfValues = Integer.parseInt(optionsExport.getValue(5));
+//			if (numbersOfValues < 20) {
+//				numbersOfValues = 20;
+//			}
+//		}
+//		for (int i = 0; i < selectedColors.length; i++) {
+//			if (optionsExport.getValue(6 + i) != null) {
+//				selectedColors[i] = Integer.parseInt(optionsExport
+//						.getValue(6 + i));
+//			} else {
+//				selectedColors[i] = i + 1;
+//			}
+//		}
+//	}
 }
