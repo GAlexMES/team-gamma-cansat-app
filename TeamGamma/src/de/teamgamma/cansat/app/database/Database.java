@@ -13,7 +13,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import de.teamgamma.cansat.app.data.constantValues;
-import de.teamgamma.cansat.app.options.Options;
+import de.teamgamma.cansat.app.options.ChartViewOptions;
+import de.teamgamma.cansat.app.options.KindOfOption;
+import de.teamgamma.cansat.app.options.newOptions;
 import de.teamgamma.cansat.app.sensors.Sensor;
 
 public class Database {
@@ -97,7 +99,8 @@ public class Database {
 				JSONArray data = response.getJSONArray("data");
 
 				JSONObject item = null;
-				int numberOfValues = Options.getInstance().getNumberOfValues();
+				int numberOfValues = Integer.valueOf(newOptions.getInstance().getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.NUMBEROFSHOWNVALUE));
+						
 
 				if (response.length() > numberOfValues) {
 

@@ -2,6 +2,8 @@ package de.teamgamma.cansat.app.options;
 
 import java.io.FileOutputStream;
 
+import de.teamgamma.cansat.app.R;
+
 import android.os.Environment;
 
 /**
@@ -22,7 +24,13 @@ public class GenerateOptions {
 	 * @return a writable string with importend informations for data saving
 	 */
 	public String generate() {
-		String writeableString = "" + newLine + "" + newLine + "1" + newLine+ filepath + newLine + filepath ;
+		String writeableString = "";
+		//add connection options to the string
+		writeableString = writeableString+""+newLine+""+newLine+R.id.radioButtonDatabase+newLine;
+		// add path options to the string
+		writeableString = writeableString +  filepath + newLine + "" + newLine + filepath + newLine+ "" + newLine + getOptionsFilepath();
+		// add chart view options to string
+		writeableString = writeableString + "" + newLine +""+newLine+"20";
 		return writeableString;
 	}
 	

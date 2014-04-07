@@ -1,7 +1,11 @@
 package de.teamgamma.cansat.app.socket;
 
+
+
 import de.teamgamma.cansat.app.data.DataCoordination;
-import de.teamgamma.cansat.app.options.Options;
+import de.teamgamma.cansat.app.options.ConnectionOptions;
+import de.teamgamma.cansat.app.options.KindOfOption;
+import de.teamgamma.cansat.app.options.newOptions;
 
 public class ServerConnection {
 
@@ -12,10 +16,11 @@ public class ServerConnection {
 
 			@Override
 			public void run() {
-				Options options = Options.getInstance();
+				newOptions options = newOptions.getInstance();
 				AndroidClient client = new AndroidClient(
-						options.getJavaSocketIpAdress(),
-						Integer.parseInt(options.getJavaSocketPort()),
+						options.getOption(KindOfOption.CONNECTION.ordinal(),ConnectionOptions.JAVASOCKETIP),
+						
+						Integer.parseInt(options.getOption(KindOfOption.CONNECTION.ordinal(),ConnectionOptions.JAVASOCKETPORT)),
 						new MessageAdapter() {
 
 							@Override

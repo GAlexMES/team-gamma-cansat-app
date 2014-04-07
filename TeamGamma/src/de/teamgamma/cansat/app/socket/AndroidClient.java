@@ -7,7 +7,6 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import de.teamgamma.cansat.app.options.Options;
 import android.util.Log;
 
 public class AndroidClient {
@@ -38,8 +37,7 @@ public class AndroidClient {
 
 			while (clientSocket.isConnected()) {
 				try {
-					if (in.ready() && Options.getInstance().isStreamRuns()) {
-						Log.d("gamma",String.valueOf(Options.getInstance().isStreamRuns()));
+					if (in.ready()) {
 						message = in.readLine();
 						Log.d("values",message);
 						messageAdapter.messageArrived(message);

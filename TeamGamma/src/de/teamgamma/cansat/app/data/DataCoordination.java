@@ -1,12 +1,13 @@
 package de.teamgamma.cansat.app.data;
 
 import de.teamgamma.cansat.app.database.Database;
-import de.teamgamma.cansat.app.fileoperations.Save;
 import de.teamgamma.cansat.app.fileoperations.SaveThread;
 import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
 import de.teamgamma.cansat.app.json.Json;
 import de.teamgamma.cansat.app.main.MainActivity;
-import de.teamgamma.cansat.app.options.Options;
+import de.teamgamma.cansat.app.options.ChartViewOptions;
+import de.teamgamma.cansat.app.options.KindOfOption;
+import de.teamgamma.cansat.app.options.newOptions;
 import de.teamgamma.cansat.app.sensors.Sensor;
 
 public class DataCoordination {
@@ -14,8 +15,7 @@ public class DataCoordination {
 	private Json json = Json.getInstance();
 	private static DataCoordination instance = null;
 	private Sensor[] sensors = new Sensor[constantValues.names.length];
-	private Options options = Options.getInstance();
-	private Save save = Save.getInstance();
+	private newOptions options = newOptions.getInstance();
 
 	// Singleton
 	public static DataCoordination getInstance() {
@@ -45,7 +45,7 @@ public class DataCoordination {
 		}
 
 		for (Sensor sensor : sensors) {
-			if (sensor.getName().equals(options.getActiveSensorName())) {
+			if (sensor.getName().equals(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.ACTIVESENSORNAME))) {
 				if (MainActivity.getCurrentFragment().getClass()
 						.equals(RealtimeGraph.class)) {
 					((RealtimeGraph) MainActivity.getCurrentFragment())
@@ -63,7 +63,7 @@ public class DataCoordination {
 
 	public Sensor[] getValuesFromDatabase() {
 		// Daten werden aus der Datenbank ausgelesen und zurueckgegeben
-		Database database = Database.getInstance(); 
+		Database database = Database.getInstance();
 		this.sensors = database.getValuesFromDatabase();
 		return sensors;
 	}

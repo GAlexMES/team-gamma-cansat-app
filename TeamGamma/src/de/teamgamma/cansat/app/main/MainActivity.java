@@ -13,7 +13,6 @@ import android.os.Environment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,15 +28,16 @@ import de.teamgamma.cansat.app.fragments.HomeFragment;
 import de.teamgamma.cansat.app.fragments.OptionsFragment;
 import de.teamgamma.cansat.app.fragments.OptionsSearcherFragment;
 import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
-import de.teamgamma.cansat.app.fragments_androidplot.scrollGraph;
-import de.teamgamma.cansat.app.options.Options;
+import de.teamgamma.cansat.app.options.ChartViewOptions;
+import de.teamgamma.cansat.app.options.KindOfOption;
+import de.teamgamma.cansat.app.options.newOptions;
 import de.teamgamma.cansat.app.sensors.Sensor;
 
 public class MainActivity extends Activity {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
-	private Options options = Options.getInstance();
+	private newOptions options = newOptions.getInstance();
 
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
@@ -97,7 +97,7 @@ public class MainActivity extends Activity {
 
 		if (new File(Environment.getExternalStorageDirectory().getPath()
 				+ "/teamgamma/options.txt").exists()) {
-			options.getValuesFromFile();
+			options.readAll();
 			if (savedInstanceState == null) {
 				selectItem(0, false);
 			}
@@ -174,22 +174,21 @@ public class MainActivity extends Activity {
 				break;
 			}
 		case 1:
-			options.setActiveSensorName(constantValues.names[0]);
+			options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[0]);
 			fragment = new RealtimeGraph();
 			break;
 		case 2:
-			options.setActiveSensorName(constantValues.names[1]);
+			options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[1]);
 			fragment = new RealtimeGraph();		
 			break;
 		case 3:
-			options.setActiveSensorName(constantValues.names[2]);
+			options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[2]);
 			fragment = new RealtimeGraph();
 			break;
 		case 4:
 			fragment = new ImportFragment();
 			break;
 		case 5:
-			options.toggleStreamRuns();
 			break;
 		case 6:
 			fragment = new OptionsFragment();

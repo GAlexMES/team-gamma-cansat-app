@@ -1,25 +1,25 @@
 package de.teamgamma.cansat.app.dataImport;
 
-import de.teamgamma.cansat.app.R;
-import de.teamgamma.cansat.app.fileoperations.Read;
-import de.teamgamma.cansat.app.fragments.HomeFragment;
-import de.teamgamma.cansat.app.fragments_androidplot.ImportSimpleXYChart;
-import de.teamgamma.cansat.app.options.Options;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.Toast;
+import de.teamgamma.cansat.app.R;
+import de.teamgamma.cansat.app.fileoperations.Read;
+import de.teamgamma.cansat.app.fragments_androidplot.ImportSimpleXYChart;
+import de.teamgamma.cansat.app.options.KindOfOption;
+import de.teamgamma.cansat.app.options.Options;
+import de.teamgamma.cansat.app.options.PathOptions;
+import de.teamgamma.cansat.app.options.newOptions;
 
 /**
  * 
@@ -33,7 +33,6 @@ import android.widget.Toast;
 public class ImportFragment extends Fragment {
 
 	// initialize a few importend variables
-	Options options_data = Options.getInstance();
 	String importFilepath;
 	LinearLayout mLinearLayout;
 
@@ -44,12 +43,13 @@ public class ImportFragment extends Fragment {
 	 */
 	@Override
 	public void onResume() {
-		final Options options_data = Options.getInstance();
+		final newOptions option = newOptions.getInstance();
 		super.onResume();
 		final EditText filePath = (EditText) mLinearLayout
 				.findViewById(R.id.filePath);
-		filePath.setText(options_data.getTemporaryBrowserResultPath());
-		importFilepath = options_data.getTemporaryBrowserResultPath();
+		importFilepath = option.getOption(KindOfOption.PATH.ordinal(),PathOptions.TEMBROWSERRESULTPATH);
+		filePath.setText(importFilepath);
+		
 
 	}
 

@@ -5,8 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -14,7 +14,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 import de.teamgamma.cansat.app.R;
-import de.teamgamma.cansat.app.options.Options;
+import de.teamgamma.cansat.app.options.ConnectionOptions;
+import de.teamgamma.cansat.app.options.KindOfOption;
+import de.teamgamma.cansat.app.options.newOptions;
 import de.teamgamma.cansat.app.socket.ServerConnection;
 
 /**
@@ -43,8 +45,7 @@ public class OptionsConnectionFragment extends Fragment {
 			Bundle savedInstanceState) {
 
 		// initialized objects with objects out of the fragment xml file
-		final Options option_data = Options.getInstance();
-		option_data.getValuesFromFile();
+		final newOptions options = newOptions.getInstance();
 		final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(
 				R.layout.fragment_options_connection, container, false);
 		final EditText java_socket_ipAdress = (EditText) mLinearLayout
@@ -62,15 +63,15 @@ public class OptionsConnectionFragment extends Fragment {
 		final RadioButton radio_java_socket = (RadioButton) mLinearLayout
 				.findViewById(R.id.radioButtonJavaSocket);
 		// shows the latest chosen values
-		java_socket_ipAdress.setText(option_data.getJavaSocketIpAdress());
-		java_socket_port.setText(option_data.getJavaSocketPort());
+		java_socket_ipAdress.setText(options.getOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETIP));
+		java_socket_port.setText(options.getOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETPORT));
 		itemTypeGroup.clearCheck();
 
 		// set the latest chosen radio button true
-		if (option_data.getMethodToConnect() == R.id.radioButtonDatabase) {
+		if (Integer.valueOf(options.getOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETMETHOD)) == R.id.radioButtonDatabase) {
 			radio_database.setChecked(true);
 			radio_java_socket.setChecked(false);
-		} else if (option_data.getMethodToConnect() == R.id.radioButtonJavaSocket) {
+		} else if (Integer.valueOf(options.getOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETMETHOD)) == R.id.radioButtonJavaSocket) {
 			radio_database.setChecked(false);
 			radio_java_socket.setChecked(true);
 
@@ -96,9 +97,11 @@ public class OptionsConnectionFragment extends Fragment {
 		options_save.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				option_data.setAllConnectionOptions(java_socket_ipAdress
-						.getText().toString(), java_socket_port.getText()
-						.toString(), itemTypeGroup.getCheckedRadioButtonId());
+				options.setOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETIP,java_socket_ipAdress
+						.getText().toString());
+				options.setOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETPORT,java_socket_port
+						.getText().toString());
+				options.setOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETMETHOD,itemTypeGroup.getCheckedRadioButtonId());
 				// a toast will show that the data was saved
 				Context context = mLinearLayout.getContext();
 				CharSequence text = "Saved";
@@ -115,9 +118,11 @@ public class OptionsConnectionFragment extends Fragment {
 		connectAndSave.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				option_data.setAllConnectionOptions(java_socket_ipAdress
-						.getText().toString(), java_socket_port.getText()
-						.toString(), itemTypeGroup.getCheckedRadioButtonId());
+				options.setOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETIP,java_socket_ipAdress
+						.getText().toString());
+				options.setOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETPORT,java_socket_port
+						.getText().toString());
+				options.setOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETMETHOD,itemTypeGroup.getCheckedRadioButtonId());
 				Context context = mLinearLayout.getContext();
 				CharSequence text = "Saved";
 				int duration = Toast.LENGTH_SHORT;
