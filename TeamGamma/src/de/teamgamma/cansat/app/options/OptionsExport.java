@@ -16,7 +16,7 @@ public class OptionsExport {
 			PathOptions.OPTIONSPATH);
 	private String writeableString = "";
 
-	public void newWrite() {
+	public void writeOptions() {
 		OptionsInterface[] optionsArray = options.getOptions();
 		for (OptionsInterface element:optionsArray) {
 			for(int b =0; b<element.getValues().length;b++){
@@ -27,7 +27,7 @@ public class OptionsExport {
 		writeableString="";
 	}
 	
-	public void newReadFile(){
+	public void readOptions(){
 		int counter = 0;
 		OptionsInterface[] optionsArray = options.getOptions();
 		for (OptionsInterface element:optionsArray) {
@@ -38,24 +38,6 @@ public class OptionsExport {
 			}
 			element.setValues(values);
 		}
-	}
-
-	public void writeAll( // writes data into options.txt
-			String java_socket_ipAdress, // JavaSocketIPAdress
-			String java_socket_port,// JavaSocketPort
-			int methodToConnect, // MethodToConnect
-			String valueExportPath, // Path for valueExport
-			String valueStoragePath, // Path for value storage
-			int numberOfShownPoints, // Numbers of Points, shown in a chart
-			int[] selectedChartColors // selected colors for points/lines/areas
-	) {
-
-		writeableString = java_socket_ipAdress + newLine + java_socket_port
-				+ newLine + methodToConnect + newLine + valueExportPath
-				+ newLine + valueStoragePath + newLine + numberOfShownPoints
-				+ newLine + selectedChartColors[0] + newLine
-				+ selectedChartColors[1] + newLine + selectedChartColors[2];
-		writeSingle(this.filepath, writeableString);
 	}
 
 	public void writeSingle(String filepath, String message) {

@@ -37,7 +37,7 @@ public class Options {
 				String[] currentValues = options[kindOfOption].getValues();
 				currentValues[nameOfOption] = String.valueOf(value);
 				options[kindOfOption].setValues(currentValues);
-				exporter.newWrite();
+				exporter.writeOptions();
 				return true;
 			} else {
 				return false;
@@ -49,7 +49,7 @@ public class Options {
 	
 	public void readAll(){
 		OptionsExport exporter = new OptionsExport();
-		exporter.newReadFile();
+		exporter.readOptions();
 	}
 
 	public String getOption(int kindOfOption, int nameOfOption) {
