@@ -2,7 +2,6 @@ package de.teamgamma.cansat.app.fragments_androidplot;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,9 +51,6 @@ public class ImportSimpleXYChart extends Fragment {
 		for(int i=0;i<valueArray.length;i++){
 			seriesNumbers[2*i]=valueArray[i][0];
 			seriesNumbers[2*i+1]=valueArray[i][1];
-		}
-		for(int i =0; i<seriesNumbers.length;i++){
-			Log.d("gamma",String.valueOf(seriesNumbers[i]));
 		}
 		// Make the seriesNumbers [] to an XYSeries
 		XYSeries series1 = new SimpleXYSeries(Arrays.asList(seriesNumbers), 

@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 
-import android.util.Log;
 
 public class OptionsExport {
 	private Options options = Options.getInstance();
@@ -41,7 +40,6 @@ public class OptionsExport {
 	}
 
 	public void writeSingle(String filepath, String message) {
-		Log.d("gamma",filepath);
 		FileOutputStream out = null;
 		try {
 			

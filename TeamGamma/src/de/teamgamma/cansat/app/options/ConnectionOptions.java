@@ -1,7 +1,5 @@
 package de.teamgamma.cansat.app.options;
 
-import android.util.Log;
-
 public class ConnectionOptions implements OptionsInterface {
 	
 	public static final int JAVASOCKETPORT = 0;
@@ -16,9 +14,6 @@ public class ConnectionOptions implements OptionsInterface {
 	 */
 
 	public String[] getValues() {
-		for(String b:values){
-		Log.d("return",String.valueOf(b));
-		}
 		return values;
 	}
 
