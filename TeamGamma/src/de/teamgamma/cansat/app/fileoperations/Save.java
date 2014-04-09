@@ -20,7 +20,7 @@ public class Save {
 	private String writableString = null;
 	private String exportTime;
 
-	// Singleton
+	// an instance of the class is created, so there is no recursive call
 	public static Save getInstance() {
 		if (instance == null) {
 			instance = new Save();
@@ -45,14 +45,9 @@ public class Save {
 		try {
 			Double time = data[0][0];
 
-			// prueft ob datei exestiert und wenn nicht wird der header
-			// hinzugefuegt
-
 			for (int i = 1; i < constantValues.names.length; i++) {
-
-				
-				
-				// Mithilfe von Sensoren speichen
+				// the values ​​of individual sensors are each written to a separate Sensor file
+				// the name of the file consists of the date, time and name of the sensor
 				if (data[i][1] != null) {
 					this.filepath = option.getOption(KindOfOption.PATH.ordinal(), PathOptions.VALUESTORAGEPATH)+ "/" + this.exportTime
 							+ constantValues.names[i] + ".teamgamma";

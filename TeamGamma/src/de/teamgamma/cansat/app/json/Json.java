@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import de.teamgamma.cansat.app.data.constantValues;
 
+
 public class Json {
 
 	private static Json instance = null;
@@ -18,23 +19,17 @@ public class Json {
 	}
 
 	public Double[][] unpack(String json) {
-
+		// the data are read out with the help of a "JsonObject" and added to the respective "Sensor" class
 		JSONObject data;
 		try {
 			data = new JSONObject(json);
 			Long time;
 			time = data.getLong("time");
 			for (int i = 0; i < constantValues.names.length; i++) {
-				// Sensoren mit Werten belegen				
 				this.sensors[i][1] = data.getDouble(constantValues.names[i]);
 				this.sensors[i][0] = Double.valueOf(time);
-//				if (i > 1) {
-//					this.dataToSave[i - 1] = this.sensors[i][1];
-//				}
-				//save.saveAll(this.sensors[0][0], dataToSave);
+
 			}
-			
-			
 		} catch (JSONException e) {
 
 			e.printStackTrace();
