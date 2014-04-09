@@ -1,7 +1,7 @@
 package de.teamgamma.cansat.app.options;
 
 import android.os.Environment;
-import android.util.Log;
+
 
 public class PathOptions implements OptionsInterface {
 	
