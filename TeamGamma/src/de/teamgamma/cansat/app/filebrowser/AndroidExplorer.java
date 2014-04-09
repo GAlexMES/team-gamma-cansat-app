@@ -9,6 +9,7 @@ import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -16,8 +17,8 @@ import android.widget.TextView;
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
-import de.teamgamma.cansat.app.options.PathOptions;
 import de.teamgamma.cansat.app.options.Options;
+import de.teamgamma.cansat.app.options.PathOptions;
 
 
 /**
@@ -131,11 +132,13 @@ public class AndroidExplorer extends ListActivity {
 				public void onClick(DialogInterface dialog, int which) {
 					boolean valueSetted = true;
 					String myPath = dirPath + "/" + fileName;
-
+							Log.d("gamma",options.getOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.LASTACTIVESCREEN));
 							switch(Integer.valueOf(options.getOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.LASTACTIVESCREEN))){
 							case 0:	options.setOption(KindOfOption.PATH.ordinal(), PathOptions.TEMPOPTIONSPATH, myPath);break;
 							case 1: options.setOption(KindOfOption.PATH.ordinal(), PathOptions.TEMPVALUEEXPORTPATH, myPath);break;
 							case 2: options.setOption(KindOfOption.PATH.ordinal(), PathOptions.TEMPVALUESTORAGEPATH, myPath);break;
+							case 3: break;
+							default: break;
 							}
 					
 					if(valueSetted){

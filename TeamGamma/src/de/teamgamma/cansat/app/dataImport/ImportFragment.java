@@ -16,6 +16,7 @@ import android.widget.Toast;
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.fileoperations.Read;
 import de.teamgamma.cansat.app.fragments_androidplot.ImportSimpleXYChart;
+import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.PathOptions;
 import de.teamgamma.cansat.app.options.Options;
@@ -34,6 +35,7 @@ public class ImportFragment extends Fragment {
 	// initialize a few importend variables
 	String importFilepath;
 	LinearLayout mLinearLayout;
+	private Options options = Options.getInstance();
 
 	/**
 	 * when the fileBrowser finished and the fragment will shown again the
@@ -42,11 +44,10 @@ public class ImportFragment extends Fragment {
 	 */
 	@Override
 	public void onResume() {
-		final Options option = Options.getInstance();
 		super.onResume();
 		final EditText filePath = (EditText) mLinearLayout
 				.findViewById(R.id.filePath);
-		importFilepath = option.getOption(KindOfOption.PATH.ordinal(),PathOptions.TEMBROWSERRESULTPATH);
+		importFilepath = options.getOption(KindOfOption.PATH.ordinal(),PathOptions.TEMBROWSERRESULTPATH);
 		filePath.setText(importFilepath);
 		
 
@@ -70,6 +71,7 @@ public class ImportFragment extends Fragment {
 		buttonBrowser.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.LASTACTIVESCREEN,3);
 				Intent intent = new Intent(
 						getActivity(),
 						de.teamgamma.cansat.app.filebrowser.AndroidExplorer.class);
