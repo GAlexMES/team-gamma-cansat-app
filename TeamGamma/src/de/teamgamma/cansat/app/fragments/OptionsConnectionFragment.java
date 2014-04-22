@@ -3,6 +3,7 @@ package de.teamgamma.cansat.app.fragments;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -128,6 +129,7 @@ public class OptionsConnectionFragment extends Fragment {
 				int duration = Toast.LENGTH_SHORT;
 				Toast toast = Toast.makeText(context, text, duration);
 				toast.show();
+				Log.d("gamma","buttonclicked");
 				connect = new ServerConnection();
 			}
 		});

@@ -7,19 +7,20 @@ import de.teamgamma.cansat.app.options.Options;
 
 public class Sensor {
 	private int numberOfValues;
-	private double[][] values = new double[numberOfValues][2];
+	private double[][] values;
 	private String name;
 	
 	
 	public Sensor(){
 		Options options = Options.getInstance();
 		if(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.NUMBEROFSHOWNVALUE)==null){
-			
+			numberOfValues=20;
 		}
 		else{
 			this.numberOfValues = Integer.valueOf(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.NUMBEROFSHOWNVALUE));
 			
 		}
+		values = new double[numberOfValues][2];
 	}
 
 	public String getName() {
