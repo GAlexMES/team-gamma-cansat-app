@@ -49,13 +49,6 @@ public class Read {
 
 					}
 				}
-				if (Integer.valueOf(this.option.getOption(
-						KindOfOption.CHARTVIEW.ordinal(),
-						ChartViewOptions.NUMBEROFSHOWNVALUE)) < this.data
-						.size()) {
-
-				}
-				this.data.clear();
 
 				in.close();
 			} catch (IOException e) {
