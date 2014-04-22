@@ -44,6 +44,5 @@
         android:text="Export"
         android:textColor="@android:color/white"
         android:textSize="30dp" />
-"
 
 </LinearLayout>
