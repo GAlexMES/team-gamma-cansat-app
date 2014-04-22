@@ -44,6 +44,10 @@ public class Read {
 						lineDouble[1] = Double.valueOf(lineArray[1]);
 						this.data.add(new Values());
 						this.data.get(counter).setValues(lineDouble);
+						if (this.data.get(counter) == null){
+							this.data.remove(counter);
+							counter--;
+						}
 
 						counter++;
 
