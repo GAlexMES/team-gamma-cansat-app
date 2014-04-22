@@ -1,5 +1,7 @@
 package de.teamgamma.cansat.app.dataImport;
 
+import java.util.ArrayList;
+
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -14,6 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import de.teamgamma.cansat.app.R;
+import de.teamgamma.cansat.app.data.Values;
 import de.teamgamma.cansat.app.fileoperations.Read;
 import de.teamgamma.cansat.app.fragments_androidplot.ImportSimpleXYChart;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
@@ -85,19 +88,18 @@ public class ImportFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Read reader = Read.getInstance();
-				ImportedFiles.getInstance().setLatestFile(
-						reader.getValuefromFile(importFilepath));
-				
-				if (ImportedFiles.getInstance().getLatestFile() == null) {
+				ArrayList<Values> allValues = reader.getValuefromFile(importFilepath);
+				if (allValues == null) {
 					Context context = mLinearLayout.getContext();
 					CharSequence text = "Wrong file format ";
 					int duration = Toast.LENGTH_SHORT;
 					Toast toast = Toast.makeText(context, text, duration);
 					toast.show();
-				}
+				}				
 				else{
 					// Create new fragment and transaction
 					Fragment newFragment = new ImportSimpleXYChart();
+					((ImportSimpleXYChart) newFragment).setValue(allValues);
 					FragmentTransaction transaction = getFragmentManager()
 							.beginTransaction();
 
