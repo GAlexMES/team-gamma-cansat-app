@@ -31,6 +31,7 @@ import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.Options;
+import de.teamgamma.cansat.app.options.OptionsExport;
 import de.teamgamma.cansat.app.sensors.Sensor;
 
 public class MainActivity extends Activity {
@@ -166,6 +167,8 @@ public class MainActivity extends Activity {
 		// update the main content by replacing fragments
 		switch (position) {
 		case 0:
+			OptionsExport b = new OptionsExport();
+			b.writeSingle(Environment.getExternalStorageDirectory()+"/teamgamma/ficken.teamgamma", saveAll());
 			if (check) {
 				fragment = new OptionsSearcherFragment();
 				break;
@@ -231,6 +234,16 @@ public class MainActivity extends Activity {
 	
 	public static Fragment getCurrentFragment(){
 		return fragment;
+	}
+	
+	public static String saveAll() {
+
+		String writeableString ="";
+		for(int i=0; i<2500;i++){
+			writeableString=writeableString+String.valueOf(i)+":"+String.valueOf(2*i)+"\n";
+		}
+		
+		return writeableString;
 	}
 
 }
