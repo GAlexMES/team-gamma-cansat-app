@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
@@ -50,13 +51,13 @@ public class ImportSimpleXYChart extends Fragment implements OnSeekBarChangeList
 			Bundle savedInstanceState) {
 		
 		// LinearLayout object, of the androitplot_xyplot.xml fragment
-		final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(
+		final RelativeLayout mLinearLayout = (RelativeLayout) inflater.inflate(
 				R.layout.import_androidplot_xyplot, container, false);
 
 		slider = (SeekBar) mLinearLayout.findViewById(R.id.seekBar1);
 		if(allValues.size()>30){
 			Log.d("lenght",String.valueOf(allValues.size()));
-			slider.setMax(allValues.size()-20);
+			slider.setMax(allValues.size()-10);
 		}
 		slider.setProgress(slider.getMax());
 		slider.setOnSeekBarChangeListener(this);
@@ -68,10 +69,10 @@ public class ImportSimpleXYChart extends Fragment implements OnSeekBarChangeList
 		ImportedFiles importedFile = ImportedFiles.getInstance();
 		int counter = 0;
 		for(int i=0; i<10;i++){
-			Values b = allValues.get(allValues.size()-20+i);
+			Values b = allValues.get(allValues.size()-10+i);
 			Double[] e = b.getValues();
-			Double l = e[1];
-			Double m = e[0];
+			Double l = e[0];
+			Double m = e[1];
 			int c = l.intValue();
 			int w = m.intValue();
 			series1Numbers[counter]=c;
@@ -108,12 +109,12 @@ public class ImportSimpleXYChart extends Fragment implements OnSeekBarChangeList
 			boolean fromUser) {
 		Log.d("SeekBar",String.valueOf(slider.getProgress()));
 		int SeekBarprogress = slider.getProgress();
-		for(int i=0; i<20;i++){
+		for(int i=0; i<10;i++){
 			((SimpleXYSeries) series1).removeFirst();
 			Values b = allValues.get(SeekBarprogress+i);
 			Double[] e = b.getValues();
-			Double l = e[1];
-			Double m = e[0];
+			Double l = e[0];
+			Double m = e[1];
 			int c = l.intValue();
 			int w = m.intValue();
 			((SimpleXYSeries) series1).addLast(c,w);
