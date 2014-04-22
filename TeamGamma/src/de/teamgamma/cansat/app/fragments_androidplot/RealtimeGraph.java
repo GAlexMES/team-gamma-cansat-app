@@ -35,7 +35,7 @@ public class RealtimeGraph extends Fragment {
 		// fun little snippet that prevents users from taking screenshots
 		// on ICS+ devices :-)
 		final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(
-				R.layout.androidplot_xyplot, container, false);
+				R.layout.realtime_androidplot_xyplot, container, false);
 
 		// initialize our XYPlot reference:
 		plot = (XYPlot) mLinearLayout.findViewById(R.id.simpleXYPlot);
