@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
@@ -8,8 +8,9 @@
     <com.androidplot.xy.XYPlot
         android:id="@+id/simpleXYPlot"
         android:layout_width="fill_parent"
-        android:layout_height="265dp"
-        android:layout_weight="0.69"
+        android:layout_height="400dp"
+        android:layout_above="@+id/seekBar1"
+        android:layout_alignParentTop="true"
         androidPlot.domainLabel="Time"
         androidPlot.domainLabelWidget.labelPaint.textSize="@dimen/domain_label_font_size"
         androidPlot.graphWidget.domainLabelPaint.textSize="@dimen/domain_tick_label_font_size"
@@ -34,6 +35,8 @@
     <SeekBar
         android:id="@+id/seekBar1"
         android:layout_width="320dp"
-        android:layout_height="30dp" />
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" />
 
-</LinearLayout>
+</RelativeLayout>
