@@ -25,6 +25,7 @@ public class Read {
 	}
 
 	public ArrayList<Values> getValuefromFile(String filepath) {
+		this.data.clear();
 
 		if (filepath.endsWith("teamgamma")) {
 			String[] lineArray;
@@ -44,7 +45,7 @@ public class Read {
 						lineDouble[1] = Double.valueOf(lineArray[1]);
 						this.data.add(new Values());
 						this.data.get(counter).setValues(lineDouble);
-						if (this.data.get(counter) == null){
+						if (this.data.get(counter) == null) {
 							this.data.remove(counter);
 							counter--;
 						}
