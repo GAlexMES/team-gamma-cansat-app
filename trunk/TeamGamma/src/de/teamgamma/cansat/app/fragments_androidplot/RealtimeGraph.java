@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,6 @@ import de.teamgamma.cansat.app.sensors.Sensor;
 
 public class RealtimeGraph extends Fragment {
 	private XYPlot plot;
-	private static final int HISTORY_SIZE = 30;
 	private XYSeries series1 = null;
 	
 	private Options options = Options.getInstance();
@@ -90,8 +90,9 @@ public class RealtimeGraph extends Fragment {
 	}
 
 	public synchronized void onValueChanged(Sensor sensor) {
+		Log.d("gamma","synchronized");
 		// get rid the oldest sample in history:
-		if (series1.size() > HISTORY_SIZE) {
+		if (series1.size() > Integer.valueOf(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.NUMBEROFSHOWNVALUE))) {
 			((SimpleXYSeries) series1).removeFirst();
 		}
 		// add the latest history sample:
