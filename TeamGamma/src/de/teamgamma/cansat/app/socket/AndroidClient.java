@@ -7,7 +7,10 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import org.json.JSONObject;
+
 import android.util.Log;
+import de.teamgamma.cansat.app.data.constantValues;
 
 public class AndroidClient {
 	private Socket clientSocket = null;
@@ -34,13 +37,18 @@ public class AndroidClient {
 
 		public void run() {
 			String message = null;
-
+			int counter = 0;
 			while (clientSocket.isConnected()) {
 				try {
 					if (in.ready()) {
 						message = in.readLine();
 						Log.d("values",message);
-						messageAdapter.messageArrived(message);
+						if (counter == 0){
+							JSONObject jsonmessage = new JSONObject(message);
+						constantValues.firstTimestamp = jsonmessage.getLong("time");
+						}
+						messageAdapter.messageArrived(message.toString());
+						counter++;
 						
 					}
 				} catch (IOException e) {
