@@ -6,12 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import de.teamgamma.cansat.app.data.Values;
-import de.teamgamma.cansat.app.options.ChartViewOptions;
-import de.teamgamma.cansat.app.options.KindOfOption;
-import de.teamgamma.cansat.app.options.Options;
 
 public class Read {
-	private Options option = Options.getInstance();
 	private ArrayList<Values> data = new ArrayList<Values>();
 
 	private static Read instance = null;
@@ -32,25 +28,25 @@ public class Read {
 			Double[] lineDouble = new Double[2];
 			try {
 				BufferedReader in = new BufferedReader(new FileReader(filepath));
-				String zeile = null;
-				int counter = 0;
+				String row = null;
+				int index = 0;
 
-				while ((zeile = in.readLine()) != null) {
+				while ((row = in.readLine()) != null) {
 
-					lineArray = zeile.split(":");
+					lineArray = row.split(":");
 					if (lineArray.length > 1 && lineArray[0] != null
 							&& lineArray[1] != null) {
 
 						lineDouble[0] = Double.valueOf(lineArray[0]);
 						lineDouble[1] = Double.valueOf(lineArray[1]);
 						this.data.add(new Values());
-						this.data.get(counter).setValues(lineDouble);
-						if (this.data.get(counter) == null) {
-							this.data.remove(counter);
-							counter--;
+						this.data.get(index).setValues(lineDouble);
+						if (this.data.get(index) == null) {
+							this.data.remove(index);
+							index--;
 						}
 
-						counter++;
+						index++;
 
 					}
 				}
@@ -65,7 +61,6 @@ public class Read {
 		}
 
 		else {
-			// FEHLERBEHEBUNG fuer Alex
 			return null;
 		}
 	}

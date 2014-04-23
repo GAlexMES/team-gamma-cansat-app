@@ -28,17 +28,15 @@ public class Save {
 		return instance;
 	}
 
-	private Save(){
-		
+	private Save() {
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_kk_mm",
 				Locale.GERMANY);
 		this.exportTime = sdf.format(new Date());
-		
-	}
-	
-	public void saveAll(Double[][] data) {
 
-		
+	}
+
+	public void saveAll(Double[][] data) {
 
 		FileOutputStream out;
 
@@ -46,15 +44,22 @@ public class Save {
 			Double time = data[0][0];
 
 			for (int i = 1; i < constantValues.names.length; i++) {
-				// the values ​​of individual sensors are each written to a separate Sensor file
-				// the name of the file consists of the date, time and name of the sensor
+				// the values ​​of individual sensors are each written to a
+				// separate Sensor file
+				// the name of the file consists of the date, time and name of
+				// the sensor
 				if (data[i][1] != null) {
-					this.filepath = option.getOption(KindOfOption.PATH.ordinal(), PathOptions.VALUESTORAGEPATH)+ "/" + this.exportTime
-							+ constantValues.names[i] + ".teamgamma";
+					this.filepath = option.getOption(
+							KindOfOption.PATH.ordinal(),
+							PathOptions.VALUESTORAGEPATH)
+							+ "/"
+							+ this.exportTime
+							+ constantValues.names[i]
+							+ ".teamgamma";
 					out = new FileOutputStream(new File(this.filepath), true);
 
-
-					this.writableString = String.valueOf(time) + ":" + Double.toString(data[i][1]) + "\n";
+					this.writableString = String.valueOf(time) + ":"
+							+ Double.toString(data[i][1]) + "\n";
 					out.write(this.writableString.getBytes());
 					out.close();
 

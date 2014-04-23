@@ -1,6 +1,7 @@
 package de.teamgamma.cansat.app.fragments_androidplot;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,8 @@ import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.sensors.Sensor;
 
 
+
+
 import java.util.ArrayList;
 import java.util.Arrays;
 /**
@@ -39,7 +42,9 @@ public class ImportSimpleXYChart extends Fragment implements OnSeekBarChangeList
 	private ArrayList<Values> allValues;
 	private SeekBar slider;
 	private XYSeries series1 = null;
+	private XYSeries highestValueSeries = null;
 	private Number[] series1Numbers = new Number[20];
+	private Number[] highestValue = {0,0};
 	public void setValue(ArrayList<Values> values){
 		allValues=values;
 	}
@@ -65,35 +70,52 @@ public class ImportSimpleXYChart extends Fragment implements OnSeekBarChangeList
 		// initialize the plot by using the XYPlot in the fragment
 		plot = (XYPlot) mLinearLayout.findViewById(R.id.simpleXYPlot);
 		
-		// initialize a few importend variables to display the values correct
-		ImportedFiles importedFile = ImportedFiles.getInstance();
+		
+		for(int i = 0; i<allValues.size();i++){
+			if(allValues.get(i).getValues()[1]>highestValue[1].intValue()){
+				highestValue[1]=allValues.get(i).getValues()[1].intValue();
+			}
+		}
+		
+				
 		int counter = 0;
 		for(int i=0; i<10;i++){
-			Values b = allValues.get(allValues.size()-10+i);
-			Double[] e = b.getValues();
-			Double l = e[0];
-			Double m = e[1];
-			int c = l.intValue();
-			int w = m.intValue();
-			series1Numbers[counter]=c;
+			Double[] values = allValues.get(allValues.size()-10+i).getValues();
+			int value = values[1].intValue();
+			int time = values[0].intValue();
+			if(counter==0){
+				highestValue[0]=time;
+			}
+			series1Numbers[counter]=value;
 			counter++;
-			series1Numbers[counter]=w;
+			series1Numbers[counter]=time;
 			counter++;
-			Log.d("numbers",String.valueOf(series1Numbers[i]));
 		}
+
+		
 		// Make the seriesNumbers [] to an XYSeries
 		series1 = new SimpleXYSeries(Arrays.asList(series1Numbers), 
 				SimpleXYSeries.ArrayFormat.XY_VALS_INTERLEAVED, 
 				""); //Name of the series
+		
+		// Make the highestValue to an XYSeries
+		highestValueSeries = new SimpleXYSeries(Arrays.asList(highestValue), 
+				SimpleXYSeries.ArrayFormat.XY_VALS_INTERLEAVED, 
+				""); //Name of the series
+		
 		// Configures the graph
 		LineAndPointFormatter series1Format = new LineAndPointFormatter(				
 				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW.ordinal()].getColors()[1]], //Line color
 				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW.ordinal()].getColors()[0]], //Point color
 				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW.ordinal()].getColors()[2]], //Area color
 				null);
+		LineAndPointFormatter series2Format = new LineAndPointFormatter(				
+				Color.TRANSPARENT,Color.TRANSPARENT,Color.TRANSPARENT,
+				null);
 
 		// add a new series' to the xyplot:
 		plot.addSeries(series1, series1Format);
+		plot.addSeries(highestValueSeries, series2Format);
 
 		// reduce the number of range labels
 		plot.setTicksPerRangeLabel(3);
@@ -107,8 +129,9 @@ public class ImportSimpleXYChart extends Fragment implements OnSeekBarChangeList
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress,
 			boolean fromUser) {
-		Log.d("SeekBar",String.valueOf(slider.getProgress()));
 		int SeekBarprogress = slider.getProgress();
+
+		
 		for(int i=0; i<10;i++){
 			((SimpleXYSeries) series1).removeFirst();
 			Values b = allValues.get(SeekBarprogress+i);
@@ -117,6 +140,9 @@ public class ImportSimpleXYChart extends Fragment implements OnSeekBarChangeList
 			Double m = e[1];
 			int c = l.intValue();
 			int w = m.intValue();
+			Number value = highestValue[1];
+			((SimpleXYSeries) highestValueSeries).removeLast();
+			((SimpleXYSeries) highestValueSeries).addLast(c,value);
 			((SimpleXYSeries) series1).addLast(c,w);
 		}		
 		
