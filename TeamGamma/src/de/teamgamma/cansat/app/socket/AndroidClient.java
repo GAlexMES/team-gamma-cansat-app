@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import org.json.JSONObject;
 
@@ -19,7 +22,6 @@ public class AndroidClient {
 
 		private BufferedReader in;
 		private MessageAdapter messageAdapter;
-
 
 		public CommunicationThread(MessageAdapter messageAdapter) {
 			this.messageAdapter = messageAdapter;
@@ -42,14 +44,15 @@ public class AndroidClient {
 				try {
 					if (in.ready()) {
 						message = in.readLine();
-						Log.d("values",message);
-						if (counter == 0){
+						Log.d("values", message);
+						if (counter == 0) {
 							JSONObject jsonmessage = new JSONObject(message);
-						constantValues.firstTimestamp = jsonmessage.getLong("time");
+							constantValues.firstTimestamp = jsonmessage
+									.getLong("time");
 						}
 						messageAdapter.messageArrived(message.toString());
 						counter++;
-						
+
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -66,14 +69,19 @@ public class AndroidClient {
 
 	public AndroidClient(String dst, int dstPort, MessageAdapter messageAdapter) {
 		try {
-			
+
 			InetAddress inetAddress = InetAddress.getByName(dst);
-			
+
 			try {
 				clientSocket = new Socket(inetAddress, dstPort);
 				Log.d("socket_test", "Socket created, everything fine!");
 				commThread = new Thread(new CommunicationThread(messageAdapter));
 				commThread.start();
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_kk_mm",
+						Locale.GERMANY);
+				constantValues.exportTime = sdf.format(new Date());
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 				Log.d("socket_test", "Socket created, IO Exception!");
@@ -89,6 +97,7 @@ public class AndroidClient {
 
 	public void startStreaming() {
 		commThread.start();
+
 	}
 
 	public void stopStreaming() {

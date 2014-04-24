@@ -10,6 +10,8 @@ public class constantValues {
 	public static String[] names = { "time", "co2", "temp", "presure" };
 	
 	public static long firstTimestamp;
+	
+	public static String exportTime;
 
 	public static final int[] selectableColors = { Color.TRANSPARENT,
 			Color.BLUE, Color.BLACK, Color.CYAN, Color.GREEN, Color.RED,

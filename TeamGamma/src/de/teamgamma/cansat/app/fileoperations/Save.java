@@ -3,21 +3,18 @@ package de.teamgamma.cansat.app.fileoperations;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 import de.teamgamma.cansat.app.data.constantValues;
 import de.teamgamma.cansat.app.options.KindOfOption;
-import de.teamgamma.cansat.app.options.PathOptions;
 import de.teamgamma.cansat.app.options.Options;
+import de.teamgamma.cansat.app.options.PathOptions;
 
 public class Save {
 	private static Save instance = null;
 
-	private Options option = Options.getInstance();
+	private Options option; 
 	private String filepath;
-	private String writableString = null;
+	private String writableString;
 	private String exportTime;
 
 	// an instance of the class is created, so there is no recursive call
@@ -30,13 +27,13 @@ public class Save {
 
 	private Save() {
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_kk_mm",
-				Locale.GERMANY);
-		this.exportTime = sdf.format(new Date());
+		option = Options.getInstance();
+		writableString = null;
 
 	}
 
 	public void saveAll(Double[][] data) {
+		this.exportTime = constantValues.exportTime;
 
 		FileOutputStream out;
 
