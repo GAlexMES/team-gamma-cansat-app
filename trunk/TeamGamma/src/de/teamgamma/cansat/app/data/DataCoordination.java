@@ -1,6 +1,5 @@
 package de.teamgamma.cansat.app.data;
 
-import android.util.Log;
 import de.teamgamma.cansat.app.database.Database;
 import de.teamgamma.cansat.app.fileoperations.SaveThread;
 import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;

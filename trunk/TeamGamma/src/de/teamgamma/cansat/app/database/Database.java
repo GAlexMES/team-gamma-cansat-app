@@ -99,8 +99,9 @@ public class Database {
 				JSONArray data = response.getJSONArray("data");
 
 				JSONObject item = null;
-				int numberOfValues = Integer.valueOf(Options.getInstance().getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.NUMBEROFSHOWNVALUE));
-						
+				int numberOfValues = Integer.valueOf(Options.getInstance()
+						.getOption(KindOfOption.CHARTVIEW.ordinal(),
+								ChartViewOptions.NUMBEROFSHOWNVALUE));
 
 				if (response.length() > numberOfValues) {
 
