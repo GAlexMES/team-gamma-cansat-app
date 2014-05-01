@@ -2,7 +2,6 @@ package de.teamgamma.cansat.app.fragments_androidplot;
 
 import android.R.color;
 import android.app.Fragment;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +17,6 @@ import de.teamgamma.cansat.app.data.Values;
 import de.teamgamma.cansat.app.data.constantValues;
 import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.Options;
-
-
 
 import java.util.ArrayList;
 
@@ -38,8 +35,7 @@ public class ImportSimpleXYChart extends Fragment implements
 	private SeekBar timeSlider;
 	private SeekBar numberOfShownValueSlider;
 	private XYSeries series1 = null;
-<<<<<<< .mine
-	private XYSeries highestPoint = null;
+	private XYSeries highestAndLowestPoints = null;
 	private int numberOfShownValues;
 	int highestValue;
 	int lowestValue;
@@ -56,13 +52,6 @@ public class ImportSimpleXYChart extends Fragment implements
 				lowestValue=allValues.get(i).getValues()[1].intValue();
 			}
 		}
-=======
-	private XYSeries highestValueSeries = null;
-	private Number[] series1Numbers = new Number[20];
-	private Number[] highestValue = {0,0};
-	public void setValue(ArrayList<Values> values){
-		allValues=values;
->>>>>>> .r110
 	}
 
 	/**
@@ -89,51 +78,19 @@ public class ImportSimpleXYChart extends Fragment implements
 		// initialize the plot by using the XYPlot in the fragment
 		plot = (XYPlot) mLinearLayout.findViewById(R.id.simpleXYPlot);
 
-<<<<<<< .mine
 		// initialize a few importend variables to display the values correct
 
-=======
-		
-		for(int i = 0; i<allValues.size();i++){
-			if(allValues.get(i).getValues()[1]>highestValue[1].intValue()){
-				highestValue[1]=allValues.get(i).getValues()[1].intValue();
-			}
-		}
-		
-				
-		int counter = 0;
-		for(int i=0; i<10;i++){
-			Double[] values = allValues.get(allValues.size()-10+i).getValues();
-			int value = values[1].intValue();
-			int time = values[0].intValue();
-			if(counter==0){
-				highestValue[0]=time;
-			}
-			series1Numbers[counter]=value;
-			counter++;
-			series1Numbers[counter]=time;
-			counter++;
-		}
->>>>>>> .r110
-
-		
 		// Make the seriesNumbers [] to an XYSeries
 		series1 = new SimpleXYSeries(null,
 				SimpleXYSeries.ArrayFormat.XY_VALS_INTERLEAVED, ""); // Name of
 																		// the
 																		// series
-		highestPoint = new SimpleXYSeries(null,
+		highestAndLowestPoints = new SimpleXYSeries(null,
 				SimpleXYSeries.ArrayFormat.XY_VALS_INTERLEAVED, "");
-		((SimpleXYSeries) highestPoint).addFirst(0, highestValue);
-		((SimpleXYSeries) highestPoint).addFirst(0, lowestValue);
+		((SimpleXYSeries) highestAndLowestPoints).addFirst(0, highestValue);
+		((SimpleXYSeries) highestAndLowestPoints).addFirst(0, lowestValue);
 
 		updateSeries(numberOfShownValues, 0);
-		
-		// Make the highestValue to an XYSeries
-		highestValueSeries = new SimpleXYSeries(Arrays.asList(highestValue), 
-				SimpleXYSeries.ArrayFormat.XY_VALS_INTERLEAVED, 
-				""); //Name of the series
-		
 		// Configures the graph
 		LineAndPointFormatter series1Format = new LineAndPointFormatter(
 				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW
@@ -143,24 +100,13 @@ public class ImportSimpleXYChart extends Fragment implements
 				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW
 						.ordinal()].getColors()[2]], // Area color
 				null);
-<<<<<<< .mine
 		
 		LineAndPointFormatter highestPointFormatter = new LineAndPointFormatter(
 				color.transparent,color.transparent,color.transparent,null);
-=======
-		LineAndPointFormatter series2Format = new LineAndPointFormatter(				
-				Color.TRANSPARENT,Color.TRANSPARENT,Color.TRANSPARENT,
-				null);
->>>>>>> .r110
 
 		// add a new series' to the xyplot:
 		plot.addSeries(series1, series1Format);
-<<<<<<< .mine
-		plot.addSeries(highestPoint, highestPointFormatter);
-=======
-		plot.addSeries(highestValueSeries, series2Format);
-
->>>>>>> .r110
+		plot.addSeries(highestAndLowestPoints, highestPointFormatter);
 		// reduce the number of range labels
 		plot.setTicksPerRangeLabel(3);
 		plot.getGraphWidget().setDomainLabelOrientation(-45);
@@ -171,7 +117,6 @@ public class ImportSimpleXYChart extends Fragment implements
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress,
 			boolean fromUser) {
-<<<<<<< .mine
 		updateSeries(numberOfShownValueSlider.getProgress(), timeSlider.getProgress());
 		numberOfShownValues=numberOfShownValueSlider.getProgress();
 
@@ -195,14 +140,7 @@ public class ImportSimpleXYChart extends Fragment implements
 		}
 		int arraySize = ((SimpleXYSeries) series1).size();
 		for (int i = 0; i < arraySize; i++) {
-=======
-		int SeekBarprogress = slider.getProgress();
-
-		
-		for(int i=0; i<10;i++){
->>>>>>> .r110
 			((SimpleXYSeries) series1).removeFirst();
-<<<<<<< .mine
 		}
 		for (int i = 0; i < numberOfShownValues; i++) {
 			((SimpleXYSeries) series1).addLast(
@@ -210,24 +148,12 @@ public class ImportSimpleXYChart extends Fragment implements
 							.intValue(), allValues.get(timeSliderProgress + i)
 							.getValues()[1].intValue());
 		}
-		for(int i = 0; i<2;i++){
-		((SimpleXYSeries) highestPoint).removeFirst();
-		}
-		((SimpleXYSeries) highestPoint).addFirst(timeSliderProgress,highestValue);
-		((SimpleXYSeries) highestPoint).addFirst(timeSliderProgress,lowestValue);
-=======
-			Values b = allValues.get(SeekBarprogress+i);
-			Double[] e = b.getValues();
-			Double l = e[0];
-			Double m = e[1];
-			int c = l.intValue();
-			int w = m.intValue();
-			Number value = highestValue[1];
-			((SimpleXYSeries) highestValueSeries).removeLast();
-			((SimpleXYSeries) highestValueSeries).addLast(c,value);
-			((SimpleXYSeries) series1).addLast(c,w);
-		}		
->>>>>>> .r110
+		
+		for(int i =0; i<2;i++){
+			((SimpleXYSeries) highestAndLowestPoints).removeFirst();
+		}	
+		((SimpleXYSeries) highestAndLowestPoints).addFirst(timeSliderProgress,lowestValue);
+		((SimpleXYSeries) highestAndLowestPoints).addFirst(timeSliderProgress,highestValue);
 		
 		// redraw the Plot:
 		plot.redraw();
