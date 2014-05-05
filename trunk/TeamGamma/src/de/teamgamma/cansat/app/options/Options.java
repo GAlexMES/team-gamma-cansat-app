@@ -3,7 +3,7 @@ package de.teamgamma.cansat.app.options;
 
 public class Options {
 
-	private OptionsInterface[] options = new OptionsInterface[3];
+	private OptionsInterface[] options = new OptionsInterface[4];
 
 	private OptionsReviewer check = new OptionsReviewer();
 	
@@ -23,6 +23,7 @@ public class Options {
 		options[0] = new ConnectionOptions();
 		options[1] = new PathOptions();
 		options[2] = new ChartViewOptions();
+		options[3] = new MapsOptions();
 	}
 
 	public OptionsInterface[] getOptions() {

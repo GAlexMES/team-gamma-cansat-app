@@ -1,5 +1,5 @@
 package de.teamgamma.cansat.app.options;
 
 public enum KindOfOption {
-	CONNECTION, PATH, CHARTVIEW
+	CONNECTION, PATH, CHARTVIEW, MAPS
 }

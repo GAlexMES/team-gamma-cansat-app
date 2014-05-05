@@ -2,6 +2,7 @@ package de.teamgamma.cansat.app.fragments;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -142,6 +143,7 @@ public class OptionsExportFragment extends Fragment {
 				Intent intent = new Intent(
 						getActivity(),
 						de.teamgamma.cansat.app.filebrowser.AndroidExplorer.class);
+
 				// starts the activity
 				startActivity(intent);
 			}
