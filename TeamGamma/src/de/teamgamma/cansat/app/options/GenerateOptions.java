@@ -29,6 +29,7 @@ public class GenerateOptions {
 		writeableString = writeableString +  filepath + newLine + "" + newLine + filepath + newLine+ "" + newLine + getOptionsFilepath()+newLine+ "" + newLine +"";
 		// add chart view options to string
 		writeableString = writeableString +newLine+"20";
+
 		return writeableString;
 	}
 	

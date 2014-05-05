@@ -22,7 +22,9 @@ import java.util.ArrayList;
 
 /**
  * 
- * @author Alexander Brennecke Shows a fragment which displays a SimpleXYChart
+ * @author Alexander Brennecke 
+ * 
+ * Shows a fragment which displays a SimpleXYChart
  *         of the selected import file
  */
 
@@ -39,17 +41,18 @@ public class ImportSimpleXYChart extends Fragment implements
 	private int numberOfShownValues;
 	int highestValue;
 	int lowestValue;
+
 	public void setValue(ArrayList<Values> values) {
 		allValues = values;
 		numberOfShownValues = allValues.size();
-		lowestValue=allValues.get(0).getValues()[1].intValue();
-		highestValue=allValues.get(0).getValues()[1].intValue();
-		for(int i =0; i<allValues.size();i++){
-			if(allValues.get(i).getValues()[1].intValue()>highestValue){
-				highestValue=allValues.get(i).getValues()[1].intValue();
+		lowestValue = allValues.get(0).getValues()[1].intValue();
+		highestValue = allValues.get(0).getValues()[1].intValue();
+		for (int i = 0; i < allValues.size(); i++) {
+			if (allValues.get(i).getValues()[1].intValue() > highestValue) {
+				highestValue = allValues.get(i).getValues()[1].intValue();
 			}
-			if(allValues.get(i).getValues()[1].intValue()<lowestValue){
-				lowestValue=allValues.get(i).getValues()[1].intValue();
+			if (allValues.get(i).getValues()[1].intValue() < lowestValue) {
+				lowestValue = allValues.get(i).getValues()[1].intValue();
 			}
 		}
 	}
@@ -100,9 +103,9 @@ public class ImportSimpleXYChart extends Fragment implements
 				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW
 						.ordinal()].getColors()[2]], // Area color
 				null);
-		
+
 		LineAndPointFormatter highestPointFormatter = new LineAndPointFormatter(
-				color.transparent,color.transparent,color.transparent,null);
+				color.transparent, color.transparent, color.transparent, null);
 
 		// add a new series' to the xyplot:
 		plot.addSeries(series1, series1Format);
@@ -117,14 +120,15 @@ public class ImportSimpleXYChart extends Fragment implements
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress,
 			boolean fromUser) {
-		updateSeries(numberOfShownValueSlider.getProgress(), timeSlider.getProgress());
-		numberOfShownValues=numberOfShownValueSlider.getProgress();
+		updateSeries(numberOfShownValueSlider.getProgress(),
+				timeSlider.getProgress());
+		numberOfShownValues = numberOfShownValueSlider.getProgress();
 
 	}
 
 	private void updateSeries(int numberOfShownValues, int timeSliderProgress) {
-		int timeSliderMax=timeSliderProgress;
-		if (numberOfShownValues != this.numberOfShownValues) {			
+		int timeSliderMax = timeSliderProgress;
+		if (numberOfShownValues != this.numberOfShownValues) {
 			while (numberOfShownValues + timeSliderMax != allValues.size()) {
 				if (numberOfShownValues + timeSliderMax > allValues.size()) {
 					timeSliderMax = timeSliderMax - 1;
@@ -135,8 +139,8 @@ public class ImportSimpleXYChart extends Fragment implements
 			}
 			timeSlider.setMax(timeSliderMax);
 		}
-		if(timeSliderProgress+numberOfShownValues>allValues.size()){
-			timeSliderProgress=timeSliderMax;
+		if (timeSliderProgress + numberOfShownValues > allValues.size()) {
+			timeSliderProgress = timeSliderMax;
 		}
 		int arraySize = ((SimpleXYSeries) series1).size();
 		for (int i = 0; i < arraySize; i++) {
@@ -148,13 +152,15 @@ public class ImportSimpleXYChart extends Fragment implements
 							.intValue(), allValues.get(timeSliderProgress + i)
 							.getValues()[1].intValue());
 		}
-		
-		for(int i =0; i<2;i++){
+
+		for (int i = 0; i < 2; i++) {
 			((SimpleXYSeries) highestAndLowestPoints).removeFirst();
-		}	
-		((SimpleXYSeries) highestAndLowestPoints).addFirst(timeSliderProgress,lowestValue);
-		((SimpleXYSeries) highestAndLowestPoints).addFirst(timeSliderProgress,highestValue);
-		
+		}
+		((SimpleXYSeries) highestAndLowestPoints).addFirst(timeSliderProgress,
+				lowestValue);
+		((SimpleXYSeries) highestAndLowestPoints).addFirst(timeSliderProgress,
+				highestValue);
+
 		// redraw the Plot:
 		plot.redraw();
 	}

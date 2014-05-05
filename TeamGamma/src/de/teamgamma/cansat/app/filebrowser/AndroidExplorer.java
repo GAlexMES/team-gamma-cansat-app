@@ -32,8 +32,10 @@ public class AndroidExplorer extends ListActivity {
 	private List<String> item = null;
 	private List<String> path = null;
 	private String root = "/";
+	private String exportPath;
 	private TextView myPath;
 	private String dirPath;
+	
 
 	
 	/**
@@ -44,7 +46,13 @@ public class AndroidExplorer extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.browser);
 		myPath = (TextView) findViewById(R.id.path);
-		getDir(root);
+		if(Integer.valueOf(options.getOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.LASTACTIVESCREEN))==3){
+			getDir(options.getOption(KindOfOption.PATH.ordinal(), PathOptions.VALUEEXPOTPATH));
+		}
+		else{
+			getDir(root);
+		}
+	
 	}
 	
 

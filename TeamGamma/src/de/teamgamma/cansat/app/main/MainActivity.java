@@ -6,8 +6,11 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -30,6 +33,7 @@ import de.teamgamma.cansat.app.fragments.OptionsSearcherFragment;
 import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
+import de.teamgamma.cansat.app.options.MapsOptions;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.options.OptionsExport;
 import de.teamgamma.cansat.app.sensors.Sensor;
@@ -190,6 +194,9 @@ public class MainActivity extends Activity {
 			fragment = new ImportFragment();
 			break;
 		case 5:
+			String longitude = options.getOption(KindOfOption.MAPS.ordinal(), MapsOptions.LONGITUDE);
+			String latitude = options.getOption(KindOfOption.MAPS.ordinal(), MapsOptions.LATITUDE);
+			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?q=" + longitude + "," + latitude)));
 			break;
 		case 6:
 			fragment = new OptionsFragment();

@@ -16,7 +16,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:text="Pleas choos a correct .txt file to import the data!"
+            android:text="Pleas choos a correct .teamgamma file to import the data!"
             android:textColor="@android:color/white"
             android:textSize="25dp" />
 

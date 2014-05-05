@@ -78,6 +78,7 @@ public class ImportFragment extends Fragment {
 				Intent intent = new Intent(
 						getActivity(),
 						de.teamgamma.cansat.app.filebrowser.AndroidExplorer.class);
+	
 				startActivity(intent);
 
 			}

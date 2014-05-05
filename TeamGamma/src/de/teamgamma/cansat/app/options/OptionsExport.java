@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 
-
 public class OptionsExport {
 	private Options options = Options.getInstance();
 	private String newLine = "\n";
@@ -17,32 +16,38 @@ public class OptionsExport {
 
 	public void writeOptions() {
 		OptionsInterface[] optionsArray = options.getOptions();
-		for (OptionsInterface element:optionsArray) {
-			for(int b =0; b<element.getValues().length;b++){
-				writeableString=writeableString+element.getValues()[b]+newLine;
+		for (OptionsInterface element : optionsArray) {
+			for (int b = 0; b < element.getValues().length; b++) {
+				writeableString = writeableString + element.getValues()[b]
+						+ newLine;
 			}
 		}
-		writeSingle(options.getOption(KindOfOption.PATH.ordinal(),PathOptions.OPTIONSPATH), writeableString);
-		writeableString="";
+		writeSingle(options.getOption(KindOfOption.PATH.ordinal(),
+				PathOptions.OPTIONSPATH), writeableString);
+		writeableString = "";
 	}
-	
-	public void readOptions(){
+
+	public void readOptions() {
 		int counter = 0;
 		OptionsInterface[] optionsArray = options.getOptions();
-		for (OptionsInterface element:optionsArray) {
-			String[] values = new String[element.getValues().length];
-			for(int b =0; b<element.getValues().length;b++){
-				values[b]= getValue(counter);
-				counter++;
+		for (OptionsInterface element : optionsArray) {
+			if (element.getValues().length == 0) {
+				
+			} else {
+				String[] values = new String[element.getValues().length];
+				for (int b = 0; b < element.getValues().length; b++) {
+					values[b] = getValue(counter);
+					counter++;
+				}
+				element.setValues(values);
 			}
-			element.setValues(values);
 		}
 	}
 
 	public void writeSingle(String filepath, String message) {
 		FileOutputStream out = null;
 		try {
-			
+
 			out = new FileOutputStream(new File(filepath));
 		} catch (FileNotFoundException e2) {
 			// TODO Auto-generated catch block
@@ -61,7 +66,6 @@ public class OptionsExport {
 			e.printStackTrace();
 		}
 	}
-	
 
 	private String getValue(int positionLine) {
 		String zeile = null;
