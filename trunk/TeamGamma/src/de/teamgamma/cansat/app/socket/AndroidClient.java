@@ -28,7 +28,7 @@ public class AndroidClient {
 
 			try {
 				// BufferedReader zum lesen erzeugen
-				in = new BufferedReader(new InputStreamReader(
+				this.in = new BufferedReader(new InputStreamReader(
 						clientSocket.getInputStream()));
 
 				Log.d("socket_test", "Buffered reader created!");
@@ -42,15 +42,15 @@ public class AndroidClient {
 			int counter = 0;
 			while (clientSocket.isConnected()) {
 				try {
-					if (in.ready()) {
-						message = in.readLine();
+					if (this.in.ready()) {
+						message = this.in.readLine();
 						Log.d("values", message);
 						if (counter == 0) {
 							JSONObject jsonmessage = new JSONObject(message);
 							constantValues.firstTimestamp = jsonmessage
 									.getLong("time");
 						}
-						messageAdapter.messageArrived(message.toString());
+						this.messageAdapter.messageArrived(message.toString());
 						counter++;
 
 					}
@@ -73,10 +73,10 @@ public class AndroidClient {
 			InetAddress inetAddress = InetAddress.getByName(dst);
 
 			try {
-				clientSocket = new Socket(inetAddress, dstPort);
+				this.clientSocket = new Socket(inetAddress, dstPort);
 				Log.d("socket_test", "Socket created, everything fine!");
-				commThread = new Thread(new CommunicationThread(messageAdapter));
-				commThread.start();
+				this.commThread = new Thread(new CommunicationThread(messageAdapter));
+				this.commThread.start();
 				
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_kk_mm",
 						Locale.GERMANY);
@@ -96,17 +96,17 @@ public class AndroidClient {
 	}
 
 	public void startStreaming() {
-		commThread.start();
+		this.commThread.start();
 
 	}
 
 	public void stopStreaming() {
-		commThread.interrupt();
+		this.commThread.interrupt();
 	}
 
 	public void disconnect() {
 		try {
-			clientSocket.close();
+			this.clientSocket.close();
 		} catch (IOException e) {
 			Log.d("socket_test", "Exception while closing the socket!");
 		}

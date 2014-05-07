@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class constantValues {
 
-	public static String[] names = { "time", "co2", "temp", "presure" };
+	public static String[] names = { "time", "co2", "temp", "presure", "longitude", "latitude" };
 	
 	public static long firstTimestamp;
 	

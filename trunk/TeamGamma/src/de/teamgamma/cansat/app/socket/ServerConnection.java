@@ -10,7 +10,6 @@ import de.teamgamma.cansat.app.options.Options;
 
 public class ServerConnection {
 
-	private DataCoordination datatransfer = DataCoordination.getInstance();
 
 	public ServerConnection() {
 		new Thread(new Runnable() {
@@ -28,7 +27,7 @@ public class ServerConnection {
 							@Override
 							public void messageArrived(String message) {
 								Log.d("message",message);
-								datatransfer.coordinateData(message);
+								DataCoordination.getInstance().coordinateData(message);
 							}
 						});
 
