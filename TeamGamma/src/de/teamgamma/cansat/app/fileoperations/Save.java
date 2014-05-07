@@ -27,8 +27,8 @@ public class Save {
 
 	private Save() {
 
-		option = Options.getInstance();
-		writableString = null;
+		this.option = Options.getInstance();
+		this.writableString = null;
 
 	}
 

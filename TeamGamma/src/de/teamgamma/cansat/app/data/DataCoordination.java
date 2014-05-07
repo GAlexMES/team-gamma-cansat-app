@@ -12,7 +12,7 @@ import de.teamgamma.cansat.app.sensors.Sensor;
 
 public class DataCoordination {
 
-	private Json json = Json.getInstance();
+	private Json json;
 	private static DataCoordination instance = null;
 	private Sensor[] sensors;
 	private Options options;
@@ -28,11 +28,12 @@ public class DataCoordination {
 	public DataCoordination() {
 		// the constructor of the class adds in each index of the sensor array,
 		// a new object of class sensor and give this the corresponding names
-		sensors = new Sensor[constantValues.names.length];
-		options = Options.getInstance();
+		this.sensors = new Sensor[constantValues.names.length];
+		this.options = Options.getInstance();
+		this.json = Json.getInstance();
 		for (int i = 0; i < constantValues.names.length; i++) {
-			sensors[i] = new Sensor();
-			sensors[i].setName(constantValues.names[i]);
+			this.sensors[i] = new Sensor();
+			this.sensors[i].setName(constantValues.names[i]);
 
 		}
 	}
@@ -40,7 +41,7 @@ public class DataCoordination {
 	public void coordinateData(String message) {
 		// takes the message from the AndroidClient
 		// message is unpacked
-		Double[][] data = json.unpack(message);
+		Double[][] data = this.json.unpack(message);
 		for (int i = 0; i < constantValues.names.length; i++) {
 			// the data from the unpacked message will be written in every
 			// corresponding Sensor
@@ -50,7 +51,7 @@ public class DataCoordination {
 
 			// The SensorArray are the SensorArray passed.
 			if (sensor.getName().equals(
-					options.getOption(KindOfOption.CHARTVIEW.ordinal(),
+					this.options.getOption(KindOfOption.CHARTVIEW.ordinal(),
 							ChartViewOptions.ACTIVESENSORNAME))) {
 				if (MainActivity.getCurrentFragment().getClass()
 						.equals(RealtimeGraph.class)) {
@@ -72,7 +73,7 @@ public class DataCoordination {
 		// the SensorArray is filled with the values from the Database.
 		Database database = Database.getInstance();
 		this.sensors = database.getValuesFromDatabase();
-		return sensors;
+		return this.sensors;
 	}
 
 }

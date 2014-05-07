@@ -14,17 +14,17 @@ public class Sensor {
 	public Sensor(){
 		Options options = Options.getInstance();
 		if(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.NUMBEROFSHOWNVALUE)==null){
-			numberOfValues=20;
+			this.numberOfValues=20;
 		}
 		else{
 			this.numberOfValues = Integer.valueOf(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.NUMBEROFSHOWNVALUE));
 			
 		}
-		values = new double[numberOfValues][2];
+		this.values = new double[numberOfValues][2];
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -32,15 +32,15 @@ public class Sensor {
 	}
 
 	public double[][] getValues() {
-		return values;
+		return this.values;
 	}
 
 	public void setValues(long time, Double value) {
 		if (value != null) {
 			newValue();
-			if (numberOfValues > 0) {
-				values[numberOfValues - 1][0] = time;
-				values[numberOfValues - 1][1] = value;
+			if (this.numberOfValues > 0) {
+				this.values[this.numberOfValues - 1][0] = time;
+				this.values[this.numberOfValues - 1][1] = value;
 			}
 		}
 	}
@@ -48,15 +48,15 @@ public class Sensor {
 	public void setFirstValue(long time, Double value) {
 		if (value != null) {
 			newValue();
-			values[0][0] = time;
-			values[0][1] = value;
+			this.values[0][0] = time;
+			this.values[0][1] = value;
 		}
 
 	}
 
 	private void newValue() {
-		for (int i = 0; i < numberOfValues - 1; i++) {
-			values[i][1] = values[i + 1][1];
+		for (int i = 0; i < this.numberOfValues - 1; i++) {
+			this.values[i][1] = this.values[i + 1][1];
 		}
 	}
 
