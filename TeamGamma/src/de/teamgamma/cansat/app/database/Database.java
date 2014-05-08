@@ -3,26 +3,23 @@ package de.teamgamma.cansat.app.database;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import de.teamgamma.cansat.app.data.constantValues;
-import de.teamgamma.cansat.app.options.ChartViewOptions;
-import de.teamgamma.cansat.app.options.KindOfOption;
-import de.teamgamma.cansat.app.options.Options;
-import de.teamgamma.cansat.app.sensors.Sensor;
+import de.teamgamma.cansat.app.values.ValueList;
+import de.teamgamma.cansat.app.values.Values;
 
 public class Database {
-	private Sensor[] sensors = new Sensor[constantValues.names.length];
 	private String apiKey = ""; // Options.getStringApiKey oderso noch nicht
-								// da!!!!
+	private ValueList data;
 	private static Database instance = null;
+		
+	
 
 	public static Database getInstance() {
 		if (instance == null) {
@@ -33,113 +30,62 @@ public class Database {
 
 	public Database() {
 		// SENSORENARRAY MIT NAMESBELEGUNG DER SENSOREN WIRD ERZEUGT
-		for (int i = 0; i < constantValues.names.length; i++) {
-			sensors[i] = new Sensor();
-			sensors[i].setName(constantValues.names[i]);
-		}
-	}
+		data = new ValueList();
 
-	public Sensor[] getValuesFromDatabase() {
-		// Daten werden aus der Datenbank gelesen und zurueckgegeben
-		this.getData(this.connect());
-		return this.sensors;
 	}
+	
 
-	private String connect() {
+	public ArrayList<Values> connect(String sensor) {
 		// Verbindung zur Datenbank wird aufgebaut
 		// Die erhaltenen Daten werden zurueckgegeben
 		try {
-			String body = "key=" + URLEncoder.encode(this.apiKey, "UTF-8")
-					+ "&" + "action=" + URLEncoder.encode("get_data", "UTF-8");
+//			String body = "key=" + URLEncoder.encode(this.apiKey, "UTF-8") + "&" + "action="
+//			+ URLEncoder.encode("get_data", "UTF-8");
 
-			URL url = new URL("http://team-gamma.de");// URL Noch nicht
-														// Richtig
+			URL url = new URL("http://gammaweb.team-gamma.de/read.php");
 
-			HttpURLConnection connection = (HttpURLConnection) url
-					.openConnection();
-			connection.setRequestMethod("POST");
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
 			connection.setDoInput(true);
 			connection.setDoOutput(true);
 			connection.setUseCaches(false);
-			connection.setRequestProperty("Content-Type",
-					"application/x-www-form-urlencoded");
-			connection.setRequestProperty("Content-Length",
-					String.valueOf(body.length()));
-			OutputStreamWriter writer = new OutputStreamWriter(
-					connection.getOutputStream());
-			writer.write(body);
-			writer.flush();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					connection.getInputStream()));
-			StringBuilder stringBuilder = new StringBuilder();
+			connection.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+//			connection.setRequestProperty("Content-Length",String.valueOf(body.length()));
+//			OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+//			writer.write(body);
+//			writer.flush();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-			for (String line; (line = reader.readLine()) != null;) {
-				stringBuilder.append(line);
+			JSONArray jdata = null;
+			
+			try {
+				jdata = new JSONArray(reader.readLine());
+			} catch (JSONException e1) {
+				e1.printStackTrace();
+			}
+			JSONObject jvalue;
+			for (int i = 0; i < jdata.length(); i++) {
+				
+				try {
+					jvalue = jdata.getJSONObject(i);
+					this.data.appendData(Double.valueOf(jvalue.getLong("time")), jvalue.getDouble(sensor));
+
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+
 			}
 
-			writer.close();
+//			writer.close();
 			reader.close();
-
-			return stringBuilder.toString();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 
 		}
-		return null;
+		return this.data.getData();
+
 	}
 
-	private void getData(String param) {
-		// Daten werden in die jeweiligen Sensoren des SensorArrays geschrieben
-		JSONObject response;
-		try {
-			response = new JSONObject(param);
-
-			if (response.getBoolean("error") == false) {
-				JSONArray data = response.getJSONArray("data");
-
-				JSONObject item = null;
-				int numberOfValues = Integer.valueOf(Options.getInstance()
-						.getOption(KindOfOption.CHARTVIEW.ordinal(),
-								ChartViewOptions.NUMBEROFSHOWNVALUE));
-
-				if (response.length() > numberOfValues) {
-
-					long time;
-					int index;
-					for (int i = 0; i < numberOfValues; i++) {
-
-						index = response.length() / numberOfValues * i;
-						item = data.getJSONObject(index);
-
-						index -= 1;
-						// Zeit lesen
-						time = item.getLong("time");
-
-						// Zugriff auf einzelne Sensoren
-
-						for (int counter = 0; counter < constantValues.names.length; counter++) {
-							this.sensors[counter].setValues(time, item
-									.getDouble(constantValues.names[counter]));
-
-						}
-					}
-
-				} else {
-					long time;
-					for (int i = response.length(); i > 0; i++) {
-						item = data.getJSONObject(i);
-						time = data.getJSONObject(i).getLong("time");
-						for (int counter = 0; counter < constantValues.names.length; counter++) {
-							this.sensors[counter].setValues(time, item
-									.getDouble(constantValues.names[counter]));
-						}
-					}
-				}
-			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }

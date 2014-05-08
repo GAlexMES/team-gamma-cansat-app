@@ -13,10 +13,10 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import com.androidplot.xy.*;
 
 import de.teamgamma.cansat.app.R;
-import de.teamgamma.cansat.app.data.Values;
 import de.teamgamma.cansat.app.data.constantValues;
 import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.Options;
+import de.teamgamma.cansat.app.values.Values;
 
 import java.util.ArrayList;
 

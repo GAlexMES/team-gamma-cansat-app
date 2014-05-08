@@ -5,11 +5,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import de.teamgamma.cansat.app.data.Values;
+import de.teamgamma.cansat.app.values.ValueList;
+import de.teamgamma.cansat.app.values.Values;
 
 public class Read {
-	private ArrayList<Values> data = new ArrayList<Values>();
 
+	private ValueList data = new ValueList();
 	private static Read instance = null;
 
 	// Singleton
@@ -21,15 +22,12 @@ public class Read {
 	}
 
 	public ArrayList<Values> getValuefromFile(String filepath) {
-		this.data.clear();
-
+		data.clearValues();
 		if (filepath.endsWith("teamgamma")) {
 			String[] lineArray;
-			Double[] lineDouble = new Double[2];
 			try {
 				BufferedReader in = new BufferedReader(new FileReader(filepath));
 				String row = null;
-				int index = 0;
 
 				while ((row = in.readLine()) != null) {
 
@@ -37,16 +35,10 @@ public class Read {
 					if (lineArray.length > 1 && lineArray[0] != null
 							&& lineArray[1] != null) {
 
-						lineDouble[0] = Double.valueOf(lineArray[0]);
-						lineDouble[1] = Double.valueOf(lineArray[1]);
-						this.data.add(new Values());
-						this.data.get(index).setValues(lineDouble);
-						if (this.data.get(index) == null) {
-							this.data.remove(index);
-							index--;
-						}
+						
+						
+						this.data.appendData(Double.valueOf(lineArray[0]), Double.valueOf(lineArray[1]));
 
-						index++;
 
 					}
 				}
@@ -57,7 +49,7 @@ public class Read {
 				return null;
 			}
 
-			return this.data;
+			return this.data.getData();
 		}
 
 		else {
@@ -65,3 +57,4 @@ public class Read {
 		}
 	}
 }
+
