@@ -16,13 +16,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import de.teamgamma.cansat.app.R;
-import de.teamgamma.cansat.app.data.Values;
 import de.teamgamma.cansat.app.fileoperations.Read;
 import de.teamgamma.cansat.app.fragments_androidplot.ImportSimpleXYChart;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.PathOptions;
 import de.teamgamma.cansat.app.options.Options;
+import de.teamgamma.cansat.app.values.Values;
 
 /**
  * 

@@ -69,11 +69,4 @@ public class DataCoordination {
 
 	}
 
-	public Sensor[] getValuesFromDatabase() {
-		// the SensorArray is filled with the values from the Database.
-		Database database = Database.getInstance();
-		this.sensors = database.getValuesFromDatabase();
-		return this.sensors;
-	}
-
 }
