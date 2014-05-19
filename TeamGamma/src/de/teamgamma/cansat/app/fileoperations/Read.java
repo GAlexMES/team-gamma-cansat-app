@@ -35,11 +35,8 @@ public class Read {
 					if (lineArray.length > 1 && lineArray[0] != null
 							&& lineArray[1] != null) {
 
-						
-						
-						this.data.appendData(Double.valueOf(lineArray[0]), Double.valueOf(lineArray[1]));
-
-
+						this.data.appendData(Double.valueOf(lineArray[0]),
+								Double.valueOf(lineArray[1]));
 					}
 				}
 
@@ -57,4 +54,3 @@ public class Read {
 		}
 	}
 }
-
