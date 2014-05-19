@@ -14,6 +14,9 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import de.teamgamma.cansat.app.data.constantValues;
+import de.teamgamma.cansat.app.options.ConnectionOptions;
+import de.teamgamma.cansat.app.options.KindOfOption;
+import de.teamgamma.cansat.app.options.Options;
 
 public class AndroidClient {
 	private Socket clientSocket = null;
@@ -81,6 +84,7 @@ public class AndroidClient {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_kk_mm",
 						Locale.GERMANY);
 				constantValues.exportTime = sdf.format(new Date());
+				Options.getInstance().setOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.ACTIVECONNECTION, 1);
 				
 			} catch (IOException e) {
 				e.printStackTrace();
