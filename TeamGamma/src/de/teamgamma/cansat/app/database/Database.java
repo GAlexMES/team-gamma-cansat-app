@@ -59,8 +59,6 @@ public class Database {
 			JSONObject jdata = null;
 			JSONArray jarray = null;
 
-			// System.out.println(reader.readLine());
-
 			try {
 				jdata = new JSONObject(reader.readLine());
 				jarray = jdata.getJSONArray("data");
@@ -73,7 +71,7 @@ public class Database {
 
 				try {
 					jvalue = jarray.getJSONObject(i);
-					this.data.appendData(Double.valueOf(jvalue.getString("utc_time")), Double.valueOf(jvalue.getString(sensor)));
+					this.data.appendData(Double.valueOf(jvalue.getLong("utc_time")), jvalue.getDouble(sensor));
 					
 
 				} catch (JSONException e) {
