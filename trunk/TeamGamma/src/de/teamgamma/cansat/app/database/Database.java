@@ -73,7 +73,7 @@ public class Database {
 
 				try {
 					jvalue = jarray.getJSONObject(i);
-					this.data.appendData(Double.valueOf(jvalue.getString("utc_time")), jvalue.getDouble(sensor));
+					this.data.appendData(Double.valueOf(jvalue.getString("utc_time")), Double.valueOf(jvalue.getString(sensor)));
 					
 
 				} catch (JSONException e) {
@@ -82,15 +82,15 @@ public class Database {
 
 			}
 			
-			try {
-				Options.getInstance().setOption(KindOfOption.MAPS.ordinal(),MapsOptions.LONGITUDE, jarray.getJSONObject(jarray.length()-1).getString("longitude"));
-				Options.getInstance().setOption(KindOfOption.MAPS.ordinal(),MapsOptions.LATITUDE, jarray.getJSONObject(jarray.length()-1).getString("latitude"));
-
-				
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				Options.getInstance().setOption(KindOfOption.MAPS.ordinal(),MapsOptions.LONGITUDE, jarray.getJSONObject(jarray.length()-1).getString("longitude"));
+//				Options.getInstance().setOption(KindOfOption.MAPS.ordinal(),MapsOptions.LATITUDE, jarray.getJSONObject(jarray.length()-1).getString("latitude"));
+//
+//				
+//			} catch (JSONException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 
 			reader.close();
 
