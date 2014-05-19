@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.SearchManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -16,6 +17,7 @@ import android.os.Environment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,6 +34,7 @@ import de.teamgamma.cansat.app.fragments.OptionsFragment;
 import de.teamgamma.cansat.app.fragments.OptionsSearcherFragment;
 import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
+import de.teamgamma.cansat.app.options.ConnectionOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.MapsOptions;
 import de.teamgamma.cansat.app.options.Options;
@@ -49,6 +52,7 @@ public class MainActivity extends Activity {
 	private String[] mSlidemanueTitels;
 	private Sensor sensor = new Sensor();
 	private static Fragment fragment;
+	private int lastCase = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -175,31 +179,83 @@ public class MainActivity extends Activity {
 				fragment = new OptionsSearcherFragment();
 				break;
 			} else {
+				lastCase = 0;
 				fragment = new HomeFragment();
 				break;
 			}
 		case 1:
-			options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[0]);
-			fragment = new RealtimeGraph();
-			break;
+			if(Integer.parseInt(options.getOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.ACTIVECONNECTION))==1){
+				options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[0]);
+				fragment = new RealtimeGraph();
+				lastCase = 1;
+				break;				
+			}
+			else{
+				creatToast("No Connection! Go to: Options -> Connection");
+				selectItem(lastCase,false);
+				break;
+			}
+
 		case 2:
-			options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[1]);
-			fragment = new RealtimeGraph();		
-			break;
+			if(Integer.parseInt(options.getOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.ACTIVECONNECTION))==1){
+				options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[1]);
+				fragment = new RealtimeGraph();
+				break;				
+			}
+			else{
+				creatToast("No Connection! Go to: Options -> Connection");
+				selectItem(lastCase,false);
+				break;
+			}
 		case 3:
-			options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[2]);
-			fragment = new RealtimeGraph();
-			break;
+			if(Integer.parseInt(options.getOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.ACTIVECONNECTION))==1){
+				options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[2]);
+				fragment = new RealtimeGraph();
+				break;				
+			}
+			else{
+				creatToast("No Connection! Go to: Options -> Connection");
+				selectItem(lastCase,false);
+				break;
+			}
 		case 4:
-			fragment = new ImportFragment();
-			break;
+			if(Integer.parseInt(options.getOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.ACTIVECONNECTION))==1){
+				options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[3]);
+				fragment = new RealtimeGraph();
+				break;				
+			}
+			else{
+				creatToast("No Connection! Go to: Options -> Connection");
+				selectItem(lastCase,false);
+				break;
+			}
+			
 		case 5:
+			options.setOption(KindOfOption.MAPS.ordinal(), MapsOptions.LATITUDE, 69.2948485);
+			options.setOption(KindOfOption.MAPS.ordinal(), MapsOptions.LONGITUDE, 16.029606);
 			String longitude = options.getOption(KindOfOption.MAPS.ordinal(), MapsOptions.LONGITUDE);
 			String latitude = options.getOption(KindOfOption.MAPS.ordinal(), MapsOptions.LATITUDE);
-			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?q=" + longitude + "," + latitude)));
-			break;
+
+			if(!(longitude== null)&&!(latitude==null)) {
+				selectItem(lastCase,false);
+				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?q=" + latitude + "," + longitude)));
+				break;
+			}
+			else{
+				creatToast("No Position found!");
+				selectItem(lastCase,false);
+				break;
+			}
+			
+			
 		case 6:
+			fragment = new ImportFragment();
+			lastCase = 6;
+			break;
+		
+		case 7:
 			fragment = new OptionsFragment();
+			lastCase = 7;
 			break;
 
 		}
@@ -239,6 +295,14 @@ public class MainActivity extends Activity {
 	
 	public static Fragment getCurrentFragment(){
 		return fragment;
+	}
+	
+	private void creatToast(String message){
+		Context context = this.getBaseContext();
+		CharSequence text = message;
+		int duration = Toast.LENGTH_SHORT;
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();
 	}
 
 }

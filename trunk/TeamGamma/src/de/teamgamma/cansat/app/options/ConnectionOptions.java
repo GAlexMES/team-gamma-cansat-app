@@ -5,7 +5,8 @@ public class ConnectionOptions implements OptionsInterface {
 	public static final int JAVASOCKETPORT = 0;
 	public static final int JAVASOCKETIP = 1;
 	public static final int JAVASOCKETMETHOD= 2;
-	public String[] values = new String[3];
+	public static final int ACTIVECONNECTION = 3;
+	public String[] values = new String[4];
 	
 	/*
 	 * 0: Java Socket port
