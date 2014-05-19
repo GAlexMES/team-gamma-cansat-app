@@ -11,15 +11,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+import de.teamgamma.cansat.app.options.KindOfOption;
+import de.teamgamma.cansat.app.options.MapsOptions;
+import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.values.ValueList;
 import de.teamgamma.cansat.app.values.Values;
 
 public class Database {
-	private String apiKey = ""; // Options.getStringApiKey oderso noch nicht
 	private ValueList data;
 	private static Database instance = null;
-		
-	
 
 	public static Database getInstance() {
 		if (instance == null) {
@@ -33,51 +34,64 @@ public class Database {
 		data = new ValueList();
 
 	}
-	
 
 	public ArrayList<Values> connect(String sensor) {
-		// Verbindung zur Datenbank wird aufgebaut
-		// Die erhaltenen Daten werden zurueckgegeben
+		ValueList data = new ValueList();
 		try {
-//			String body = "key=" + URLEncoder.encode(this.apiKey, "UTF-8") + "&" + "action="
-//			+ URLEncoder.encode("get_data", "UTF-8");
+			// String body = "key=" + URLEncoder.encode(this.apiKey, "UTF-8") +
+			// "&" + "action="
+			// + URLEncoder.encode("get_data", "UTF-8");
 
-			URL url = new URL("http://gammaweb.team-gamma.de/read.php");
+			URL url = new URL("http://gammaweb.noodle-net.de/read.php");
 
-			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			HttpURLConnection connection = (HttpURLConnection) url
+					.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setDoInput(true);
 			connection.setDoOutput(true);
 			connection.setUseCaches(false);
-			connection.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-//			connection.setRequestProperty("Content-Length",String.valueOf(body.length()));
-//			OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-//			writer.write(body);
-//			writer.flush();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			connection.setRequestProperty("Content-Type",
+					"application/x-www-form-urlencoded");
 
-			JSONArray jdata = null;
-			
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					connection.getInputStream()));
+
+			JSONObject jdata = null;
+			JSONArray jarray = null;
+
+			// System.out.println(reader.readLine());
+
 			try {
-				jdata = new JSONArray(reader.readLine());
+				jdata = new JSONObject(reader.readLine());
+				jarray = jdata.getJSONArray("data");
+
 			} catch (JSONException e1) {
 				e1.printStackTrace();
 			}
 			JSONObject jvalue;
-			for (int i = 0; i < jdata.length(); i++) {
-				
-				try {
-					jvalue = jdata.getJSONObject(i);
-					this.data.appendData(Double.valueOf(jvalue.getLong("time")), jvalue.getDouble(sensor));
+			for (int i = 0; i < jarray.length(); i++) {
 
+				try {
+					jvalue = jarray.getJSONObject(i);
+					this.data.appendData(Double.valueOf(jvalue.getString("utc_time")), jvalue.getDouble(sensor));
+					
 
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
 
 			}
+			
+			try {
+				Options.getInstance().setOption(KindOfOption.MAPS.ordinal(),MapsOptions.LONGITUDE, jarray.getJSONObject(jarray.length()-1).getString("longitude"));
+				Options.getInstance().setOption(KindOfOption.MAPS.ordinal(),MapsOptions.LATITUDE, jarray.getJSONObject(jarray.length()-1).getString("latitude"));
 
-//			writer.close();
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 			reader.close();
 
 		} catch (IOException e) {
@@ -87,5 +101,4 @@ public class Database {
 		return this.data.getData();
 
 	}
-
 }
