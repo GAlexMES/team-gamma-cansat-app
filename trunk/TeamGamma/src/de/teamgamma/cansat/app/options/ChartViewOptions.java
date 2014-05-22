@@ -1,5 +1,7 @@
 package de.teamgamma.cansat.app.options;
 
+import android.util.Log;
+
 public class ChartViewOptions implements OptionsInterface {
 	
 	public static final int NUMBEROFSHOWNVALUE = 0;
@@ -25,10 +27,10 @@ public class ChartViewOptions implements OptionsInterface {
 	
 	public int[] getColors(){
 		int[] colors = new int[3];
-		if(values[POINTCOLOR]!= null && values[LINECOLOR]!= null && values[AREACOLOR]!= null){
-		colors[0] = Integer.valueOf(values[POINTCOLOR]);
-		colors[1] = Integer.valueOf(values[LINECOLOR]);
-		colors[2] = Integer.valueOf(values[AREACOLOR]);
+		if(values[POINTCOLOR].isEmpty() && values[LINECOLOR].isEmpty() && values[AREACOLOR].isEmpty()){
+			colors[0] = Integer.valueOf(values[POINTCOLOR]);
+			colors[1] = Integer.valueOf(values[LINECOLOR]);
+			colors[2] = Integer.valueOf(values[AREACOLOR]);
 		}
 		return colors;
 	}
