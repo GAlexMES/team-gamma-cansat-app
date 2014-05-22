@@ -27,7 +27,7 @@ public class ChartViewOptions implements OptionsInterface {
 	
 	public int[] getColors(){
 		int[] colors = new int[3];
-		if(values[POINTCOLOR].isEmpty() && values[LINECOLOR].isEmpty() && values[AREACOLOR].isEmpty()){
+		if(!(values[POINTCOLOR].equals("null")) && !(values[LINECOLOR].equals("null")) && !(values[AREACOLOR].equals("null"))){
 			colors[0] = Integer.valueOf(values[POINTCOLOR]);
 			colors[1] = Integer.valueOf(values[LINECOLOR]);
 			colors[2] = Integer.valueOf(values[AREACOLOR]);
