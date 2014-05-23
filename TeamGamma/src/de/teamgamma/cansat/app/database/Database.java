@@ -38,7 +38,7 @@ public class Database implements Runnable {
 		if (this.download) {
 			// sagt noch nicht wohin mit den Daten.
 			// DIE FOLGENDE ZEILE LIEFERT DIE ARRAYLIST ZURUECK; MIT DER ALEXS GRAPH AUFGERUFEN WERDEN SOLL!!!
-			DatabaseSensorsdata.getInstance().getData(this.sensor);
+			DatabaseSensorsdata.getInstance().getData(this.sensor, this.jarray);
 
 		} else {
 			

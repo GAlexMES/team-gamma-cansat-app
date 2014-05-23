@@ -26,17 +26,15 @@ public class DatabaseSensorsdata {
 
 	}
 
-	public ArrayList<Values> getData(String sensor) {
+	public ArrayList<Values> getData(String sensor, JSONArray jarray) {
 		ValueList data = new ValueList();
 
-		JSONObject jdata = null;
-		JSONArray jarray = null;
+
 
 		try {
-			if (jdata == null) {
+			if (jarray == null) {
 				return null;
 			}
-			jarray = jdata.getJSONArray("data");
 
 		} catch (JSONException e1) {
 			e1.printStackTrace();
