@@ -19,7 +19,7 @@ public class Database {
 	private static Database instance = null;
 	private String[] namesArray;
 
-	public String[] getNamesArray() {
+	public String[] getSensornames() {
 		return namesArray;
 	}
 
