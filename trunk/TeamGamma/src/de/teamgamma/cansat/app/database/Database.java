@@ -36,7 +36,7 @@ public class Database {
 	}
 
 
-	public void setSensornames(JSONObject jdata) {
+	public void setSensornames() {
 		
 		Thread connectionThread = new Thread(new ConnectionThread());
 		connectionThread.start();
