@@ -1,26 +1,21 @@
 package de.teamgamma.cansat.app.database;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import de.teamgamma.cansat.app.values.ValueList;
-import de.teamgamma.cansat.app.values.Values;
+public class Database implements Runnable {
 
-public class Database {
-	private ValueList data;
+	private JSONArray jarray;
+	private boolean download;
+	private String sensor;
 	private static Database instance = null;
-	private String[] namesArray;
-
-	public String[] getSensornames() {
-		return namesArray;
-	}
-
-	public void setNamesArray(String[] namesArray) {
-		this.namesArray = namesArray;
-	}
 
 	public static Database getInstance() {
 		if (instance == null) {
@@ -29,51 +24,33 @@ public class Database {
 		return instance;
 	}
 
-	public Database() {
-		// SENSORENARRAY MIT NAMESBELEGUNG DER SENSOREN WIRD ERZEUGT
-		data = new ValueList();
+	public void getSensornames() {
 
+		this.download = false;
+		Thread databaseThread = new Thread(this);
 	}
 
-
-	public void setSensornames() {
-		
-		Thread connectionThread = new Thread(new ConnectionThread());
-		connectionThread.start();
-
+	public void getData(String sensor) {
+		this.sensor = sensor;
+		this.download = true;
+		Thread databaseThread = new Thread(this);
 	}
 
-	public ArrayList<Values> getData(String sensor) {
-		ValueList data = new ValueList();
+	@Override
+	public void run() {
 
-		JSONObject jdata = null;
-		JSONArray jarray = null;
+		this.jarray = DatabseConnection.getInstance().connection();
 
-		try {
-			if (jdata == null){
-				return null;
-			}
-			jarray = jdata.getJSONArray("data");
+		if (this.download) {
+			DatabaseSensorsdata.getInstance().setNamesArray(
+					(JSONObject.getNames(this.jarray.getJSONObject(0))));
 
-		} catch (JSONException e1) {
-			e1.printStackTrace();
-		}
-		JSONObject jvalue;
-		for (int i = 0; i < jarray.length(); i++) {
+		} else {
 
-			try {
-				jvalue = jarray.getJSONObject(i);
-				this.data.appendData(
-						Double.valueOf(jvalue.getLong("utc_time")),
-						jvalue.getDouble(sensor));
-
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-
+			DatabaseSensorsdata.getInstance().getData(this.sensor);
 		}
 
-		return this.data.getData();
-
+		this.download = false;
 	}
+
 }
