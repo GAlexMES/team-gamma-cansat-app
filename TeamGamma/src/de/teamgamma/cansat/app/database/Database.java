@@ -39,15 +39,13 @@ public class Database implements Runnable {
 	@Override
 	public void run() {
 
-		this.jarray = DatabseConnection.getInstance().connection();
+		this.jarray = DatabseConnection.connection();
 
 		if (this.download) {
-			DatabaseSensorsdata.getInstance().setNamesArray(
-					(JSONObject.getNames(this.jarray.getJSONObject(0))));
+			DatabaseSensorsdata.getInstance().getData(this.sensor);
 
 		} else {
-
-			DatabaseSensorsdata.getInstance().getData(this.sensor);
+			DatabaseSensornames.getInstance().setNamesArray((JSONObject.getNames(this.jarray.getJSONObject(0))));
 		}
 
 		this.download = false;

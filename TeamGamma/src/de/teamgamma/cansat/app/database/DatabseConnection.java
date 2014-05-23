@@ -11,20 +11,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DatabseConnection {
-	private static DatabseConnection instance = null;
 
-
-	public static DatabseConnection getInstance() {
-		if (instance == null) {
-			instance = new DatabseConnection();
-		}
-		return instance;
-	}
-
-
-
-
-	public JSONArray connection() {
+	public static JSONArray connection() {
 		try {
 
 			URL url = new URL("http://gammaweb.noodle-net.de/read.php");
