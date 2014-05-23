@@ -16,7 +16,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import de.teamgamma.cansat.app.R;
+import de.teamgamma.cansat.app.database.Database;
 import de.teamgamma.cansat.app.fileoperations.Read;
+import de.teamgamma.cansat.app.fragments.DatabaseSensors;
 import de.teamgamma.cansat.app.fragments_androidplot.ImportSimpleXYChart;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
@@ -69,6 +71,7 @@ public class ImportFragment extends Fragment {
 				.findViewById(R.id.button_import);
 		Button buttonBrowser = (Button) mLinearLayout
 				.findViewById(R.id.button_browser);
+		Button connectDatabase = (Button) mLinearLayout.findViewById(R.id.Database);
 
 		// ActionListener to open the fileBrowser
 		buttonBrowser.setOnClickListener(new OnClickListener() {
@@ -83,7 +86,25 @@ public class ImportFragment extends Fragment {
 
 			}
 		});
+		
+		// ActionListener to open the fileBrowser
+				connectDatabase.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						
+						// Create new fragment and transaction
+						Fragment newFragment = new DatabaseSensors();
+						FragmentTransaction transaction = getFragmentManager()
+								.beginTransaction();
 
+						transaction.replace(R.id.content_frame, newFragment);
+						transaction.addToBackStack(null);
+
+						// Commit the transaction
+						transaction.commit();
+						
+					}
+				});
 		// Button to import the file into a chart and display this chart
 		buttonImport.setOnClickListener(new OnClickListener() {
 			@Override

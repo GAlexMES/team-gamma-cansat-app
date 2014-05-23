@@ -53,45 +53,17 @@ public class OptionsConnectionFragment extends Fragment {
 				.findViewById(R.id.editJavaSocketIPAdress);
 		final EditText java_socket_port = (EditText) mLinearLayout
 				.findViewById(R.id.editJavaSocketPort);
-		final RadioGroup itemTypeGroup = (RadioGroup) mLinearLayout
-				.findViewById(R.id.Group);
+		
 		Button connectAndSave = (Button) mLinearLayout
 				.findViewById(R.id.button_connect);
 		Button options_save = (Button) mLinearLayout
 				.findViewById(R.id.button_save);
-		final RadioButton radio_database = (RadioButton) mLinearLayout
-				.findViewById(R.id.radioButtonDatabase);
-		final RadioButton radio_java_socket = (RadioButton) mLinearLayout
-				.findViewById(R.id.radioButtonJavaSocket);
+		
+		
+
 		// shows the latest chosen values
 		java_socket_ipAdress.setText(options.getOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETIP));
 		java_socket_port.setText(options.getOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETPORT));
-		itemTypeGroup.clearCheck();
-
-		// set the latest chosen radio button true
-		if (Integer.valueOf(options.getOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETMETHOD)) == R.id.radioButtonDatabase) {
-			radio_database.setChecked(true);
-			radio_java_socket.setChecked(false);
-		} else if (Integer.valueOf(options.getOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETMETHOD)) == R.id.radioButtonJavaSocket) {
-			radio_database.setChecked(false);
-			radio_java_socket.setChecked(true);
-
-		}
-		// item group for the two radio button, which displays the ways to
-		// connect, to switch them
-		itemTypeGroup
-				.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-					@Override
-					public void onCheckedChanged(RadioGroup group, int checkedID) {
-						itemTypeGroup.check(checkedID);
-						if (checkedID == R.id.radioButtonJavaSocket) {
-							radio_database.setChecked(false);
-						} else if (checkedID == R.id.radioButtonDatabase) {
-							radio_java_socket.setChecked(false);
-						}
-
-					}
-				});
 
 		// called when the save button was clicked
 		// gives the information to the option class
@@ -102,7 +74,6 @@ public class OptionsConnectionFragment extends Fragment {
 						.getText().toString());
 				options.setOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETPORT,java_socket_port
 						.getText().toString());
-				options.setOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETMETHOD,itemTypeGroup.getCheckedRadioButtonId());
 				// a toast will show that the data was saved
 				Context context = mLinearLayout.getContext();
 				CharSequence text = "Saved";
@@ -123,7 +94,6 @@ public class OptionsConnectionFragment extends Fragment {
 						.getText().toString());
 				options.setOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETPORT,java_socket_port
 						.getText().toString());
-				options.setOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETMETHOD,itemTypeGroup.getCheckedRadioButtonId());
 				Context context = mLinearLayout.getContext();
 				CharSequence text = "Saved";
 				int duration = Toast.LENGTH_SHORT;
