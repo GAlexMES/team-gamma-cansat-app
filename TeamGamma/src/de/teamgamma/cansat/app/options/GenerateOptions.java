@@ -24,7 +24,7 @@ public class GenerateOptions {
 	public String generate() {
 		String writeableString = "";
 		//add connection options to the string
-		writeableString = writeableString+""+newLine+""+newLine+R.id.radioButtonDatabase+newLine+0+newLine;
+		writeableString = writeableString+""+newLine+""+newLine+0+newLine;
 		// add path options to the string
 		writeableString = writeableString +  filepath + newLine + "" + newLine + filepath + newLine+ "" + newLine + getOptionsFilepath()+newLine+ "" + newLine +"";
 		// add chart view options to string
