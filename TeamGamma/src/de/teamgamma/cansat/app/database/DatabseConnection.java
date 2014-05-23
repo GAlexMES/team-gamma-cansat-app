@@ -10,10 +10,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ConnectionThread implements Runnable{
+public class DatabseConnection {
+	private static DatabseConnection instance = null;
 
-	@Override
-	public void run() {
+
+	public static DatabseConnection getInstance() {
+		if (instance == null) {
+			instance = new DatabseConnection();
+		}
+		return instance;
+	}
+
+
+
+
+	public JSONArray connection() {
 		try {
 
 			URL url = new URL("http://gammaweb.noodle-net.de/read.php");
@@ -27,28 +38,31 @@ public class ConnectionThread implements Runnable{
 			connection.setRequestProperty("Content-Type",
 					"application/x-www-form-urlencoded");
 
-			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					connection.getInputStream()));
 
 			JSONObject jdata = null;
+			JSONArray jarray = null;
 			try {
-				
+
 				jdata = new JSONObject(reader.readLine());
-				
-				JSONArray jarray = jdata.getJSONArray("data");
-				
-				Database.getInstance().setNamesArray((JSONObject.getNames(jarray.getJSONObject(0))));	
-				
-				
+
+				jarray = jdata.getJSONArray("data");
+
+				return jarray;
+
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 			reader.close();
-			
-		
+
 		} catch (IOException e) {
 			e.printStackTrace();
 
-		}		
+		}
+		return null;
 	}
+
+
 
 }
