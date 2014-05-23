@@ -17,14 +17,14 @@ import de.teamgamma.cansat.app.values.Values;
 public class Database {
 	private ValueList data;
 	private static Database instance = null;
-	private String[] sensorNames;
+	private String[] namesArray;
 
-	public String[] getSensorNames() {
-		return sensorNames;
+	public String[] getNamesArray() {
+		return namesArray;
 	}
 
-	public void setSensorNames(String[] sensorNames) {
-		this.sensorNames = sensorNames;
+	public void setNamesArray(String[] namesArray) {
+		this.namesArray = namesArray;
 	}
 
 	public static Database getInstance() {
