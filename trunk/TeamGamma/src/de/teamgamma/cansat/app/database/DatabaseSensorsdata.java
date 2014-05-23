@@ -17,15 +17,6 @@ import de.teamgamma.cansat.app.values.Values;
 public class DatabaseSensorsdata {
 	private ValueList data;
 	private static DatabaseSensorsdata instance = null;
-	private String[] namesArray;
-
-	public String[] getSensornames() {
-		return namesArray;
-	}
-
-	public void setNamesArray(String[] namesArray) {
-		this.namesArray = namesArray;
-	}
 
 	public static DatabaseSensorsdata getInstance() {
 		if (instance == null) {

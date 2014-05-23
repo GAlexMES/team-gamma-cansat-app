@@ -2,7 +2,7 @@ package de.teamgamma.cansat.app.database;
 
 
 public class DatabaseSensornames {
-	private String[] namesArray;
+	private String[] namesArray = null;
 	private static DatabaseSensornames instance = null;
 
 	public static DatabaseSensornames getInstance() {
@@ -19,18 +19,4 @@ public class DatabaseSensornames {
 	public void setNamesArray(String[] namesArray) {
 		this.namesArray = namesArray;
 	}
-
-
-	public void setSensornamesToMembervariable() {
-		this.namesArray = null;
-
-		Database connectionThread = new Database();
-		connectionThread.setDownload(true);
-		Thread conThread = new Thread(connectionThread);
-		conThread.start();
-
-	}
-
-	
-
 }
