@@ -39,9 +39,6 @@ public class ConnectionThread implements Runnable{
 				Database.getInstance().setNamesArray((JSONObject.getNames(jarray.getJSONObject(0))));	
 				
 				
-				
-				
-				
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
