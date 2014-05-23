@@ -17,6 +17,15 @@ import de.teamgamma.cansat.app.values.Values;
 public class Database {
 	private ValueList data;
 	private static Database instance = null;
+	private String[] sensorNames;
+
+	public String[] getSensorNames() {
+		return sensorNames;
+	}
+
+	public void setSensorNames(String[] sensorNames) {
+		this.sensorNames = sensorNames;
+	}
 
 	public static Database getInstance() {
 		if (instance == null) {
@@ -31,68 +40,21 @@ public class Database {
 
 	}
 
-	private JSONObject connection() {
-		try {
 
-			URL url = new URL("http://gammaweb.noodle-net.de/read.php");
-
-			HttpURLConnection connection = (HttpURLConnection) url
-					.openConnection();
-			connection.setRequestMethod("GET");
-			connection.setDoInput(true);
-			connection.setDoOutput(true);
-			connection.setUseCaches(false);
-			connection.setRequestProperty("Content-Type",
-					"application/x-www-form-urlencoded");
-
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					connection.getInputStream()));
-
-			JSONObject jdata = null;
-			try {
-				jdata = new JSONObject(reader.readLine());
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-			reader.close();
-			return jdata;
-
-		} catch (IOException e) {
-			e.printStackTrace();
-
-		}
-		return null;
+	public void setSensornames(JSONObject jdata) {
+		
+		Thread connectionThread = new Thread(new ConnectionThread());
+		connectionThread.start();
 
 	}
 
-	public String[] getSensornames() {
-		
-		
-		
-		JSONObject jdata = this.connection();
-		JSONArray jarray = jdata.getJSONArray("data");
-		
-		
-		try {
-			
-			return JSONObject.getNames(jarray.getJSONObject(0));	
-			
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		return null;
-
-	}
-
-	public ArrayList<Values> connect(String sensor) {
+	public ArrayList<Values> getData(String sensor) {
 		ValueList data = new ValueList();
 
 		JSONObject jdata = null;
 		JSONArray jarray = null;
 
 		try {
-			jdata = this.connection();
 			if (jdata == null){
 				return null;
 			}
