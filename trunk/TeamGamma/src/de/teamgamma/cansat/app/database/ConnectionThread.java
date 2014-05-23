@@ -36,7 +36,7 @@ public class ConnectionThread implements Runnable{
 				
 				JSONArray jarray = jdata.getJSONArray("data");
 				
-				Database.getInstance().setSensornames(JSONObject.getNames(jarray.getJSONObject(0)));	
+				Database.getInstance().setNamesArray((JSONObject.getNames(jarray.getJSONObject(0))));	
 				
 				
 				
