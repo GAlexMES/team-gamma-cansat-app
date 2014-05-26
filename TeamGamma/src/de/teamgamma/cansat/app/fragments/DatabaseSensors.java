@@ -52,10 +52,12 @@ public class DatabaseSensors extends Fragment {
 				R.layout.fragment_database_sensor, container, false);
 		
 		
-		String[] sensorNames = {"temp", "pressure", "humidity", "gyro", "longitude", "latitude" };
+		Database.getInstance().getSensornames();
+		while(DatabaseSensornames.getInstance().getSensornames()==null){
+		}
 			
-		for(String Sensor : sensorNames){
-			AddAll(Sensor);
+		for(String sensor : DatabaseSensornames.getInstance().getSensornames()){
+			AddAll(sensor);
 		}
 		
 		
@@ -79,7 +81,7 @@ public class DatabaseSensors extends Fragment {
 				}
 				
 				
-				Fragment fragment = new RealtimeGraph();
+				Fragment fragment = new ImportSimpleXYChart();
 				Bundle args = new Bundle();
 		        args.putInt(OptionsFragment.ARG_SLIDEMENU_VALUES, v.getId());
 		        fragment.setArguments(args);
