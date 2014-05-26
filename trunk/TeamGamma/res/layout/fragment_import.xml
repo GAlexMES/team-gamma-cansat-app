@@ -46,11 +46,42 @@
             android:id="@+id/button_import"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/button_browser"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:background="@android:color/holo_blue_light"
             android:text="open file" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/button_import"
+            android:layout_marginTop="19dp"
+            android:background="#FF0099CC" />
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textView3"
+            android:text="Or connect to our own database to get all ever measured values"
+            android:textColor="@android:color/white"
+            android:textSize="25dp" />
+
+        <Button
+            android:id="@+id/Database"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/TextView01"
+            android:layout_marginTop="27dp"
+            android:background="@android:color/holo_blue_light"
+            android:text="Connect to database!" />
 
     </RelativeLayout>
 
