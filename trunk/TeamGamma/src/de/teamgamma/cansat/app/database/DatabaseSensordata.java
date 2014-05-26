@@ -9,35 +9,23 @@ import org.json.JSONObject;
 import de.teamgamma.cansat.app.values.ValueList;
 import de.teamgamma.cansat.app.values.Values;
 
-public class DatabaseSensorsdata {
+public class DatabaseSensordata {
 	private ValueList data;
-	private static DatabaseSensorsdata instance = null;
+	private static DatabaseSensordata instance = null;
 
-	public static DatabaseSensorsdata getInstance() {
+	public static DatabaseSensordata getInstance() {
 		if (instance == null) {
-			instance = new DatabaseSensorsdata();
+			instance = new DatabaseSensordata();
 		}
 		return instance;
 	}
 
-	public DatabaseSensorsdata() {
-		// SENSORENARRAY MIT NAMESBELEGUNG DER SENSOREN WIRD ERZEUGT
-		data = new ValueList();
-
-	}
 
 	public ArrayList<Values> getData(String sensor, JSONArray jarray) {
-		ValueList data = new ValueList();
+		this.data = new ValueList();
 
-
-
-		try {
-			if (jarray == null) {
-				return null;
-			}
-
-		} catch (JSONException e1) {
-			e1.printStackTrace();
+		if (jarray == null) {
+			return null;
 		}
 		JSONObject jvalue;
 		for (int i = 0; i < jarray.length(); i++) {
