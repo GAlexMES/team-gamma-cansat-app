@@ -10,7 +10,7 @@ import de.teamgamma.cansat.app.values.Values;
 
 public class Read {
 
-	private ValueList data = new ValueList();
+	private ValueList data;
 	private static Read instance = null;
 
 	// Singleton
@@ -22,7 +22,7 @@ public class Read {
 	}
 
 	public ArrayList<Values> getValuefromFile(String filepath) {
-		data.clearValues();
+		this.data = new ValueList();
 		if (filepath.endsWith("teamgamma")) {
 			String[] lineArray;
 			try {
