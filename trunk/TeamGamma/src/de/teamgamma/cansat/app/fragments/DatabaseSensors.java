@@ -82,12 +82,16 @@ public class DatabaseSensors extends Fragment {
 				
 				
 				Fragment fragment = new ImportSimpleXYChart();
+				
 				Bundle args = new Bundle();
 		        args.putInt(OptionsFragment.ARG_SLIDEMENU_VALUES, v.getId());
 		        fragment.setArguments(args);
 
 		        FragmentManager fragmentManager = getFragmentManager();
 		        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+		        
+		        Database.getInstance().getData(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.ACTIVESENSORNAME), fragment);
+		       
 				
 				
 			}
