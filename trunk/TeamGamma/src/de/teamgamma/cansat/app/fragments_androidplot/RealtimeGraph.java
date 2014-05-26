@@ -1,10 +1,10 @@
 package de.teamgamma.cansat.app.fragments_androidplot;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +21,7 @@ import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.sensors.Sensor;
+import de.teamgamma.cansat.app.values.Values;
 
 public class RealtimeGraph extends Fragment {
 	private XYPlot plot;
@@ -90,7 +91,6 @@ public class RealtimeGraph extends Fragment {
 	}
 
 	public synchronized void onValueChanged(Sensor sensor) {
-		Log.d("gamma","synchronized");
 		// get rid the oldest sample in history:
 		if (series1.size() > Integer.valueOf(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.NUMBEROFSHOWNVALUE))) {
 			((SimpleXYSeries) series1).removeFirst();
@@ -100,6 +100,5 @@ public class RealtimeGraph extends Fragment {
 
 		// redraw the Plots:
 		plot.redraw();
-
 	}
 }
