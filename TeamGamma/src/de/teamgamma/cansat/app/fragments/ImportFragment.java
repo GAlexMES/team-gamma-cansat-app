@@ -1,4 +1,4 @@
-package de.teamgamma.cansat.app.dataImport;
+package de.teamgamma.cansat.app.fragments;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,6 @@ import android.widget.Toast;
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.database.Database;
 import de.teamgamma.cansat.app.fileoperations.Read;
-import de.teamgamma.cansat.app.fragments.DatabaseSensors;
 import de.teamgamma.cansat.app.fragments_androidplot.ImportSimpleXYChart;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;

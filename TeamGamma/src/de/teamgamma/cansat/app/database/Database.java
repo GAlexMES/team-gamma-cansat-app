@@ -1,7 +1,10 @@
 package de.teamgamma.cansat.app.database;
 
-import org.json.*;
+import org.json.JSONArray;
+import org.json.JSONException;
 
+import android.app.Fragment;
+import android.util.Log;
 import de.teamgamma.cansat.app.fragments_androidplot.ImportSimpleXYChart;
 import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
 import de.teamgamma.cansat.app.main.MainActivity;
@@ -15,6 +18,7 @@ public class Database implements Runnable {
 	private boolean download;
 	private String sensor;
 	private static Database instance = null;
+	private Fragment fragment;
 
 	public static Database getInstance() {
 		if (instance == null) {
@@ -30,7 +34,8 @@ public class Database implements Runnable {
 		databaseThread.start();
 	}
 
-	public void getData(String sensor) {
+	public void getData(String sensor, Fragment fragment) {
+		this.fragment = fragment;
 		this.sensor = sensor;
 		this.download = true;
 		Thread databaseThread = new Thread(this);
@@ -52,12 +57,8 @@ public class Database implements Runnable {
 			if (this.sensor.equals(Options.getInstance().getOption(
 					KindOfOption.CHARTVIEW.ordinal(),
 					ChartViewOptions.ACTIVESENSORNAME))) {
-				if (MainActivity.getCurrentFragment().getClass()
-						.equals(RealtimeGraph.class)) {
-					((ImportSimpleXYChart) MainActivity.getCurrentFragment())
-							.setValue(DatabaseSensordata.getInstance().getData(
-									this.sensor, this.jarray));
-				}
+				((ImportSimpleXYChart) fragment).setValue(DatabaseSensordata.getInstance().getData(this.sensor, this.jarray));
+				
 			}
 
 		} else {

@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import de.teamgamma.cansat.app.values.ValueList;
 import de.teamgamma.cansat.app.values.Values;
 
@@ -41,7 +43,6 @@ public class DatabaseSensordata {
 			}
 
 		}
-
 		return this.data.getData();
 
 	}

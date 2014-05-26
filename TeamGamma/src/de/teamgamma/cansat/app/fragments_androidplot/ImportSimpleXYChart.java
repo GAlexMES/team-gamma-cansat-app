@@ -1,8 +1,11 @@
 package de.teamgamma.cansat.app.fragments_androidplot;
 
+import java.util.ArrayList;
+
 import android.R.color;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +13,16 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
-import com.androidplot.xy.*;
+import com.androidplot.xy.LineAndPointFormatter;
+import com.androidplot.xy.SimpleXYSeries;
+import com.androidplot.xy.XYPlot;
+import com.androidplot.xy.XYSeries;
 
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.data.constantValues;
 import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.values.Values;
-
-import java.util.ArrayList;
 
 /**
  * 
@@ -31,6 +35,7 @@ import java.util.ArrayList;
 public class ImportSimpleXYChart extends Fragment implements
 		OnSeekBarChangeListener {
 
+	private RelativeLayout mLinearLayout;
 	private XYPlot plot;
 	private Options options = Options.getInstance();
 	private ArrayList<Values> allValues;
@@ -43,6 +48,7 @@ public class ImportSimpleXYChart extends Fragment implements
 	int lowestValue;
 
 	public void setValue(ArrayList<Values> values) {
+		Log.d("values", String.valueOf(values.get(0)));
 		allValues = values;
 		numberOfShownValues = allValues.size();
 		lowestValue = allValues.get(0).getValues()[1].intValue();
@@ -55,6 +61,7 @@ public class ImportSimpleXYChart extends Fragment implements
 				lowestValue = allValues.get(i).getValues()[1].intValue();
 			}
 		}
+		createFragment();
 	}
 
 	/**
@@ -62,10 +69,24 @@ public class ImportSimpleXYChart extends Fragment implements
 	 */
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
 		// LinearLayout object, of the androitplot_xyplot.xml fragment
-		final RelativeLayout mLinearLayout = (RelativeLayout) inflater.inflate(
+		mLinearLayout = (RelativeLayout) inflater.inflate(
 				R.layout.import_androidplot_xyplot, container, false);
+
+		return mLinearLayout;
+	}
+	
+
+	@Override
+	public void onProgressChanged(SeekBar seekBar, int progress,
+			boolean fromUser) {
+		updateSeries(numberOfShownValueSlider.getProgress(),
+				timeSlider.getProgress());
+		numberOfShownValues = numberOfShownValueSlider.getProgress();
+
+	}
+
+	private void createFragment(){
 
 		numberOfShownValueSlider = (SeekBar) mLinearLayout
 				.findViewById(R.id.numberOfShownValueSeekBar);
@@ -113,19 +134,7 @@ public class ImportSimpleXYChart extends Fragment implements
 		// reduce the number of range labels
 		plot.setTicksPerRangeLabel(3);
 		plot.getGraphWidget().setDomainLabelOrientation(-45);
-
-		return mLinearLayout;
 	}
-
-	@Override
-	public void onProgressChanged(SeekBar seekBar, int progress,
-			boolean fromUser) {
-		updateSeries(numberOfShownValueSlider.getProgress(),
-				timeSlider.getProgress());
-		numberOfShownValues = numberOfShownValueSlider.getProgress();
-
-	}
-
 	private void updateSeries(int numberOfShownValues, int timeSliderProgress) {
 		int timeSliderMax = timeSliderProgress;
 		if (numberOfShownValues != this.numberOfShownValues) {

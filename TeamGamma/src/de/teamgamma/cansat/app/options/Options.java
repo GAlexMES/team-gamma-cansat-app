@@ -1,12 +1,13 @@
 package de.teamgamma.cansat.app.options;
 
+import android.app.Fragment;
+
 
 public class Options {
 
 	private OptionsInterface[] options = new OptionsInterface[4];
 
 	private OptionsReviewer check = new OptionsReviewer();
-	
 	
 	private static Options instance = null;
 
