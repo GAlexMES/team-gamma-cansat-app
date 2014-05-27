@@ -49,12 +49,12 @@ public class ImportSimpleXYChart extends Fragment implements
 	boolean layoutCreated = false;
 
 	public void setValue(ArrayList<Values> values) {
+		
 		allValues = values;
 		numberOfShownValues = allValues.size();
 		lowestValue = allValues.get(0).getValues()[1].intValue();
 		highestValue = allValues.get(0).getValues()[1].intValue();
 		for (int i = 0; i < allValues.size(); i++) {
-			Log.d("gamma",String.valueOf(allValues.get(i).getValues()[1]));
 			if (allValues.get(i).getValues()[1].intValue() > highestValue) {
 				highestValue = allValues.get(i).getValues()[1].intValue();
 			}
@@ -160,6 +160,8 @@ public class ImportSimpleXYChart extends Fragment implements
 					allValues.get(timeSliderProgress + i).getValues()[0]
 							.intValue(), allValues.get(timeSliderProgress + i)
 							.getValues()[1].intValue());
+			Log.d("timestemp",String.valueOf(allValues.get(timeSliderProgress + i)
+							.getValues()[0].intValue()));
 		}
 
 		for (int i = 0; i < 2; i++) {

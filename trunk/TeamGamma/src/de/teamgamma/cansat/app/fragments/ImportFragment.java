@@ -3,6 +3,7 @@ package de.teamgamma.cansat.app.fragments;
 import java.util.ArrayList;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
@@ -119,16 +120,19 @@ public class ImportFragment extends Fragment {
 				}				
 				else{
 					// Create new fragment and transaction
-					Fragment newFragment = new ImportSimpleXYChart();
-					((ImportSimpleXYChart) newFragment).setValue(allValues);
-					FragmentTransaction transaction = getFragmentManager()
-							.beginTransaction();
-
-					transaction.replace(R.id.content_frame, newFragment);
-					transaction.addToBackStack(null);
-
-					// Commit the transaction
-					transaction.commit();					
+		
+					Fragment fragment = new ImportSimpleXYChart();
+					
+					Bundle args = new Bundle();
+			        args.putInt(OptionsFragment.ARG_SLIDEMENU_VALUES, v.getId());
+			        fragment.setArguments(args);
+			        	
+			        FragmentManager fragmentManager = getFragmentManager();
+			        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+			        fragmentManager.executePendingTransactions();
+			        ((ImportSimpleXYChart) fragment).setValue(allValues);
+			        
+			        
 				}
 			}
 		});
