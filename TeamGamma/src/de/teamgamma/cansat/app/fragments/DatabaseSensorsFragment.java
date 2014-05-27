@@ -52,13 +52,14 @@ public class DatabaseSensorsFragment extends Fragment {
 				R.layout.fragment_database_sensor, container, false);
 		
 		
-		DatabaseCoordination.getInstance().setSensornames();
+		DatabaseCoordination.getInstance().connectToDatabase();
 		while(Sensornames.getInstance().getSensornames()==null){
 		}
 			
 		for(int i = 0; i < Sensornames.getInstance().getSensornames().length;i++){
 			AddAll(Sensornames.getInstance().getSensornames()[i],i);
 		}
+		
 		
 		
 		return mLinearLayout;
@@ -94,7 +95,7 @@ public class DatabaseSensorsFragment extends Fragment {
 		        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 		        
 		        //Database.getInstance().getData(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.ACTIVESENSORNAME), fragment);
-		        DatabaseCoordination.getInstance().connectToDatabase(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.ACTIVESENSORNAME), fragment);
+		        DatabaseCoordination.getInstance().getData(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.ACTIVESENSORNAME), fragment);
 
 				
 			}
