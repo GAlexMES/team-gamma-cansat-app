@@ -46,14 +46,15 @@ public class ImportSimpleXYChart extends Fragment implements
 	private int numberOfShownValues;
 	int highestValue;
 	int lowestValue;
+	boolean layoutCreated = false;
 
 	public void setValue(ArrayList<Values> values) {
-		Log.d("values", String.valueOf(values.get(0)));
 		allValues = values;
 		numberOfShownValues = allValues.size();
 		lowestValue = allValues.get(0).getValues()[1].intValue();
 		highestValue = allValues.get(0).getValues()[1].intValue();
 		for (int i = 0; i < allValues.size(); i++) {
+			Log.d("gamma",String.valueOf(allValues.get(i).getValues()[1]));
 			if (allValues.get(i).getValues()[1].intValue() > highestValue) {
 				highestValue = allValues.get(i).getValues()[1].intValue();
 			}
@@ -72,7 +73,7 @@ public class ImportSimpleXYChart extends Fragment implements
 		// LinearLayout object, of the androitplot_xyplot.xml fragment
 		mLinearLayout = (RelativeLayout) inflater.inflate(
 				R.layout.import_androidplot_xyplot, container, false);
-
+		layoutCreated = true;
 		return mLinearLayout;
 	}
 	
@@ -87,7 +88,6 @@ public class ImportSimpleXYChart extends Fragment implements
 	}
 
 	private void createFragment(){
-
 		numberOfShownValueSlider = (SeekBar) mLinearLayout
 				.findViewById(R.id.numberOfShownValueSeekBar);
 		numberOfShownValueSlider.setMax(allValues.size());

@@ -84,7 +84,6 @@ public class DatabaseSensorsFragment extends Fragment {
 					}
 				}
 				
-				
 				Fragment fragment = new ImportSimpleXYChart();
 				
 				Bundle args = new Bundle();
@@ -93,7 +92,8 @@ public class DatabaseSensorsFragment extends Fragment {
 
 		        FragmentManager fragmentManager = getFragmentManager();
 		        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-		        
+		        fragmentManager.executePendingTransactions();
+
 		        //Database.getInstance().getData(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.ACTIVESENSORNAME), fragment);
 		        DatabaseCoordination.getInstance().getData(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.ACTIVESENSORNAME), fragment);
 
