@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import de.teamgamma.cansat.app.R;
-import de.teamgamma.cansat.app.database.Database;
+import de.teamgamma.cansat.app.database.DatabaseCoordination;
 import de.teamgamma.cansat.app.fileoperations.Read;
 import de.teamgamma.cansat.app.fragments_androidplot.ImportSimpleXYChart;
 import de.teamgamma.cansat.app.options.ChartViewOptions;

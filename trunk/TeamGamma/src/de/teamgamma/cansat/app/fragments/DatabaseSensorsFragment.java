@@ -21,8 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import de.teamgamma.cansat.app.R;
 import de.teamgamma.cansat.app.data.constantValues;
-import de.teamgamma.cansat.app.database.Database;
-import de.teamgamma.cansat.app.database.DatabaseSensornames;
+import de.teamgamma.cansat.app.database.DatabaseCoordination;
+import de.teamgamma.cansat.app.database.Sensornames;
 import de.teamgamma.cansat.app.fileoperations.Read;
 import de.teamgamma.cansat.app.fragments_androidplot.ImportSimpleXYChart;
 import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
@@ -52,12 +52,12 @@ public class DatabaseSensorsFragment extends Fragment {
 				R.layout.fragment_database_sensor, container, false);
 		
 		
-		Database.getInstance().setSensornames();
-		while(DatabaseSensornames.getInstance().getSensornames()==null){
+		DatabaseCoordination.getInstance().setSensornames();
+		while(Sensornames.getInstance().getSensornames()==null){
 		}
 			
-		for(int i = 0; i < DatabaseSensornames.getInstance().getSensornames().length;i++){
-			AddAll(DatabaseSensornames.getInstance().getSensornames()[i],i);
+		for(int i = 0; i < Sensornames.getInstance().getSensornames().length;i++){
+			AddAll(Sensornames.getInstance().getSensornames()[i],i);
 		}
 		
 		
@@ -94,7 +94,7 @@ public class DatabaseSensorsFragment extends Fragment {
 		        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 		        
 		        //Database.getInstance().getData(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.ACTIVESENSORNAME), fragment);
-		        Database.getInstance().getData(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.ACTIVESENSORNAME), fragment);
+		        DatabaseCoordination.getInstance().connectToDatabase(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.ACTIVESENSORNAME), fragment);
 
 				
 			}
