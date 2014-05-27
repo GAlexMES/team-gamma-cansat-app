@@ -1,13 +1,13 @@
 package de.teamgamma.cansat.app.database;
 
 
-public class DatabaseSensornames {
+public class Sensornames {
 	private String[] namesArray = null;
-	private static DatabaseSensornames instance = null;
+	private static Sensornames instance = null;
 
-	public static DatabaseSensornames getInstance() {
+	public static Sensornames getInstance() {
 		if (instance == null) {
-			instance = new DatabaseSensornames();
+			instance = new Sensornames();
 		}
 		return instance;
 	}
