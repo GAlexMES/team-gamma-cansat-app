@@ -3,6 +3,7 @@ package de.teamgamma.cansat.app.database;
 import org.json.JSONArray;
 
 import android.app.Fragment;
+import android.util.Log;
 import de.teamgamma.cansat.app.fragments_androidplot.ImportSimpleXYChart;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
@@ -31,7 +32,6 @@ public class DatabaseCoordination {
 	}
 
 	public void getData(String sensor, Fragment fragment) {
-
 		if (sensor.equals(Options.getInstance().getOption(
 				KindOfOption.CHARTVIEW.ordinal(),
 				ChartViewOptions.ACTIVESENSORNAME))) {
