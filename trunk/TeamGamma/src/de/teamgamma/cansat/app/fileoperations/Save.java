@@ -40,7 +40,7 @@ public class Save {
 		try {
 			Double time = data[0][0];
 
-			for (int i = 1; i < constantValues.names.length; i++) {
+			for (int i = 0; i < constantValues.names.length; i++) {
 				// the values ​​of individual sensors are each written to a
 				// separate Sensor file
 				// the name of the file consists of the date, time and name of
