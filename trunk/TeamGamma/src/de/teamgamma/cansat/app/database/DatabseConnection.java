@@ -29,13 +29,9 @@ public class DatabseConnection {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
 					connection.getInputStream()));
 
-			JSONObject jdata = null;
-			JSONArray jarray = null;
 			try {
 
-				jdata = new JSONObject(reader.readLine());
-
-				jarray = jdata.getJSONArray("data");
+				JSONArray jarray = new JSONObject(reader.readLine()).getJSONArray("data");
 
 				return jarray;
 
