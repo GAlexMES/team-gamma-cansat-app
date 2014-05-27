@@ -10,13 +10,13 @@ import android.util.Log;
 import de.teamgamma.cansat.app.values.ValueList;
 import de.teamgamma.cansat.app.values.Values;
 
-public class DatabaseSensordata {
+public class Sensordata {
 	private ValueList data;
-	private static DatabaseSensordata instance = null;
+	private static Sensordata instance = null;
 
-	public static DatabaseSensordata getInstance() {
+	public static Sensordata getInstance() {
 		if (instance == null) {
-			instance = new DatabaseSensordata();
+			instance = new Sensordata();
 		}
 		return instance;
 	}
@@ -30,12 +30,22 @@ public class DatabaseSensordata {
 			return null;
 		}
 		JSONObject jvalue;
+		Long firstTimestamp = Long.valueOf(0);
+		try {
+			jvalue = jarray.getJSONObject(0);
+			firstTimestamp = jvalue.getLong("time");
+			
+			
+			
+		} catch (JSONException e1) {
+			e1.printStackTrace();
+		}
 		for (int i = 0; i < jarray.length(); i++) {
 
 			try {
 				jvalue = jarray.getJSONObject(i);
 				this.data.appendData(
-						Double.valueOf(jvalue.getLong("time")),
+						Double.valueOf(jvalue.getLong("time") - firstTimestamp),
 						jvalue.getDouble(sensor));
 
 			} catch (JSONException e) {
