@@ -39,5 +39,4 @@ public class DatabaseCoordination {
 					.getData(sensor, this.jarray));
 		}
 	}
-
 }
