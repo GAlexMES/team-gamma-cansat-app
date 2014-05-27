@@ -92,7 +92,7 @@ public class ImportFragment extends Fragment {
 					public void onClick(View v) {
 						
 						// Create new fragment and transaction
-						Fragment newFragment = new DatabaseSensors();
+						Fragment newFragment = new DatabaseSensorsFragment();
 						FragmentTransaction transaction = getFragmentManager()
 								.beginTransaction();
 

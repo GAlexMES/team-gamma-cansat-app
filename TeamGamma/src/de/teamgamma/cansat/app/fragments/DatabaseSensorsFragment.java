@@ -34,7 +34,7 @@ import de.teamgamma.cansat.app.options.PathOptions;
 import de.teamgamma.cansat.app.socket.ServerConnection;
 import de.teamgamma.cansat.app.values.Values;
 
-public class DatabaseSensors extends Fragment {
+public class DatabaseSensorsFragment extends Fragment {
 
 	// initialize a few importend variables
 	LinearLayout mLinearLayout;
@@ -56,18 +56,19 @@ public class DatabaseSensors extends Fragment {
 		while(DatabaseSensornames.getInstance().getSensornames()==null){
 		}
 			
-		for(String sensor : DatabaseSensornames.getInstance().getSensornames()){
-			AddAll(sensor);
+		for(int i = 0; i < DatabaseSensornames.getInstance().getSensornames().length;i++){
+			AddAll(DatabaseSensornames.getInstance().getSensornames()[i],i);
 		}
 		
 		
 		return mLinearLayout;
 	}
 		
-	private void AddAll(String text) {	    
+	private void AddAll(String text, int id) {	    
 	    Button btn = new Button(mLinearLayout.getContext());
 	    btn.setBackgroundColor(Color.rgb(51, 181, 229));
 	    btn.setText(text); 
+	    btn.setId(id);
 	    buttons.add(btn);
 	    btn.setY(buttons.size()*(btn.getHeight()+10));
 	    btn.setOnClickListener(new OnClickListener() {
@@ -75,7 +76,9 @@ public class DatabaseSensors extends Fragment {
 			public void onClick(View v) {
 				for(int i = 0; i<buttons.size();i++){
 					if(buttons.get(i).getId() == v.getId()){
-						options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[i]);
+						//options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[i]);
+						// maybe wrong only testing
+						options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,(String) buttons.get(v.getId()).getText());
 						break;
 					}
 				}
@@ -90,9 +93,9 @@ public class DatabaseSensors extends Fragment {
 		        FragmentManager fragmentManager = getFragmentManager();
 		        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 		        
+		        //Database.getInstance().getData(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.ACTIVESENSORNAME), fragment);
 		        Database.getInstance().getData(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.ACTIVESENSORNAME), fragment);
-		       
-				
+
 				
 			}
 		});
