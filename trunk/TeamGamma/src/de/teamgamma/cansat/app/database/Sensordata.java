@@ -47,6 +47,7 @@ public class Sensordata {
 				this.data.appendData(
 						Double.valueOf(jvalue.getLong("time") - firstTimestamp),
 						jvalue.getDouble(sensor));
+				Log.d("database", String.valueOf(jvalue.getDouble(sensor)));
 
 			} catch (JSONException e) {
 				e.printStackTrace();
