@@ -9,23 +9,20 @@ import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.Options;
 
 public class DatabaseCoordination {
-
-
+	
 	private static DatabaseCoordination instance = null;
-	private JSONArray jarray;
-
-
-	public void setJsonArray(JSONArray jarray) {
-		this.jarray = jarray;
-	}
-
 	private ConnectionRun connectionrun = new ConnectionRun();
-
+	private JSONArray jarray;
+	
 	public static DatabaseCoordination getInstance() {
 		if (instance == null) {
 			instance = new DatabaseCoordination();
 		}
 		return instance;
+	}
+	
+	public void setJsonArray(JSONArray jarray) {
+		this.jarray = jarray;
 	}
 
 	public void connectToDatabase() {
