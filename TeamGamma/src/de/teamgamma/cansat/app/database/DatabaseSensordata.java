@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
-
 import de.teamgamma.cansat.app.values.ValueList;
 import de.teamgamma.cansat.app.values.Values;
 
@@ -24,6 +23,7 @@ public class DatabaseSensordata {
 
 
 	public ArrayList<Values> getData(String sensor, JSONArray jarray) {
+		Log.d("database", sensor);
 		this.data = new ValueList();
 
 		if (jarray == null) {
@@ -35,7 +35,7 @@ public class DatabaseSensordata {
 			try {
 				jvalue = jarray.getJSONObject(i);
 				this.data.appendData(
-						Double.valueOf(jvalue.getLong("utc_time")),
+						Double.valueOf(jvalue.getLong("time")),
 						jvalue.getDouble(sensor));
 
 			} catch (JSONException e) {

@@ -52,7 +52,7 @@ public class DatabaseSensorsFragment extends Fragment {
 				R.layout.fragment_database_sensor, container, false);
 		
 		
-		Database.getInstance().getSensornames();
+		Database.getInstance().setSensornames();
 		while(DatabaseSensornames.getInstance().getSensornames()==null){
 		}
 			
