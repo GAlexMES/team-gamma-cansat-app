@@ -1,5 +1,13 @@
 package de.teamgamma.cansat.app.fileoperations;
 
+/**
+ * @author Teamgamma
+ * 
+ *This class implements Runnable to save the data parallel in an own Thread.
+ * 
+ * 
+ */
+
 
 public class SaveThread implements Runnable {
 	private Save save = Save.getInstance();

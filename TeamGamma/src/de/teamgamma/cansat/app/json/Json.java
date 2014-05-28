@@ -8,6 +8,15 @@ import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.MapsOptions;
 import de.teamgamma.cansat.app.options.Options;
 
+/**
+ * @author Teamgamma
+ * 
+ *         This class convert the String message from the Socketsystem to an
+ *         JSONObject. With the JSONObject, the data will convert to an "Sensor"
+ *         Object for every Sensor.
+ * 
+ */
+
 public class Json {
 
 	private Double[][] sensors;
@@ -37,13 +46,22 @@ public class Json {
 						- constantValues.firstTimestamp);
 				try {
 					if (data.getDouble(constantValues.names[i]) != 0) {
-						this.sensors[i][1] = data.getDouble(constantValues.names[i]);
-						if (constantValues.names[i].equals("longitude") || constantValues.names[i].equals("latitude"))
+						this.sensors[i][1] = data
+								.getDouble(constantValues.names[i]);
+						if (constantValues.names[i].equals("longitude")
+								|| constantValues.names[i].equals("latitude"))
 
 							if (constantValues.names[i].equals("longitude")) {
-								Options.getInstance().setOption(KindOfOption.MAPS.ordinal(),MapsOptions.LONGITUDE,this.sensors[i][1]);
-							} else if (constantValues.names[i].equals("latitude")) {
-								Options.getInstance().setOption(KindOfOption.MAPS.ordinal(),MapsOptions.LATITUDE,this.sensors[i][1]);
+								Options.getInstance().setOption(
+										KindOfOption.MAPS.ordinal(),
+										MapsOptions.LONGITUDE,
+										this.sensors[i][1]);
+							} else if (constantValues.names[i]
+									.equals("latitude")) {
+								Options.getInstance().setOption(
+										KindOfOption.MAPS.ordinal(),
+										MapsOptions.LATITUDE,
+										this.sensors[i][1]);
 							}
 					}
 				} catch (JSONException e) {

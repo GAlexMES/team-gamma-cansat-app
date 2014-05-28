@@ -9,6 +9,14 @@ import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.options.PathOptions;
 
+/**
+ * @author Teamgamma
+ * 
+ * This class saves the data of one try to an own file for every different Sensor.
+ * 
+ * 
+ */
+
 public class Save {
 	private static Save instance = null;
 

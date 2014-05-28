@@ -1,39 +1,44 @@
 package de.teamgamma.cansat.app.socket;
 
-
-
-import android.util.Log;
 import de.teamgamma.cansat.app.data.DataCoordination;
 import de.teamgamma.cansat.app.options.ConnectionOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.Options;
 
-public class ServerConnection {
+/**
+ * @author Teamgamma
+ * 
+ *         This class implements Runnable to get the data parallel in a new
+ *         Thread and give the data to the DataCoordination class.
+ * 
+ */
 
+public class ServerConnection {
 
 	public ServerConnection() {
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
-				Log.d("gamma","datacoordination");
 				Options options = Options.getInstance();
-				AndroidClient client = new AndroidClient(
-						options.getOption(KindOfOption.CONNECTION.ordinal(),ConnectionOptions.JAVASOCKETIP),
-						
-						Integer.parseInt(options.getOption(KindOfOption.CONNECTION.ordinal(),ConnectionOptions.JAVASOCKETPORT)),
+				AndroidClient client = new AndroidClient(options.getOption(
+						KindOfOption.CONNECTION.ordinal(),
+						ConnectionOptions.JAVASOCKETIP),
+
+				Integer.parseInt(options.getOption(
+						KindOfOption.CONNECTION.ordinal(),
+						ConnectionOptions.JAVASOCKETPORT)),
 						new MessageAdapter() {
 
 							@Override
 							public void messageArrived(String message) {
-								Log.d("message",message);
-								DataCoordination.getInstance().coordinateData(message);
+								DataCoordination.getInstance().coordinateData(
+										message);
 							}
 						});
 
 			}
-		}
-		).start();
+		}).start();
 
 	}
 }

@@ -1,5 +1,12 @@
 package de.teamgamma.cansat.app.database;
 
+/**
+ * @author Teamgamma
+ * 
+ *         This class is only an getter and setter class to save the names of
+ *         Sensors from the Database.
+ * 
+ */
 
 public class Sensornames {
 	private String[] namesArray = null;
@@ -11,7 +18,7 @@ public class Sensornames {
 		}
 		return instance;
 	}
-	
+
 	public String[] getSensornames() {
 		return namesArray;
 	}

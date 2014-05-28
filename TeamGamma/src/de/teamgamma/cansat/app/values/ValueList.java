@@ -2,6 +2,14 @@ package de.teamgamma.cansat.app.values;
 
 import java.util.ArrayList;
 
+/**
+ * @author Teamgama
+ * 
+ *         This class built easily an ArrayList. Each index of the ArrayList
+ *         consists of an Value Object.
+ * 
+ */
+
 public class ValueList {
 
 	private ArrayList<Values> data;
@@ -20,8 +28,8 @@ public class ValueList {
 	public ArrayList<Values> getData() {
 		return this.data;
 	}
-	
-	public void clearValues(){
+
+	public void clearValues() {
 		this.data.clear();
 	}
 

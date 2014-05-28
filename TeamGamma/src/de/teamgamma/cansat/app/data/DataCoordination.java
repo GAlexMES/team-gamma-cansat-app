@@ -9,6 +9,17 @@ import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.sensors.Sensor;
 
+/**
+ * @author Teamgamma
+ * 
+ *         This class controls the entire data traffic in real-time connection.
+ *         The data will converted From an String to an Sensor Object. Every
+ *         Sensordata will give to the Realtimegraph and save it parallel in an own
+ *         Sensorfile for every try.
+ * 
+ * 
+ */
+
 public class DataCoordination {
 
 	private Json json;
@@ -67,6 +78,5 @@ public class DataCoordination {
 		saveThread.start();
 
 	}
-
 
 }

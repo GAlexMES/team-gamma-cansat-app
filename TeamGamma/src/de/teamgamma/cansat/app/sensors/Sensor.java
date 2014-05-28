@@ -1,24 +1,34 @@
 package de.teamgamma.cansat.app.sensors;
 
-import android.util.Log;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.Options;
+
+/**
+ * @author Teamgamma
+ * 
+ *         This class is an Object to save the data from one Sensor with 20
+ *         values and this 20 timestamps. The 20 Values will show in the
+ *         RealtimeGraph. Every new Value will append to the Sensor Object and
+ *         the first Sensor will delete.
+ * 
+ */
 
 public class Sensor {
 	private int numberOfValues;
 	private double[][] values;
 	private String name;
-	
-	
-	public Sensor(){
+
+	public Sensor() {
 		Options options = Options.getInstance();
-		if(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.NUMBEROFSHOWNVALUE)==null){
-			this.numberOfValues=20;
-		}
-		else{
-			this.numberOfValues = Integer.valueOf(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.NUMBEROFSHOWNVALUE));
-			
+		if (options.getOption(KindOfOption.CHARTVIEW.ordinal(),
+				ChartViewOptions.NUMBEROFSHOWNVALUE) == null) {
+			this.numberOfValues = 20;
+		} else {
+			this.numberOfValues = Integer.valueOf(options.getOption(
+					KindOfOption.CHARTVIEW.ordinal(),
+					ChartViewOptions.NUMBEROFSHOWNVALUE));
+
 		}
 		this.values = new double[numberOfValues][2];
 	}

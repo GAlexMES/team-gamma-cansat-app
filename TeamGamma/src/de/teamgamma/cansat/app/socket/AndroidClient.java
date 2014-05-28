@@ -18,6 +18,15 @@ import de.teamgamma.cansat.app.options.ConnectionOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.Options;
 
+/**
+ * @author Teamgamma
+ * 
+ *         This class is our Socketclient, to connect the Socketserver. The
+ *         connection starts in an parallel Thread and wait for the data, while
+ *         the connection exists.
+ * 
+ */
+
 public class AndroidClient {
 	private Socket clientSocket = null;
 
@@ -30,11 +39,9 @@ public class AndroidClient {
 			this.messageAdapter = messageAdapter;
 
 			try {
-				// BufferedReader zum lesen erzeugen
 				this.in = new BufferedReader(new InputStreamReader(
 						clientSocket.getInputStream()));
 
-				Log.d("socket_test", "Buffered reader created!");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -43,6 +50,7 @@ public class AndroidClient {
 		public void run() {
 			String message = null;
 			int counter = 0;
+			// while the connection exists, the class wait for data.
 			while (clientSocket.isConnected()) {
 				try {
 					if (this.in.ready()) {
@@ -76,16 +84,20 @@ public class AndroidClient {
 			InetAddress inetAddress = InetAddress.getByName(dst);
 
 			try {
+				// a new Thread start to get the message from the Server.
 				this.clientSocket = new Socket(inetAddress, dstPort);
 				Log.d("socket_test", "Socket created, everything fine!");
-				this.commThread = new Thread(new CommunicationThread(messageAdapter));
+				this.commThread = new Thread(new CommunicationThread(
+						messageAdapter));
 				this.commThread.start();
-				
+
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_kk_mm",
 						Locale.GERMANY);
 				constantValues.exportTime = sdf.format(new Date());
-				Options.getInstance().setOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.ACTIVECONNECTION, 1);
-				
+				Options.getInstance().setOption(
+						KindOfOption.CONNECTION.ordinal(),
+						ConnectionOptions.ACTIVECONNECTION, 1);
+
 			} catch (IOException e) {
 				e.printStackTrace();
 				Log.d("socket_test", "Socket created, IO Exception!");
