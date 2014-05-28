@@ -34,6 +34,14 @@ import de.teamgamma.cansat.app.options.PathOptions;
 import de.teamgamma.cansat.app.socket.ServerConnection;
 import de.teamgamma.cansat.app.values.Values;
 
+
+/**
+ * 
+ * @author Alexander Brennecke
+ * creates a fragment which displays every sensor, cathed from the database as a button
+ * 
+ *
+ */
 public class DatabaseSensorsFragment extends Fragment {
 
 	// initialize a few importend variables
@@ -42,7 +50,7 @@ public class DatabaseSensorsFragment extends Fragment {
 	private ArrayList<Button> buttons = new ArrayList<Button>();
 
 	/**
-	 * will be called when a new ImportedFragment object is generated
+	 * will be called when a new DatabaseSensorFragment object is generated
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,6 +73,12 @@ public class DatabaseSensorsFragment extends Fragment {
 		return mLinearLayout;
 	}
 		
+	
+	/**
+	 * generates a button with the transfered text and id and add it to the fragment
+	 * @param text text which should displayed on the generated button
+	 * @param id ID of the button which should be generated
+	 */
 	private void AddAll(String text, int id) {	    
 	    Button btn = new Button(mLinearLayout.getContext());
 	    btn.setBackgroundColor(Color.rgb(51, 181, 229));
@@ -73,16 +87,23 @@ public class DatabaseSensorsFragment extends Fragment {
 	    buttons.add(btn);
 	    btn.setY(buttons.size()*(btn.getHeight()+10));
 	    btn.setOnClickListener(new OnClickListener() {
+	    	
+	    	/**
+	    	 * on click listener
+	    	 * creates a new ImportSimpleXYChart Fragment and displays it
+	    	 * with the correct values from the database
+	    	 */
 			@Override
 			public void onClick(View v) {
 				for(int i = 0; i<buttons.size();i++){
 					if(buttons.get(i).getId() == v.getId()){
-						//options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[i]);
-						// maybe wrong only testing
+
 						options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,(String) buttons.get(v.getId()).getText());
 						break;
 					}
 				}
+				
+				//generates the new fragment and commits it to the display
 				
 				Fragment fragment = new ImportSimpleXYChart();
 				

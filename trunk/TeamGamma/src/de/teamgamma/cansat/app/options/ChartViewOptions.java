@@ -2,6 +2,13 @@ package de.teamgamma.cansat.app.options;
 
 import android.util.Log;
 
+
+/**
+ * 
+ * @author Alexander Brennecke
+ *	saves every options which are imported for the correct displaying of the charts
+ *
+ */
 public class ChartViewOptions implements OptionsInterface {
 	
 	public static final int NUMBEROFSHOWNVALUE = 0;
@@ -17,14 +24,21 @@ public class ChartViewOptions implements OptionsInterface {
 	 * 1: point color
 	 * 2: line color
 	 * 3: area color
+	 * 4: active sensor
+	 * 5: last active screen
 	 */
+	
 	public String[] getValues() {
 		return values;
 	}
+	
 	public void setValues(String[] values) {
 		this.values = values;
 	}
 	
+	/**
+	 * @return colors returns an Array within the different colors fir Line, Area and Point
+	 */
 	public int[] getColors(){
 		int[] colors = new int[3];
 		if(!(values[POINTCOLOR].equals("null")) && !(values[LINECOLOR].equals("null")) && !(values[AREACOLOR].equals("null"))){

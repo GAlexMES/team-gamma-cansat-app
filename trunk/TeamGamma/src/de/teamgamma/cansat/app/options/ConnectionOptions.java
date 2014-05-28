@@ -1,5 +1,12 @@
 package de.teamgamma.cansat.app.options;
 
+
+/**
+ * 
+ * @author Alexander Brennecke
+ *	saves every option required for a java socket connection	
+ *
+ */
 public class ConnectionOptions implements OptionsInterface {
 	
 	public static final int JAVASOCKETPORT = 0;
