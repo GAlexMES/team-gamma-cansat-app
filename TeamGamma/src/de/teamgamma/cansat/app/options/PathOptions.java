@@ -1,7 +1,11 @@
 package de.teamgamma.cansat.app.options;
 
 import android.os.Environment;
-
+/**
+ * 
+ * @author Alexander Brennecke
+ * Path options to save short- and long-term pathes
+ */
 
 public class PathOptions implements OptionsInterface {
 	
@@ -25,6 +29,9 @@ public class PathOptions implements OptionsInterface {
 	 * 6: temporaryBrowserResultPath
 	 */
 
+	/**
+	 * generates the home path 
+	 */
 	public PathOptions() {
 		values[4] = Environment.getExternalStorageDirectory().getPath()
 				+ "/teamgamma/options.txt";

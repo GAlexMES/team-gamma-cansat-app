@@ -91,6 +91,10 @@ public class OptionsChartviewFragment extends Fragment implements OnSeekBarChang
 		return mLinearLayout;
 	}
 	
+	/**
+	 * updates the color of the displaying chart
+	 */
+	
 	private void updateColor(){
 		for(int i = 0; i<seekBarIdArray.length;i++){
 			seekBarValue[i]=seekBarArray[i].getProgress();

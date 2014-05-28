@@ -161,7 +161,11 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	/* The click listner for ListView in the navigation drawer */
+	/**
+	 *  
+	 * @author Alexander Brennecke
+	 *	The click listner for ListView in the navigation drawer
+	 */
 	private class DrawerItemClickListener implements
 			ListView.OnItemClickListener {
 		@Override
@@ -170,6 +174,13 @@ public class MainActivity extends Activity {
 			selectItem(position, false);
 		}
 	}
+	
+	/**
+	 * 
+	 * @param position position of the selected item in the item Array List
+	 * @param check operation were generated
+	 * updates the displaying fragment depend on the selected item in the navigation drawer
+	 */
 
 	private void selectItem(int position, boolean check) {
 		// update the main content by replacing fragments
@@ -293,10 +304,18 @@ public class MainActivity extends Activity {
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 	
+	/**
+	 * 
+	 * @return the current fragment
+	 */
 	public static Fragment getCurrentFragment(){
 		return fragment;
 	}
 	
+	/**
+	 * creates a toast
+	 * @param message text which should displayed 
+	 */
 	private void creatToast(String message){
 		Context context = this.getBaseContext();
 		CharSequence text = message;

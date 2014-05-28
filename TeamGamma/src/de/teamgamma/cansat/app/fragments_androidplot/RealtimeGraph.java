@@ -1,10 +1,11 @@
 package de.teamgamma.cansat.app.fragments_androidplot;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +22,20 @@ import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
 import de.teamgamma.cansat.app.options.Options;
 import de.teamgamma.cansat.app.sensors.Sensor;
-import de.teamgamma.cansat.app.values.Values;
 
+
+/**
+ * 
+ * @author Alexander Brennecke
+ * 
+ * generates a RealtimeGraph which can displays the values in real time
+ *
+ */
 public class RealtimeGraph extends Fragment {
 	private XYPlot plot;
 	private XYSeries series1 = null;
+	private int counter = 0;
+	private LineAndPointFormatter series1Format;
 	
 	private Options options = Options.getInstance();
 	
@@ -60,9 +70,9 @@ public class RealtimeGraph extends Fragment {
 																	// array
 																	// into a
 																	// List
-				SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, // Y_VALS_ONLY means use
-														// the element index as
-														// the x value
+				SimpleXYSeries.ArrayFormat.XY_VALS_INTERLEAVED, // Y_VALS_ONLY means use
+																// the element index as
+																// the x value
 				options.getOption(KindOfOption.CHARTVIEW.ordinal(),
 						ChartViewOptions.ACTIVESENSORNAME)); // Set the display
 																// title of the
@@ -71,13 +81,15 @@ public class RealtimeGraph extends Fragment {
 		// Create a formatter to use for drawing a series using
 		// LineAndPointRenderer
 		// and configure it from xml:
-		LineAndPointFormatter series1Format = new LineAndPointFormatter(
-				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW
-						.ordinal()].getColors()[1]], // Line color
-				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW
-						.ordinal()].getColors()[0]], // Point color
-				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW
-						.ordinal()].getColors()[2]], // Area color
+//		series1Format = new LineAndPointFormatter(
+//				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW
+//						.ordinal()].getColors()[1]], // Line color
+//				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW
+//						.ordinal()].getColors()[0]], // Point color
+//				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW
+//						.ordinal()].getColors()[2]], // Area color
+//				null);
+		series1Format = new LineAndPointFormatter(Color.BLUE,Color.BLUE,Color.BLUE,
 				null);
 
 		// add a new series' to the xyplot:
@@ -89,6 +101,11 @@ public class RealtimeGraph extends Fragment {
 
 		return mLinearLayout;
 	}
+	
+	/**
+	 * updates the chart with the new current values
+	 * @param sensor sensor which should be displayed
+	 */
 
 	public synchronized void onValueChanged(Sensor sensor) {
 		// get rid the oldest sample in history:
@@ -96,9 +113,10 @@ public class RealtimeGraph extends Fragment {
 			((SimpleXYSeries) series1).removeFirst();
 		}
 		// add the latest history sample:
-		((SimpleXYSeries) series1).addLast(null, sensor.getValues()[19][1]);
-
+		((SimpleXYSeries) series1).addLast(counter, sensor.getValues()[19][1]);
+		counter = counter +1 ;
 		// redraw the Plots:
 		plot.redraw();
+		Log.d("gamma", "ende");
 	}
 }

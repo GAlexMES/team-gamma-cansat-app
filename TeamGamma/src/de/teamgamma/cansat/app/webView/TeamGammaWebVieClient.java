@@ -5,11 +5,12 @@ import android.net.Uri;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+/**
+ * 
+ * @author Alexander Brennecke
+ *web view client to display our website into the application
+ */
 public class TeamGammaWebVieClient extends WebViewClient {        
-    /* (non-Java doc)
-     * @see android.webkit.WebViewClient#shouldOverrideUrlLoading(android.webkit.WebView, java.lang.String)
-     */
-
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {

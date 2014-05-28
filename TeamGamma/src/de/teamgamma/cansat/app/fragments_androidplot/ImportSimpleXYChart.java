@@ -29,7 +29,7 @@ import de.teamgamma.cansat.app.values.Values;
  * @author Alexander Brennecke 
  * 
  * Shows a fragment which displays a SimpleXYChart
- *         of the selected import file
+ *         of the selected import file or database
  */
 
 public class ImportSimpleXYChart extends Fragment implements
@@ -47,14 +47,18 @@ public class ImportSimpleXYChart extends Fragment implements
 	int highestValue;
 	int lowestValue;
 	boolean layoutCreated = false;
+	
+	/**
+	 * method to set the ArrayList with all values, which can be shown
+	 */
 
-	public void setValue(ArrayList<Values> values) {
-		
+	public void setValue(ArrayList<Values> values) {		
 		allValues = values;
 		numberOfShownValues = allValues.size();
 		lowestValue = allValues.get(0).getValues()[1].intValue();
 		highestValue = allValues.get(0).getValues()[1].intValue();
 		for (int i = 0; i < allValues.size(); i++) {
+			Log.d("gamma",String.valueOf(allValues.get(i).getValues()[0].intValue()));
 			if (allValues.get(i).getValues()[1].intValue() > highestValue) {
 				highestValue = allValues.get(i).getValues()[1].intValue();
 			}
@@ -86,6 +90,10 @@ public class ImportSimpleXYChart extends Fragment implements
 		numberOfShownValues = numberOfShownValueSlider.getProgress();
 
 	}
+	
+	/**
+	 * called when the fragments get the values it should display
+	 */
 
 	private void createFragment(){
 		numberOfShownValueSlider = (SeekBar) mLinearLayout
@@ -135,6 +143,11 @@ public class ImportSimpleXYChart extends Fragment implements
 		plot.setTicksPerRangeLabel(3);
 		plot.getGraphWidget().setDomainLabelOrientation(-45);
 	}
+	
+	/**
+	 * updates the displaying series with the values transfered from the seekBars
+	 */
+	
 	private void updateSeries(int numberOfShownValues, int timeSliderProgress) {
 		int timeSliderMax = timeSliderProgress;
 		if (numberOfShownValues != this.numberOfShownValues) {
@@ -160,8 +173,6 @@ public class ImportSimpleXYChart extends Fragment implements
 					allValues.get(timeSliderProgress + i).getValues()[0]
 							.intValue(), allValues.get(timeSliderProgress + i)
 							.getValues()[1].intValue());
-			Log.d("timestemp",String.valueOf(allValues.get(timeSliderProgress + i)
-							.getValues()[0].intValue()));
 		}
 
 		for (int i = 0; i < 2; i++) {

@@ -7,6 +7,12 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * 
+ * @author Alexander Brennecke
+ *read/write in/out the options.txt
+ *
+ */
 public class OptionsExport {
 	private Options options = Options.getInstance();
 	private String newLine = "\n";
@@ -14,6 +20,9 @@ public class OptionsExport {
 			PathOptions.OPTIONSPATH);
 	private String writeableString = "";
 
+	/**
+	 * generates an writable String and writes it into the options.txt
+	 */
 	public void writeOptions() {
 		OptionsInterface[] optionsArray = options.getOptions();
 		for (OptionsInterface element : optionsArray) {
@@ -27,6 +36,9 @@ public class OptionsExport {
 		writeableString = "";
 	}
 
+	/**
+	 * reads the options.txt and writes the values into the correct OptionsInterface object
+	 */
 	public void readOptions() {
 		int counter = 0;
 		OptionsInterface[] optionsArray = options.getOptions();
@@ -43,7 +55,12 @@ public class OptionsExport {
 			}
 		}
 	}
-
+	
+	/**
+	 * writes a single message into a file
+	 * @param filepath filepath for the file in which it writes
+	 * @param message text which should be write into the filepath
+	 */
 	public void writeSingle(String filepath, String message) {
 		FileOutputStream out = null;
 		try {
@@ -67,6 +84,11 @@ public class OptionsExport {
 		}
 	}
 
+	/**
+	 * 
+	 * @param positionLine line position into the file
+	 * @return choosen line as string
+	 */
 	private String getValue(int positionLine) {
 		String zeile = null;
 		try {
