@@ -8,6 +8,15 @@ import java.util.ArrayList;
 import de.teamgamma.cansat.app.values.ValueList;
 import de.teamgamma.cansat.app.values.Values;
 
+/**
+ * @author Teamgamma
+ * 
+ *         This class read data of an specific Sensor from an file, convert it
+ *         to an ArrayList and return it.
+ * 
+ * 
+ */
+
 public class Read {
 
 	private ValueList data;
@@ -34,7 +43,8 @@ public class Read {
 					lineArray = row.split(":");
 					if (lineArray.length > 1 && lineArray[0] != null
 							&& lineArray[1] != null) {
-
+						
+						//The data is added to an ArrayList.
 						this.data.appendData(Double.valueOf(lineArray[0]),
 								Double.valueOf(lineArray[1]));
 					}

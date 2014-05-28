@@ -2,6 +2,15 @@ package de.teamgamma.cansat.app.data;
 
 import java.util.HashMap;
 
+/**
+ * @author Teamgamma
+ * 
+ * This class consists of static types of data.
+ * The Application adapt to this Class and change it self easily, if there are changes
+ * 
+ * 
+ */
+
 import android.graphics.Color;
 import android.util.Log;
 

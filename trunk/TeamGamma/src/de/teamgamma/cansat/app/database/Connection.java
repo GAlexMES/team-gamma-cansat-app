@@ -10,9 +10,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+/**
+ * @author Teamgamma
+ * 
+ * this class connects to our database and is returned the data as an "JSONArray"
+ * 
+ * 
+ */
+
 public class Connection {
 
 	public static JSONArray connection() {
+		//here the connection to the database will start
 		try {
 
 			URL url = new URL("http://gammaweb.noodle-net.de/read.php");
@@ -30,7 +40,7 @@ public class Connection {
 					connection.getInputStream()));
 
 			try {
-
+				//The data from our database will be cast to an ("JSONArray") and the JsonArray is returned
 				JSONArray jarray = new JSONObject(reader.readLine()).getJSONArray("data");
 
 				return jarray;

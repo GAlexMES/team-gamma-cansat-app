@@ -6,9 +6,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
 import de.teamgamma.cansat.app.values.ValueList;
 import de.teamgamma.cansat.app.values.Values;
+
+/**
+ * @author Teamgamma
+ * 
+ *         This class takes the response of the Database as an JSONArray,
+ *         converted it to an ArrayList of an specific needed Sensor and return it.
+ * 
+ * 
+ */
 
 public class Sensordata {
 	private ValueList data;
@@ -21,9 +29,7 @@ public class Sensordata {
 		return instance;
 	}
 
-
 	public ArrayList<Values> getData(String sensor, JSONArray jarray) {
-		Log.d("database", sensor);
 		this.data = new ValueList();
 
 		if (jarray == null) {
@@ -34,21 +40,18 @@ public class Sensordata {
 		try {
 			jvalue = jarray.getJSONObject(0);
 			firstTimestamp = jvalue.getLong("time");
-			
-			
-			
+
 		} catch (JSONException e1) {
 			e1.printStackTrace();
 		}
+		//The data of an specific Sensor will add to an ArrayList.
 		for (int i = 0; i < jarray.length(); i++) {
 
 			try {
 				jvalue = jarray.getJSONObject(i);
-				this.data.appendData(
-						Double.valueOf(jvalue.getLong("time") - firstTimestamp),
-						jvalue.getDouble(sensor));
-				Log.d("database", String.valueOf(jvalue.getDouble(sensor)));
-
+				this.data.appendData(Double.valueOf(jvalue.getLong("time")
+						- firstTimestamp), jvalue.getDouble(sensor));
+				
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
