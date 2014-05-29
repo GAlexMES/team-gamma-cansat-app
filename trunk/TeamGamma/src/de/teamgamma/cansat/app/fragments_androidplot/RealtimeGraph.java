@@ -70,7 +70,7 @@ public class RealtimeGraph extends Fragment {
 																	// array
 																	// into a
 																	// List
-				SimpleXYSeries.ArrayFormat.XY_VALS_INTERLEAVED, // Y_VALS_ONLY means use
+				SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, // Y_VALS_ONLY means use
 																// the element index as
 																// the x value
 				options.getOption(KindOfOption.CHARTVIEW.ordinal(),
@@ -89,7 +89,7 @@ public class RealtimeGraph extends Fragment {
 //				constantValues.selectableColors[options.getOptions()[KindOfOption.CHARTVIEW
 //						.ordinal()].getColors()[2]], // Area color
 //				null);
-		series1Format = new LineAndPointFormatter(Color.BLUE,Color.BLUE,Color.BLUE,
+		series1Format = new LineAndPointFormatter(Color.BLUE,Color.RED,Color.YELLOW,
 				null);
 
 		// add a new series' to the xyplot:
@@ -113,10 +113,10 @@ public class RealtimeGraph extends Fragment {
 			((SimpleXYSeries) series1).removeFirst();
 		}
 		// add the latest history sample:
-		((SimpleXYSeries) series1).addLast(counter, sensor.getValues()[19][1]);
+		//Log.d("gamma", String.valueOf(sensor.getValues()[19][0]) + "    " + String.valueOf(sensor.getValues()[19][1]));
+		((SimpleXYSeries) series1).addLast(sensor.getValues()[19][0],sensor.getValues()[19][1]);
 		counter = counter +1 ;
 		// redraw the Plots:
 		plot.redraw();
-		Log.d("gamma", "ende");
 	}
 }
