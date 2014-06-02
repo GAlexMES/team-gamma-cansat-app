@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 
+import android.util.Log;
+
 /**
  * 
  * @author Alexander Brennecke
@@ -27,8 +29,14 @@ public class OptionsExport {
 		OptionsInterface[] optionsArray = options.getOptions();
 		for (OptionsInterface element : optionsArray) {
 			for (int b = 0; b < element.getValues().length; b++) {
+				if(element.getValues()[b] == null){
+					writeableString = writeableString + "null"
+							+ newLine;
+				}
+				else{
 				writeableString = writeableString + element.getValues()[b]
 						+ newLine;
+				}
 			}
 		}
 		writeSingle(options.getOption(KindOfOption.PATH.ordinal(),
@@ -52,6 +60,7 @@ public class OptionsExport {
 					counter++;
 				}
 				element.setValues(values);
+			
 			}
 		}
 	}
@@ -64,13 +73,14 @@ public class OptionsExport {
 	public void writeSingle(String filepath, String message) {
 		FileOutputStream out = null;
 		try {
-
 			out = new FileOutputStream(new File(filepath));
 		} catch (FileNotFoundException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		try {
+			Log.d("message", message);
+			Log.d("message", "ende");
 			out.write(message.getBytes());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block

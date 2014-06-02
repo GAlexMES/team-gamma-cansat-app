@@ -28,7 +28,7 @@ public class GenerateOptions {
 		// add path options to the string
 		writeableString = writeableString +  filepath + newLine + "" + newLine + filepath + newLine+ "" + newLine + getOptionsFilepath()+newLine+ "" + newLine +"";
 		// add chart view options to string
-		writeableString = writeableString +newLine+"20"+newLine+"0"+newLine+"0"+newLine+"0";
+		writeableString = writeableString +newLine+"20"+newLine+"2"+newLine+"2"+newLine+"0";
 
 		return writeableString;
 	}

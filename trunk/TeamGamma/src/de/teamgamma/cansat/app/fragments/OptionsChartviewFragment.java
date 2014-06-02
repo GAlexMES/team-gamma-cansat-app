@@ -3,6 +3,7 @@ package de.teamgamma.cansat.app.fragments;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -52,7 +53,6 @@ public class OptionsChartviewFragment extends Fragment implements OnSeekBarChang
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
 		// initialized variables and create object out of fragment xml objects
 		final Options options = Options.getInstance();
 		mLinearLayout = (LinearLayout) inflater.inflate(

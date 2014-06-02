@@ -34,13 +34,12 @@ import de.teamgamma.cansat.app.options.PathOptions;
 import de.teamgamma.cansat.app.socket.ServerConnection;
 import de.teamgamma.cansat.app.values.Values;
 
-
 /**
  * 
- * @author Alexander Brennecke
- * creates a fragment which displays every sensor, cathed from the database as a button
+ * @author Alexander Brennecke creates a fragment which displays every sensor,
+ *         cathed from the database as a button
  * 
- *
+ * 
  */
 public class DatabaseSensorsFragment extends Fragment {
 
@@ -58,73 +57,87 @@ public class DatabaseSensorsFragment extends Fragment {
 		// initialize a few importend variables
 		mLinearLayout = (LinearLayout) inflater.inflate(
 				R.layout.fragment_database_sensor, container, false);
-		
-		
+
 		DatabaseCoordination.getInstance().connectToDatabase();
-		while(Sensornames.getInstance().getSensornames()==null){
+		while (Sensornames.getInstance().getSensornames() == null) {
 		}
+
+		int counter = 0;
+		for (int i = 0; i < Sensornames.getInstance().getSensornames().length; i++) {
+			boolean notAllowed = false;
+			for (int a = 0; a < constantValues.notAllowedKeys.length; a++) {
+				if (Sensornames.getInstance().getSensornames()[i]
+						.equals(constantValues.notAllowedKeys[a])) {
+					notAllowed = true;
+				}
+			}
+				if (!notAllowed) {
+					AddAll(Sensornames.getInstance().getSensornames()[i],
+							counter);
+					counter++;
+				}
 			
-		for(int i = 0; i < Sensornames.getInstance().getSensornames().length;i++){
-			AddAll(Sensornames.getInstance().getSensornames()[i],i);
 		}
-		
-		
-		
+
 		return mLinearLayout;
 	}
-		
-	
+
 	/**
-	 * generates a button with the transfered text and id and add it to the fragment
-	 * @param text text which should displayed on the generated button
-	 * @param id ID of the button which should be generated
+	 * generates a button with the transfered text and id and add it to the
+	 * fragment
+	 * 
+	 * @param text
+	 *            text which should displayed on the generated button
+	 * @param id
+	 *            ID of the button which should be generated
 	 */
-	private void AddAll(String text, int id) {	    
-	    Button btn = new Button(mLinearLayout.getContext());
-	    btn.setBackgroundColor(Color.rgb(51, 181, 229));
-	    btn.setText(text); 
-	    btn.setId(id);
-	    buttons.add(btn);
-	    btn.setY(buttons.size()*(btn.getHeight()+10));
-	    btn.setOnClickListener(new OnClickListener() {
-	    	
-	    	/**
-	    	 * on click listener
-	    	 * creates a new ImportSimpleXYChart Fragment and displays it
-	    	 * with the correct values from the database
-	    	 */
+	private void AddAll(String text, int id) {
+		Button btn = new Button(mLinearLayout.getContext());
+		btn.setBackgroundColor(Color.rgb(51, 181, 229));
+		btn.setText(text);
+		btn.setId(id);
+		buttons.add(btn);
+		btn.setY(buttons.size() * (btn.getHeight() + 10));
+		btn.setOnClickListener(new OnClickListener() {
+
+			/**
+			 * on click listener creates a new ImportSimpleXYChart Fragment and
+			 * displays it with the correct values from the database
+			 */
 			@Override
 			public void onClick(View v) {
-				for(int i = 0; i<buttons.size();i++){
-					if(buttons.get(i).getId() == v.getId()){
+				for (int i = 0; i < buttons.size(); i++) {
+					if (buttons.get(i).getId() == v.getId()) {
 
-						options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,(String) buttons.get(v.getId()).getText());
+						options.setOption(KindOfOption.CHARTVIEW.ordinal(),
+								ChartViewOptions.ACTIVESENSORNAME,
+								(String) buttons.get(v.getId()).getText());
 						break;
 					}
 				}
-				
-				//generates the new fragment and commits it to the display
-				
+
+				// generates the new fragment and commits it to the display
+
 				Fragment fragment = new ImportSimpleXYChart();
-				
+
 				Bundle args = new Bundle();
-		        args.putInt(OptionsFragment.ARG_SLIDEMENU_VALUES, v.getId());
-		        fragment.setArguments(args);
+				args.putInt(OptionsFragment.ARG_SLIDEMENU_VALUES, v.getId());
+				fragment.setArguments(args);
 
-		        FragmentManager fragmentManager = getFragmentManager();
-		        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-		        fragmentManager.executePendingTransactions();
+				FragmentManager fragmentManager = getFragmentManager();
+				fragmentManager.beginTransaction()
+						.replace(R.id.content_frame, fragment).commit();
+				fragmentManager.executePendingTransactions();
 
-		        //Database.getInstance().getData(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.ACTIVESENSORNAME), fragment);
-		        DatabaseCoordination.getInstance().getData(options.getOption(KindOfOption.CHARTVIEW.ordinal(), ChartViewOptions.ACTIVESENSORNAME), fragment);
+				// Database.getInstance().getData(options.getOption(KindOfOption.CHARTVIEW.ordinal(),
+				// ChartViewOptions.ACTIVESENSORNAME), fragment);
+				DatabaseCoordination.getInstance().getData(
+						options.getOption(KindOfOption.CHARTVIEW.ordinal(),
+								ChartViewOptions.ACTIVESENSORNAME), fragment);
 
-				
 			}
 		});
-	    mLinearLayout.addView(btn); 
-	    }
-	
-	
+		mLinearLayout.addView(btn);
+	}
 
 }
-
