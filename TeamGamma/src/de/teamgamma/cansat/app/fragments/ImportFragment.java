@@ -8,6 +8,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,8 +23,8 @@ import de.teamgamma.cansat.app.fileoperations.Read;
 import de.teamgamma.cansat.app.fragments_androidplot.ImportSimpleXYChart;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
-import de.teamgamma.cansat.app.options.PathOptions;
 import de.teamgamma.cansat.app.options.Options;
+import de.teamgamma.cansat.app.options.PathOptions;
 import de.teamgamma.cansat.app.values.Values;
 
 /**
@@ -91,17 +92,7 @@ public class ImportFragment extends Fragment {
 				connectDatabase.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						
-						// Create new fragment and transaction
-						Fragment newFragment = new DatabaseSensorsFragment();
-						FragmentTransaction transaction = getFragmentManager()
-								.beginTransaction();
-
-						transaction.replace(R.id.content_frame, newFragment);
-						transaction.addToBackStack(null);
-
-						// Commit the transaction
-						transaction.commit();
+						DatabaseCoordination.getInstance().checkConnection(getInstance());
 						
 					}
 				});
@@ -112,11 +103,7 @@ public class ImportFragment extends Fragment {
 				Read reader = Read.getInstance();
 				ArrayList<Values> allValues = reader.getValuefromFile(importFilepath);
 				if (allValues == null) {
-					Context context = mLinearLayout.getContext();
-					CharSequence text = "Wrong file format ";
-					int duration = Toast.LENGTH_SHORT;
-					Toast toast = Toast.makeText(context, text, duration);
-					toast.show();
+					createToast("Wrong file format");
 				}				
 				else{
 					// Create new fragment and transaction
@@ -136,7 +123,43 @@ public class ImportFragment extends Fragment {
 				}
 			}
 		});
+		
 		return mLinearLayout;
+	}
+	
+	private ImportFragment getInstance(){
+
+		return this;
+	}
+	
+	public View getView(){
+		return mLinearLayout;
+	}
+	
+	private void createToast(String message){
+		Context context = mLinearLayout.getContext();
+		CharSequence text = message;
+		int duration = Toast.LENGTH_SHORT;
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();
+	}
+	public void setDatabaseConnectionStatus(boolean connected){
+		Log.d("gamma",String.valueOf(connected));
+		if(connected){
+			// Create new fragment and transaction
+			Fragment newFragment = new DatabaseSensorsFragment();
+			FragmentTransaction transaction = getFragmentManager()
+					.beginTransaction();
+
+			transaction.replace(R.id.content_frame, newFragment);
+			transaction.addToBackStack(null);
+
+			// Commit the transaction
+			transaction.commit();			
+		}
+		else{
+			//createToast("No connection!");
+		}
 	}
 
 }

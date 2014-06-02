@@ -1,6 +1,7 @@
 package de.teamgamma.cansat.app.options;
 
 import android.os.Environment;
+import android.util.Log;
 /**
  * 
  * @author Alexander Brennecke

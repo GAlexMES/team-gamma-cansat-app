@@ -3,6 +3,10 @@ package de.teamgamma.cansat.app.database;
 import org.json.JSONArray;
 
 import android.app.Fragment;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.LinearLayout;
+import de.teamgamma.cansat.app.fragments.ImportFragment;
 import de.teamgamma.cansat.app.fragments_androidplot.ImportSimpleXYChart;
 import de.teamgamma.cansat.app.options.ChartViewOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
@@ -22,6 +26,8 @@ public class DatabaseCoordination {
 	private static DatabaseCoordination instance = null;
 	private ConnectionRun connectionrun = new ConnectionRun();
 	private JSONArray jarray;
+	public ImportFragment importFragment;
+	public View importFragmentView;
 
 	public static DatabaseCoordination getInstance() {
 		if (instance == null) {
@@ -38,6 +44,14 @@ public class DatabaseCoordination {
 		// The connection to the Database will start in an parallel Thread.
 		Thread databaseThread = new Thread(this.connectionrun);
 		databaseThread.start();
+	}
+	
+	public void checkConnection(ImportFragment importFragment){
+		this.importFragment = importFragment;
+		this.importFragmentView = importFragment.getView();
+		Thread connectionCheck = new Thread(new ConnectionCheckRun());
+		connectionCheck.start();
+		
 	}
 
 	public void getData(String sensor, Fragment fragment) {

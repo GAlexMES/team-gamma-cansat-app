@@ -18,6 +18,8 @@ public class constantValues {
 
 	public static String[] names = { "temp", "pressure", "humidity", "gyro", "longitude", "latitude" };
 	
+	public static String[] notAllowedKeys = { "id", "ID", "time" , "longitude", "latitude"};
+	
 	public static long firstTimestamp;
 	
 	public static String exportTime;
