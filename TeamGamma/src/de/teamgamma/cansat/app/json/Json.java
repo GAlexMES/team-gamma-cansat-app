@@ -40,7 +40,7 @@ public class Json {
 		try {
 			data = new JSONObject(json);
 			Long time;
-			time = data.getLong("time");
+			time = data.getLong("utc_time");
 			for (int i = 0; i < constantValues.names.length; i++) {
 				this.sensors[i][0] = Double.valueOf(time
 						- constantValues.firstTimestamp);

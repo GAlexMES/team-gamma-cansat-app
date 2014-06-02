@@ -1,7 +1,6 @@
 package de.teamgamma.cansat.app.data;
 
-import java.util.HashMap;
-
+import android.graphics.Color;
 /**
  * @author Teamgamma
  * 
@@ -11,14 +10,16 @@ import java.util.HashMap;
  * 
  */
 
-import android.graphics.Color;
-import android.util.Log;
-
 public class constantValues {
 
-	public static String[] names = { "temp", "pressure", "humidity", "gyro", "longitude", "latitude" };
 	
-	public static String[] notAllowedKeys = { "id", "ID", "time" , "longitude", "latitude"};
+	public static String[] names = { "temperature", "pressure", "humidity", "altitude", "longitude", "latitude", "acceleration_z", "acceleration_y","acceleration_x" };
+	public static final int sensorNamesSize = 9;
+	public static String[] sliderNames = {"Last Position", "Import", "Options"};
+	
+	public static String[] notAllowedKeys = { "id", "ID", "time" , "longitude", "latitude", "utc_time"};
+	
+	public static String[] sliderArray;
 	
 	public static long firstTimestamp;
 	
@@ -30,17 +31,23 @@ public class constantValues {
 	
 	public static final String head = "Team-Gamma_Android-App";
 	
-	private static HashMap<String, String> namesDic = new HashMap<String, String>();
-
-	public static void generateMap(String[] stringArray) {
-		for (int i = 0; i < names.length; i++) {
-			namesDic.put(names[i], stringArray[i + 1]);
-			Log.d("names", namesDic.get(names[i]));
+	public static void generateSliderArray(){
+		sliderArray = new String[names.length + sliderNames.length + 1];
+		sliderArray[0] = "Home";
+		int counter = 1;
+		for(int i = 0; i<names.length; i++){
+			sliderArray[counter] = names[i];
+			counter++;
+		}
+		for(int i = 0; i<sliderNames.length; i++){
+			sliderArray[counter] = sliderNames[i];
+			counter++;
 		}
 	}
 
-	public static String getStringFromHashmap(String key) {
-		return namesDic.get(key);
+	public static String[] getSliderArray() {
+		// TODO Auto-generated method stub
+		return sliderArray;
 	}
 
 }

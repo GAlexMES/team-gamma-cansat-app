@@ -62,9 +62,9 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		mTitle = mDrawerTitle = getTitle();
-		mSlidemanueTitels = getResources().getStringArray(
-				R.array.slidemenu_array);
-		constantValues.generateMap(mSlidemanueTitels);
+		constantValues.generateSliderArray();
+		mSlidemanueTitels = constantValues.getSliderArray();
+		
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -183,7 +183,7 @@ public class MainActivity extends Activity {
 	 */
 
 	private void selectItem(int position, boolean check) {
-		// update the main content by replacing fragments
+		// update the main content by replacing fragment
 		switch (position) {
 		case 0:
 			if (check) {
@@ -194,11 +194,12 @@ public class MainActivity extends Activity {
 				fragment = new HomeFragment();
 				break;
 			}
-		case 1:
+		
+		default:
 			if(Integer.parseInt(options.getOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.ACTIVECONNECTION))==1){
-				options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[0]);
+				options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[position-1]);
 				fragment = new RealtimeGraph();
-				lastCase = 1;
+				lastCase = position;
 				break;				
 			}
 			else{
@@ -206,42 +207,9 @@ public class MainActivity extends Activity {
 				selectItem(lastCase,false);
 				break;
 			}
+					
 
-		case 2:
-			if(Integer.parseInt(options.getOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.ACTIVECONNECTION))==1){
-				options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[1]);
-				fragment = new RealtimeGraph();
-				break;				
-			}
-			else{
-				creatToast("No Connection! Go to: Options -> Connection");
-				selectItem(lastCase,false);
-				break;
-			}
-		case 3:
-			if(Integer.parseInt(options.getOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.ACTIVECONNECTION))==1){
-				options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[2]);
-				fragment = new RealtimeGraph();
-				break;				
-			}
-			else{
-				creatToast("No Connection! Go to: Options -> Connection");
-				selectItem(lastCase,false);
-				break;
-			}
-		case 4:
-			if(Integer.parseInt(options.getOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.ACTIVECONNECTION))==1){
-				options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[3]);
-				fragment = new RealtimeGraph();
-				break;				
-			}
-			else{
-				creatToast("No Connection! Go to: Options -> Connection");
-				selectItem(lastCase,false);
-				break;
-			}
-			
-		case 5:
+		case constantValues.sensorNamesSize+1:
 			options.setOption(KindOfOption.MAPS.ordinal(), MapsOptions.LATITUDE, 69.2948485);
 			options.setOption(KindOfOption.MAPS.ordinal(), MapsOptions.LONGITUDE, 16.029606);
 			String longitude = options.getOption(KindOfOption.MAPS.ordinal(), MapsOptions.LONGITUDE);
@@ -259,12 +227,12 @@ public class MainActivity extends Activity {
 			}
 			
 			
-		case 6:
+		case constantValues.sensorNamesSize+2:
 			fragment = new ImportFragment();
 			lastCase = 6;
 			break;
 		
-		case 7:
+		case constantValues.sensorNamesSize+3:
 			fragment = new OptionsFragment();
 			lastCase = 7;
 			break;

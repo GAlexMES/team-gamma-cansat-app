@@ -39,7 +39,7 @@ public class Sensordata {
 		Long firstTimestamp = Long.valueOf(0);
 		try {
 			jvalue = jarray.getJSONObject(0);
-			firstTimestamp = jvalue.getLong("time");
+			firstTimestamp = jvalue.getLong("utc_time");
 
 		} catch (JSONException e1) {
 			e1.printStackTrace();
@@ -49,7 +49,7 @@ public class Sensordata {
 
 			try {
 				jvalue = jarray.getJSONObject(i);
-				this.data.appendData(Double.valueOf(jvalue.getLong("time")
+				this.data.appendData(Double.valueOf(jvalue.getLong("utc_time")
 						- firstTimestamp), jvalue.getDouble(sensor));
 				
 			} catch (JSONException e) {
