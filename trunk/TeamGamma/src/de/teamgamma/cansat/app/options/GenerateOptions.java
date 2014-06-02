@@ -24,11 +24,13 @@ public class GenerateOptions {
 	public String generate() {
 		String writeableString = "";
 		//add connection options to the string
-		writeableString = writeableString+""+newLine+""+newLine+0+newLine;
+		writeableString = writeableString+""+newLine+"";
 		// add path options to the string
-		writeableString = writeableString +  filepath + newLine + "" + newLine + filepath + newLine+ "" + newLine + getOptionsFilepath()+newLine+ "" + newLine +"";
+		writeableString = writeableString + newLine + filepath + newLine + "" + newLine + filepath + newLine+ "" + newLine + getOptionsFilepath()+newLine+ "" + newLine +"";
 		// add chart view options to string
-		writeableString = writeableString +newLine+"20"+newLine+"2"+newLine+"2"+newLine+"0";
+		writeableString = writeableString +newLine+"20"+newLine+"2"+newLine+"2"+newLine+"0"+newLine+"0"+newLine+"0";
+		// add lastPositionOptions
+		writeableString = writeableString +newLine+""+newLine+""+newLine+"";
 
 		return writeableString;
 	}

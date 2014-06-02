@@ -79,8 +79,6 @@ public class OptionsExport {
 			e2.printStackTrace();
 		}
 		try {
-			Log.d("message", message);
-			Log.d("message", "ende");
 			out.write(message.getBytes());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block

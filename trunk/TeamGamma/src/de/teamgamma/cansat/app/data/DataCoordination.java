@@ -1,5 +1,6 @@
 package de.teamgamma.cansat.app.data;
 
+import android.util.Log;
 import de.teamgamma.cansat.app.fileoperations.SaveThread;
 import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
 import de.teamgamma.cansat.app.json.Json;
@@ -49,6 +50,7 @@ public class DataCoordination {
 	}
 
 	public void coordinateData(String message) {
+		Log.d("Message", message);
 		// takes the message from the AndroidClient
 		// message is unpacked
 		Double[][] data = this.json.unpack(message);
@@ -58,7 +60,9 @@ public class DataCoordination {
 			this.sensors[i].setValues(data[i][0].longValue(), data[i][1]);
 		}
 		for (Sensor sensor : sensors) {
+			
 
+			
 			// The SensorArray are the SensorArray passed.
 			if (sensor.getName().equals(
 					this.options.getOption(KindOfOption.CHARTVIEW.ordinal(),

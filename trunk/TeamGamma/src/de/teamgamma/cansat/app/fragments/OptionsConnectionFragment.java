@@ -31,6 +31,7 @@ import de.teamgamma.cansat.app.socket.ServerConnection;
 public class OptionsConnectionFragment extends Fragment {
 	public static final String ARG_SLIDEMENU_VALUES = "slidemenu_values";
 	private ServerConnection connect = null;
+	private LinearLayout mLinearLayout;
 
 	public OptionsConnectionFragment() {
 		// Empty constructor required for fragment subclass
@@ -47,7 +48,7 @@ public class OptionsConnectionFragment extends Fragment {
 
 		// initialized objects with objects out of the fragment xml file
 		final Options options = Options.getInstance();
-		final LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(
+		mLinearLayout = (LinearLayout) inflater.inflate(
 				R.layout.fragment_options_connection, container, false);
 		final EditText java_socket_ipAdress = (EditText) mLinearLayout
 				.findViewById(R.id.editJavaSocketIPAdress);
@@ -70,16 +71,19 @@ public class OptionsConnectionFragment extends Fragment {
 		options_save.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if(java_socket_ipAdress.getText().toString().equals("")||java_socket_port
+						.getText().toString().equals("")){
+					createToast("wrong Input!");
+				}
+				else{
 				options.setOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETIP,java_socket_ipAdress
 						.getText().toString());
 				options.setOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETPORT,java_socket_port
 						.getText().toString());
-				// a toast will show that the data was saved
-				Context context = mLinearLayout.getContext();
-				CharSequence text = "Saved";
-				int duration = Toast.LENGTH_SHORT;
-				Toast toast = Toast.makeText(context, text, duration);
-				toast.show();
+				createToast("Saved");
+				}
+				
+
 			}
 		});
 
@@ -90,21 +94,32 @@ public class OptionsConnectionFragment extends Fragment {
 		connectAndSave.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if(java_socket_ipAdress.getText().toString().equals("")||java_socket_port
+						.getText().toString().equals("")){
+					createToast("wrong Input!");
+				}
+				else{
 				options.setOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETIP,java_socket_ipAdress
 						.getText().toString());
 				options.setOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.JAVASOCKETPORT,java_socket_port
 						.getText().toString());
-				Context context = mLinearLayout.getContext();
-				CharSequence text = "Saved";
-				int duration = Toast.LENGTH_SHORT;
-				Toast toast = Toast.makeText(context, text, duration);
-				toast.show();
-				Log.d("gamma","buttonclicked");
+				createToast("Saved");
 				connect = new ServerConnection();
+				}
+				
 			}
 		});
 
 		return mLinearLayout;
 	}
+	
 
+	private void createToast(String message){
+		// a toast will show that the data was saved
+		Context context = mLinearLayout.getContext();
+		CharSequence text = message;
+		int duration = Toast.LENGTH_SHORT;
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();
+	}
 }
