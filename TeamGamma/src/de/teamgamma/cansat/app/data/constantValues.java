@@ -25,6 +25,17 @@ public class constantValues {
 	
 	public static String exportTime;
 
+	public static int activeSensor = 0;
+	
+	
+	public static int getActiveSensor() {
+		return activeSensor;
+	}
+
+	public static void setActiveSensor(int active) {
+		activeSensor = active;
+	}
+
 	public static final int[] selectableColors = { Color.TRANSPARENT,
 			Color.BLUE, Color.BLACK, Color.CYAN, Color.GREEN, Color.RED,
 			Color.MAGENTA, Color.YELLOW, Color.WHITE };

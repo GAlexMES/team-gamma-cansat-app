@@ -94,13 +94,13 @@ public class AndroidClient {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_kk_mm",
 						Locale.GERMANY);
 				constantValues.exportTime = sdf.format(new Date());
-				Options.getInstance().setOption(
-						KindOfOption.CONNECTION.ordinal(),
-						ConnectionOptions.ACTIVECONNECTION, 1);
+				constantValues.setActiveSensor(1);
+				Log.d("socket_test", "connected");
 
 			} catch (IOException e) {
-				e.printStackTrace();
 				Log.d("socket_test", "Socket created, IO Exception!");
+				Log.d("socket_test", e.getMessage());
+				e.printStackTrace();
 			} catch (Exception e) {
 				Log.d("socket_test", "Socket created, Exception!");
 				e.printStackTrace();

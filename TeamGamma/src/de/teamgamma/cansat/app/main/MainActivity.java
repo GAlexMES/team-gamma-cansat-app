@@ -53,6 +53,7 @@ public class MainActivity extends Activity {
 	private Sensor sensor = new Sensor();
 	private static Fragment fragment;
 	private int lastCase = 0;
+	private boolean lastScreen = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -183,6 +184,7 @@ public class MainActivity extends Activity {
 	 */
 
 	private void selectItem(int position, boolean check) {
+		
 		// update the main content by replacing fragment
 		switch (position) {
 		case 0:
@@ -196,15 +198,22 @@ public class MainActivity extends Activity {
 			}
 		
 		default:
-			if(Integer.parseInt(options.getOption(KindOfOption.CONNECTION.ordinal(), ConnectionOptions.ACTIVECONNECTION))==1){
+			Log.d("gamma", String.valueOf(position));
+			if(constantValues.getActiveSensor()==1){
 				options.setOption(KindOfOption.CHARTVIEW.ordinal(),ChartViewOptions.ACTIVESENSORNAME,constantValues.names[position-1]);
 				fragment = new RealtimeGraph();
 				lastCase = position;
 				break;				
 			}
-			else{
+			else if(!lastScreen){
+				lastScreen = true;
 				creatToast("No Connection! Go to: Options -> Connection");
 				selectItem(lastCase,false);
+				break;
+			}
+			else{
+				lastScreen = false;
+				selectItem(0,false);
 				break;
 			}
 					
