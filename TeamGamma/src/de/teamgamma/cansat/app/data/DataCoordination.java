@@ -2,6 +2,7 @@ package de.teamgamma.cansat.app.data;
 
 import android.util.Log;
 import de.teamgamma.cansat.app.fileoperations.SaveThread;
+import de.teamgamma.cansat.app.fileoperations.AltitudeSaver;
 import de.teamgamma.cansat.app.fragments_androidplot.RealtimeGraph;
 import de.teamgamma.cansat.app.json.Json;
 import de.teamgamma.cansat.app.main.MainActivity;
@@ -81,6 +82,10 @@ public class DataCoordination {
 		Thread saveThread = new Thread(saveData);
 		saveThread.start();
 
+		AltitudeSaver saver = AltitudeSaver.getInstance();
+		saver.setMessage(message);
+		Thread altitudeThread = new Thread(saver);
+		altitudeThread.start();
 	}
 
 }
