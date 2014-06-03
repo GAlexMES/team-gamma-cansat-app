@@ -54,7 +54,7 @@ public class AndroidClient {
 			// while the connection exists, the class wait for data.
 			while (clientSocket.isConnected()) {
 				try {
-//					if (this.in.ready()) {
+					if (this.in.ready()) {
 						message = this.in.readLine();
 						Log.d("values", message);
 						this.messageAdapter.messageArrived(message.toString());
@@ -64,7 +64,7 @@ public class AndroidClient {
 						}
 						counter++;
 
-//					}
+					}
 				} catch (IOException e) {
 					e.printStackTrace();
 					Log.d("socket_test", "IOException while receiving message!");
