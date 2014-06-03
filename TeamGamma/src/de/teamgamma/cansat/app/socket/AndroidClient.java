@@ -43,6 +43,7 @@ public class AndroidClient {
 						clientSocket.getInputStream()));
 
 			} catch (IOException e) {
+				Log.d("socket_test", "failed to buffer creation");
 				e.printStackTrace();
 			}
 		}
@@ -53,18 +54,17 @@ public class AndroidClient {
 			// while the connection exists, the class wait for data.
 			while (clientSocket.isConnected()) {
 				try {
-					if (this.in.ready()) {
+//					if (this.in.ready()) {
 						message = this.in.readLine();
 						Log.d("values", message);
-						if (counter == 0) {
-							JSONObject jsonmessage = new JSONObject(message);
-							constantValues.firstTimestamp = jsonmessage
-									.getLong("time");
-						}
 						this.messageAdapter.messageArrived(message.toString());
+						Log.d("socket_test", message.toString());
+						if (counter == 0) {
+							constantValues.firstTimestamp = new JSONObject(message).getLong("time");
+						}
 						counter++;
 
-					}
+//					}
 				} catch (IOException e) {
 					e.printStackTrace();
 					Log.d("socket_test", "IOException while receiving message!");
@@ -73,6 +73,7 @@ public class AndroidClient {
 					Log.d("socket_test", "Exception while receiving message!");
 				}
 			}
+			Log.d("socket_test", "disconnected!");
 		}
 	}
 

@@ -1,5 +1,6 @@
 package de.teamgamma.cansat.app.socket;
 
+import android.util.Log;
 import de.teamgamma.cansat.app.data.DataCoordination;
 import de.teamgamma.cansat.app.options.ConnectionOptions;
 import de.teamgamma.cansat.app.options.KindOfOption;
@@ -32,6 +33,7 @@ public class ServerConnection {
 
 							@Override
 							public void messageArrived(String message) {
+								Log.d("gamma", "received");
 								DataCoordination.getInstance().coordinateData(
 										message);
 							}
