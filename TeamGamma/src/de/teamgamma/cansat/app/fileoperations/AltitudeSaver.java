@@ -48,7 +48,6 @@ public class AltitudeSaver implements Runnable {
 				// the name of the file consists of the date, time and name of
 				// the sensor
 				if (data != null) {
-					Log.d("hallo", "hallo");
 					if (data[i][1] != null) {
 						this.filepath = option.getInstance().getOption(
 								KindOfOption.PATH.ordinal(),
@@ -104,7 +103,6 @@ public class AltitudeSaver implements Runnable {
 			return data;
 		} catch (JSONException e) {
 
-			Log.d("hallo", "catch");
 			e.printStackTrace();
 		}
 
