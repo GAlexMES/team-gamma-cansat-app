@@ -1,0 +1,1 @@
+Repository for Team Gammas Android Application to show data in realtime on Android Devices
